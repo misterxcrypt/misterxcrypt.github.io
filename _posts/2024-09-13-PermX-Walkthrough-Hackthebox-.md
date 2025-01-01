@@ -13,21 +13,32 @@ In this write-up, We’ll go through an easy Linux machine where we first gain i
 
 1. After Starting the machine, I set my target IP as $target environment variable and ran nmap command.
 
+
 _Command — Port Scan: Nmap_
 
-```nmap $target --top-ports=1000 -sV -v -sC  -Pn > nmap.out```
+```
+nmap $target --top-ports=1000 -sV -v -sC  -Pn > nmap.out
+```
+
 
 2. Then, As usual I added the host:permx.htb in /etc/hosts.
 
 3. While enumerating the website, I started directory fuzzing and subdomain fuzzing in the background.
 
+
 _Command — Subdomain Fuzzing: Fuff_
 
-```ffuf -w /home/mrrobot/Downloads/wordlists/SecLists/Discovery/DNS/subdomains-top1million-20000.txt -u http://permx.htb/ -H "Host:FUZZ.permx.htb" -v -fw 18```
+```
+ffuf -w /home/mrrobot/Downloads/wordlists/SecLists/Discovery/DNS/subdomains-top1million-20000.txt -u http://permx.htb/ -H "Host:FUZZ.permx.htb" -v -fw 18
+```
+
 
 _Command — Directory Fuzzing: Gobuster_
 
-```gobuster dir -u http://permx.htb -w /home/mrrobot/Downloads/wordlists/SecLists/Discovery/Web-Content/raft-medium-directories.txt```
+```
+gobuster dir -u http://permx.htb -w /home/mrrobot/Downloads/wordlists/SecLists/Discovery/Web-Content/raft-medium-directories.txt
+```
+
 
 4. Let’s Explore the Subdomain: lms.permx.htb which seems interesting.
 
@@ -35,13 +46,13 @@ _Command — Directory Fuzzing: Gobuster_
 
 6. When checking for ‘chamilo lms exploit’, I came across this link.
 
-Exploit: https://github.com/m3m0o/chamilo-lms-unauthenticated-big-upload-rce-poc
+Exploit: [Chamilo LMS exploit](https://github.com/m3m0o/chamilo-lms-unauthenticated-big-upload-rce-poc)
 
 # Initial Foothold
 
-    Learn about the exploit in this link
+1. Learn about the exploit in this link
 
-Article: https://starlabs.sg/advisories/23/23-4220/
+Article: [Starlabs Article about the Exploit](https://starlabs.sg/advisories/23/23-4220/)
 
 ### CVE-2023–4220 Description
 
@@ -51,18 +62,22 @@ Article: https://starlabs.sg/advisories/23/23-4220/
 
 3. I used the PHP reverse shell from PentestMonkey to craft a reverse shell and followed the PoC (Proof of Concept) in that article to get a reverse shell.
 
-PHP Reverse Shell: https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php
+PHP Reverse Shell: [PHP Reverse Shell](https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php)
 
 ### Exploit:
 
 ### Reverse Shell Listener:
 
+
 _Command — Spawn Bash shell: python one-liner_
 
-```python3 -c 'import pty;pty.spawn("/bin/bash")'```
+```
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+```
 
-    The above command will spawn the bash shell which is more stable.
-    Now, as a www-data user, We don’t have much permission.
+1. The above command will spawn the bash shell which is more stable.
+
+2. Now, as a www-data user, We don’t have much permission.
 
 # Lateral Movement
 
@@ -70,25 +85,37 @@ _Command — Spawn Bash shell: python one-liner_
 
 1. After checking what files are available in the system. I thought of finding files which are owned by ’www-data’
 
+
 _Command — Files owned by a user: find_
 
-```find / -user www-data 2>/dev/null | grep -v '/proc\|/run\|/var/www'```
+```
+find / -user www-data 2>/dev/null | grep -v '/proc\|/run\|/var/www'
+```
+
 
 2. I tried running linpeas, but nothing interesting turned out. But I found an interesting file ‘configuration.php’.
 
 3. So I ran a find command to check for any other ‘configuration.php’ file in chamilo application.
 
+
 _Command — Finding config file: find_
 
-```find / -name configuation.php 2>/dev/null```
+```
+find / -name configuation.php 2>/dev/null
+```
+
 
 4. Upon opening the file ‘/var/www/chamilo/app/config/configuration.php’, I found the ‘database connection settings’![[Pasted image 20240912180357.png]]
 
 5. There are two users in this system. We can find this using the following command:
 
+
 _Command — Finding users: /etc/passwd_
 
-```cat /etc/passwd | grep```
+```
+cat /etc/passwd | grep
+```
+
 
 6. Let’s try ssh using the password from the configuration file.
 
@@ -96,9 +123,13 @@ _Command — Finding users: /etc/passwd_
 
 1. Now, We have a low privileged user access. First run the usual command to find the sudo privileged files.
 
+
 _Command — Sudo Privileged files: sudo_
 
-```sudo -l```
+```
+sudo -l
+```
+
 
 2. Let’s read the contents of the file ‘/opt/acl.sh’.
 
@@ -118,17 +149,25 @@ Things to Note
 
     If we able to link any important to a file in the home directory of mtz, we can change the permission using the /opt/acl.sh script.
 
+
 _Command — Symbolic link: ln_
 
-```ln -s /etc/passwd /home/mtz/passwd1```
+```
+ln -s /etc/passwd /home/mtz/passwd1
+```
+
 
 4. This command creates a symbolic link of the ‘/etc/passwd’ file to a file ‘/home/mtz/passwd1’.
 
 5. Since this symbolic file is in the home directory of the user ‘mtz’, we can change the permission of the file using the available script ‘/opt/acl.sh’.
 
+
 _Command — Using the script: /opt/ach.sh_
 
-```sudo /opt/acl.sh mtz rwx /home/mtz/passwd1```
+```
+sudo /opt/acl.sh mtz rwx /home/mtz/passwd1
+```
+
 
 6. This command changes the permission of the symbolic file /home/mtz/passwd1.
 
