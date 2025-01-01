@@ -1,58 +1,68 @@
-# **Welcome to My Portfolio**
+# Hariharan M
 
-## About Me
-I am a **Cyber Threat Intelligence Analyst** with expertise in combating financial fraud and emerging cybersecurity threats. My key strengths lie in leveraging **OSINT**, **social engineering**, and **threat analysis** to provide actionable insights. With hands-on experience in Python, Node.js, and automation tools, I aim to build innovative solutions that make a difference in the cybersecurity domain.
+```
+hariharan.mathankumar@gmail.com^ linkedin.com/in/hariharanmathan^ github.com/misterxcrypt^
+app.hackthebox.com/profile/^
+```
+## PROFESSIONAL EXPERIENCE                                                                                                                                            January 2023 – Present | IIT MRP, India
 
----
+**Cyber Threat Intel Analyst Intern**
+_Saptang Labs Pvt Ltd_
 
-## My Projects
-### Finansis - Project F
-- **Description**: A dashboard for comparing ETFs and mutual funds.
-- **Features**:
-  - ETF vs ETF comparison
-  - Mutual fund vs mutual fund comparison
-  - ETF vs mutual fund comparison
-- **Tech Stack**: React (Frontend), MongoDB (Backend, if needed), APIs for data fetching
+- **Cybercrime Investigations:** Exposed financial scammer tactics using social engineering and OSINT investigations leading
+to understanding 90% scammer tactics.
+- **Automation:** Deployed a Python-based cybersecurity product (Selenium, MongoDB, Celery), streamling threat data
+collection and boosting identified threats by 75%.
+- **Fraud Intelligence:** Identified 90,000+ scammer data points and 2,000+ malicious ad domains, disrupting ad scams and
+scammer profiles.
+- **Cyber Threat Analysis:** Monitored Telegram and Dark Web, generating over 20 threat reports on cybercrime activity.
+- **Cross-Team Collaboration:** Partnered with design and development teams to enhance product features and fix bugs.
+- **Reporting:** Maintained a database of cyber threat data, generating over 80 reports and threat breifings for stakeholders.
+- **EASM:** Conducted comprehensive attack surface assessments for clients, identifying vulnerabilities and recommending
+mitigation strategies, resulting in a 30% reduction in their attack surface.
 
-### Threat Actor Data Collector
-- **Description**: An efficient tool to collect over 40,000+ threat actor data points from scam sites.
-- **Impact**: Provided critical insights for government entities to take action against financial scams.
+## PROJECTS
 
-### Discord Bot for Cybersecurity News
-- **Description**: A bot that extracts and summarizes cybersecurity news articles from URLs.
-- **Features**:
-  - Generates tags using Hugging Face
-  - Summarizes articles on command
+**SOC Notes Repository (TryHackMe, Obsidian)**
 
----
+- Compiled detailed notes on TryHackMe's SOC Analyst exercises, organized for enhanced learning in Obsidian.
+- This repository uses graphs, flowcharts, and tags to help CTI professionals and new learners visualize SOC concepts.
+**Recon-Eye (Python, Flask)**
+- Recon-Eye scans your domain's external assets (IPs, subdomains, DNS, ports) and captures screenshots of subdomains.
+- This project is built with Python and Flask for the backend, and HTML, CSS, and JavaScript on the frontend.
+**Bash-Sys-Admin-Kit (Bash)**
+- This all-in-one CLI tool simplifies system monitoring and file analysis, consolidating essential system commands.
+- Built with Bash scripting, it integrates commands like lscpu, free, adduser, wc, and more into a single interface.
 
-## Interests
-- **Cybersecurity Specializations**:
-  - Financial Fraud Detection
-  - Brand Impersonation and Phishing
-  - Social Engineering
-- **Programming and Automation**:
-  - Python scripting
-  - Node.js for backend development
-- **Threat Research and Analysis**:
-  - Tracking emerging financial scams
-  - Monitoring platforms like Telegram for threats
-- **Investment Analysis**:
-  - Financial analytics and ETF/MF comparisons
+## CERTIFICATIONS
 
----
+```
+CISCO Introduction to Cyber Security
+(ISC)² Certified in Cybersecurity Self-Paced Training
+Kase Scenarios Betrayal Osint Training
+Introduction to Cloud Security
+```
+## SKILLS
 
-## Blogs
-### [Cybersecurity 101: Specializations & Job Roles](#)
-- A beginner-friendly guide to understanding cybersecurity and career opportunities.
+**Tools & Frameworks**
+MITRE ATT&CK Framework | MISP | Nmap | Metasploit | Elastic SIEM | AlienVault OTX | PostMan | MongoDB
 
-### [Investigating Financial Scams in India](#)
-- A deep dive into prevalent financial scams and methods for detection and prevention.
+**Technologies & Languages**
+Open-Source Intelligence | Python Automation | Bash Scripting | Linux | SOCMINT | Networking | Social Engineering
 
-### [Unmasking Telegram Threat Actors](#)
-- How OSINT and social engineering can help uncover scam networks on Telegram.
+## EDUCATION
 
----
+**B.Tech in Computer Science and Business Systems**
+Sri Eshwar College of Engineering | CGPA: 8.54                                                                                                                                2021 – 2025 | Coimbatore, India
 
-**Find me on:**  
-[GitHub](https://github.com/misterxcrypt) | [LinkedIn](https://linkedin.com/in/hariharanmathan) | [Twitter](https://twitter.com/misterxcrypt)
+- **Coursework:** Operating Systems, Project Management, Financial Analytics, Marketing Research, Operations Research.
+
+## ADDITIONAL INFORMATION
+
+**Teamwork**                                                                                                                                                                                   2022 – present
+- Actively participated in CTFs and hackathons with my team, NandBytes, also organized internal college CTFs and trainings.
+- Maintained a social media presence, sharing daily tech news and fostering a community of cybersecurity enthusiasts.
+**Achievements**
+- Internal Smart Hack Challenge Hackathon Winner 2022
+- Awarded for Academic Proficiency 2022
+- Rajya Puraskar Award 2019
