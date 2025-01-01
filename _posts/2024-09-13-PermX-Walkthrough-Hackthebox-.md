@@ -3,8 +3,9 @@ title: PermX Walkthrough — HackTheBox
 published: true
 ---
 
-_Read on Medium:_ [LINK](https://medium.com/@misterxcrypt/hackthebox-walkthrough-permx-f90a1943b156)
 ![Congrats Screen Of HTB machine PermX](https://miro.medium.com/v2/resize:fit:720/format:webp/1*_d1GtfPjVEoaekQliy8MHg.png)
+
+_Read on Medium:_ [LINK](https://medium.com/@misterxcrypt/hackthebox-walkthrough-permx-f90a1943b156)
 
 # Introduction
 
