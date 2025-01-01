@@ -1,5 +1,5 @@
 ---
-title: PermX Walkthrough — HackTheBox
+title: [PermX Walkthrough — HackTheBox](https://medium.com/@misterxcrypt/hackthebox-walkthrough-permx-f90a1943b156)
 published: true
 ---
 
@@ -11,7 +11,7 @@ In this write-up, We’ll go through an easy Linux machine where we first gain i
 
 # Reconnaissance
 
-1. After Starting the machine, I set my target IP as $target environment variable and ran nmap command.<br>
+1. After Starting the machine, I set my target IP as $target environment variable and ran nmap command.
 
 _Command — Port Scan: Nmap_
 
@@ -21,7 +21,7 @@ nmap $target --top-ports=1000 -sV -v -sC  -Pn > nmap.out
 
 2. Then, As usual I added the host:permx.htb in /etc/hosts.
 
-3. While enumerating the website, I started directory fuzzing and subdomain fuzzing in the background.<br>
+3. While enumerating the website, I started directory fuzzing and subdomain fuzzing in the background.
 
 _Command — Subdomain Fuzzing: Fuff_
 
@@ -77,7 +77,7 @@ python3 -c 'import pty;pty.spawn("/bin/bash")'
 
 ## i. User Flag
 
-1. After checking what files are available in the system. I thought of finding files which are owned by ’www-data’<br>
+1. After checking what files are available in the system. I thought of finding files which are owned by ’www-data’
 
 _Command — Files owned by a user: find_
 
@@ -87,7 +87,7 @@ find / -user www-data 2>/dev/null | grep -v '/proc\|/run\|/var/www'
 
 2. I tried running linpeas, but nothing interesting turned out. But I found an interesting file ‘configuration.php’.
 
-3. So I ran a find command to check for any other ‘configuration.php’ file in chamilo application.<br>
+3. So I ran a find command to check for any other ‘configuration.php’ file in chamilo application.
 
 _Command — Finding config file: find_
 
@@ -97,7 +97,7 @@ find / -name configuation.php 2>/dev/null
 
 4. Upon opening the file ‘/var/www/chamilo/app/config/configuration.php’, I found the ‘database connection settings’
 
-5. There are two users in this system. We can find this using the following command:<br>
+5. There are two users in this system. We can find this using the following command:
 
 _Command — Finding users: /etc/passwd_
 
@@ -109,7 +109,7 @@ cat /etc/passwd | grep
 
 ## ii. Root Flag
 
-1. Now, We have a low privileged user access. First run the usual command to find the sudo privileged files.<br>
+1. Now, We have a low privileged user access. First run the usual command to find the sudo privileged files.
 
 _Command — Sudo Privileged files: sudo_
 
@@ -139,7 +139,7 @@ ln -s /etc/passwd /home/mtz/passwd1
 
 4. This command creates a symbolic link of the ‘/etc/passwd’ file to a file ‘/home/mtz/passwd1’.
 
-5. Since this symbolic file is in the home directory of the user ‘mtz’, we can change the permission of the file using the available script ‘/opt/acl.sh’.<br>
+5. Since this symbolic file is in the home directory of the user ‘mtz’, we can change the permission of the file using the available script ‘/opt/acl.sh’.
 
 _Command — Using the script: /opt/ach.sh_
 
