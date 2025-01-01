@@ -1,8 +1,8 @@
 # Hariharan M
 
-## PROFESSIONAL EXPERIENCE                                                                                                                                            January 2023 – Present | IIT MRP, India
+## PROFESSIONAL EXPERIENCE                                                                                                                                            
 
-**Cyber Threat Intel Analyst Intern**
+**Cyber Threat Intel Analyst Intern**    January 2023 – Present | IIT MRP, India
 _Saptang Labs Pvt Ltd_
 
 - **Cybercrime Investigations:** Exposed financial scammer tactics using social engineering and OSINT investigations leading
@@ -59,10 +59,10 @@ Sri Eshwar College of Engineering | CGPA: 8.57                                  
 - Actively participated in CTFs and hackathons with my team, NandBytes, and organized internal college CTFs and training.
 - Maintained a social media presence, sharing daily tech news and fostering a community of cybersecurity enthusiasts.
 
-**Find me on:**  
-[LinkedIn](https://linkedin.com/in/hariharanmathan) | [GitHub](https://github.com/misterxcrypt) | [Hack The Box](https://app.hackthebox.com/profile/668286) | [Email](mailto:hariharan.mathankumar@gmail.com)
-
 **Achievements**
 - Internal Smart Hack Challenge Hackathon Winner 2022
 - Awarded for Academic Proficiency 2022
 - Rajya Puraskar Award 2019
+
+**Find me on:**  
+[LinkedIn](https://linkedin.com/in/hariharanmathan) | [GitHub](https://github.com/misterxcrypt) | [Hack The Box](https://app.hackthebox.com/profile/668286) | [Email](mailto:hariharan.mathankumar@gmail.com)
