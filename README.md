@@ -1,5 +1,7 @@
 # Hariharan M
 
+---
+
 ## PROFESSIONAL EXPERIENCE                                                                                                                                            
 
 **Cyber Threat Intel Analyst Intern**    January 2023 – Present | IIT MRP, India
@@ -17,6 +19,8 @@ scammer profiles.
 - **EASM:** Conducted comprehensive attack surface assessments for clients, identifying vulnerabilities and recommending
 mitigation strategies, resulting in a 30% reduction in their attack surface.
 
+---
+
 ## PROJECTS
 
 **SOC Notes Repository (TryHackMe, Obsidian)**
@@ -30,6 +34,8 @@ mitigation strategies, resulting in a 30% reduction in their attack surface.
 - This all-in-one CLI tool simplifies system monitoring and file analysis, consolidating essential system commands.
 - Built with Bash scripting, it integrates commands like lscpu, free, adduser, wc, and more into a single interface.
 
+---
+
 ## CERTIFICATIONS
 
 ```
@@ -38,6 +44,9 @@ mitigation strategies, resulting in a 30% reduction in their attack surface.
 - Kase Scenarios Betrayal Osint Training
 - Introduction to Cloud Security
 ```
+
+---
+
 ## SKILLS
 
 **Tools & Frameworks**
@@ -46,12 +55,16 @@ MITRE ATT&CK Framework | MISP | Nmap | Metasploit | Elastic SIEM | AlienVault OT
 **Technologies & Languages**
 Open-Source Intelligence | Python Automation | Bash Scripting | Linux | SOCMINT | Networking | Social Engineering
 
+---
+
 ## EDUCATION
 
 **B.Tech in Computer Science and Business Systems**
 Sri Eshwar College of Engineering | CGPA: 8.57                                                                                                                                2021 – 2025 | Coimbatore, India
 
 - **Coursework:** Operating Systems, Project Management, Financial Analytics, Marketing Research, Operations Research.
+
+---
 
 ## ADDITIONAL INFORMATION
 
