@@ -3,6 +3,8 @@ title: PermX Walkthrough — HackTheBox
 published: true
 ---
 
+![Congrats Screen Of HTB machine PermX](https://miro.medium.com/v2/resize:fit:720/format:webp/1*_d1GtfPjVEoaekQliy8MHg.png)
+
 # Introduction
 
 In this write-up, We’ll go through an easy Linux machine where we first gain initial foothold by exploiting a CVE, followed by manipulating Access Control Lists (ACL) to achieve root access.
