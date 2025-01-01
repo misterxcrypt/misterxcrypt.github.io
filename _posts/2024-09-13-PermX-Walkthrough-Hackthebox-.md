@@ -56,7 +56,7 @@ Article: [Starlabs Article about the Exploit](https://starlabs.sg/advisories/23/
 
 ### CVE-2023–4220 Description
 
-    Unrestricted file upload in big file upload functionality in /main/inc/lib/javascript/bigupload/inc/bigUpload.php in Chamilo LMS <= v1.11.24 allows unauthenticated attackers to perform stored cross-site scripting attacks and obtain remote code execution via uploading of web shell.
+> Unrestricted file upload in big file upload functionality in /main/inc/lib/javascript/bigupload/inc/bigUpload.php in Chamilo LMS <= v1.11.24 allows unauthenticated attackers to perform stored cross-site scripting attacks and obtain remote code execution via uploading of web shell.
 
 2. You can also use the knowledge from the above article to exploit this vulnerability or also you can use the above Github tool to easily to exploit it.
 
@@ -135,19 +135,15 @@ sudo -l
 
 3. Understand the script and it’s functionality.
 
-Things to Note
+_Things to Note_
 
-    This script uses sudo setfacl to assign the specified permissions to the given user.
-
-    $1: user — the user for whom ACL permissions will be set.
-    $2: perm — the permissions (e.g., rwx).
-    $3: file — the file on which permissions will be set.
-
-    The script gets three arguments: user, permission, target file.
-
-    We can use this script to modify permissions of any file which is in the home directory of user ‘mtz’.
-
-    If we able to link any important to a file in the home directory of mtz, we can change the permission using the /opt/acl.sh script.
+>This script uses sudo setfacl to assign the specified permissions to the given user.<br><br>
+$1: user — the user for whom ACL permissions will be set.<br>
+$2: perm — the permissions (e.g., rwx).<br>
+$3: file — the file on which permissions will be set.<br><br>
+The script gets three arguments: user, permission, target file.<br><br>
+We can use this script to modify permissions of any file which is in the home directory of user ‘mtz’.<br><br>
+If we able to link any important to a file in the home directory of mtz, we can change the permission using the /opt/acl.sh script.<br>
 
 
 _Command — Symbolic link: ln_
