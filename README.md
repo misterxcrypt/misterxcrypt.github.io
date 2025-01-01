@@ -1,17 +1,63 @@
-# Data Scientist
+---
+layout: default
+title: Portfolio
+---
 
-#### Technical Skills: Python, SQL, AWS, Snowflake, MATLAB
+# **Welcome to My Portfolio**
 
-## Education
-- Ph.D., Physics | The University of Texas at Dallas (_May 2022_)								       		
-- M.S., Physics	| The University of Texas at Dallas (_December 2019_)	 			        		
-- B.S., Physics | The University of Texas at Dallas (_May 2017_)
+## About Me
+I am a **Cyber Threat Intelligence Analyst** with expertise in combating financial fraud and emerging cybersecurity threats. My key strengths lie in leveraging **OSINT**, **social engineering**, and **threat analysis** to provide actionable insights. With hands-on experience in Python, Node.js, and automation tools, I aim to build innovative solutions that make a difference in the cybersecurity domain.
 
-## Work Experience
-**Data Scientist @ Toyota Financial Services (_June 2022 - Present_)**
-- Uncovered and corrected missing step in production data pipeline which impacted over 70% of active accounts
-- Redeveloped loan originations model which resulted in 50% improvement in model performance and saving 1 million dollars in potential losses
+---
 
-**Data Science Consultant @ Shawhin Talebi Ventures LLC (_December 2020 - Present_)**
-- Conducted data collection, processing, and analysis for novel study evaluating the impact of over 300 biometrics variables on human performance in hyper-realistic, live-fire training scenarios
-- Applied unsupervised deep learning approaches to longitudinal ICU data to discover novel sepsis sub-phenotypes
+## My Projects
+### Finansis - Project F
+- **Description**: A dashboard for comparing ETFs and mutual funds.
+- **Features**:
+  - ETF vs ETF comparison
+  - Mutual fund vs mutual fund comparison
+  - ETF vs mutual fund comparison
+- **Tech Stack**: React (Frontend), MongoDB (Backend, if needed), APIs for data fetching
+
+### Threat Actor Data Collector
+- **Description**: An efficient tool to collect over 40,000+ threat actor data points from scam sites.
+- **Impact**: Provided critical insights for government entities to take action against financial scams.
+
+### Discord Bot for Cybersecurity News
+- **Description**: A bot that extracts and summarizes cybersecurity news articles from URLs.
+- **Features**:
+  - Generates tags using Hugging Face
+  - Summarizes articles on command
+
+---
+
+## Interests
+- **Cybersecurity Specializations**:
+  - Financial Fraud Detection
+  - Brand Impersonation and Phishing
+  - Social Engineering
+- **Programming and Automation**:
+  - Python scripting
+  - Node.js for backend development
+- **Threat Research and Analysis**:
+  - Tracking emerging financial scams
+  - Monitoring platforms like Telegram for threats
+- **Investment Analysis**:
+  - Financial analytics and ETF/MF comparisons
+
+---
+
+## Blogs
+### [Cybersecurity 101: Specializations & Job Roles](#)
+- A beginner-friendly guide to understanding cybersecurity and career opportunities.
+
+### [Investigating Financial Scams in India](#)
+- A deep dive into prevalent financial scams and methods for detection and prevention.
+
+### [Unmasking Telegram Threat Actors](#)
+- How OSINT and social engineering can help uncover scam networks on Telegram.
+
+---
+
+**Find me on:**  
+[GitHub](https://github.com/misterxcrypt) | [LinkedIn](https://linkedin.com/in/hariharanmathan) | [Twitter](https://twitter.com/misterxcrypt)
