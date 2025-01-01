@@ -1,8 +1,3 @@
----
-layout: default
-title: Portfolio
----
-
 # **Welcome to My Portfolio**
 
 ## About Me
