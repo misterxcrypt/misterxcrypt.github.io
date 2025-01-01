@@ -1,8 +1,5 @@
 # Hariharan M
 
-```
-
-```
 ## PROFESSIONAL EXPERIENCE                                                                                                                                            January 2023 – Present | IIT MRP, India
 
 **Cyber Threat Intel Analyst Intern**
