@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hariharan's Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/favicon-black-bg.svg" sizes="64x64">
 </head>
 <body class="bg-gray-100 flex flex-col items-center justify-center h-screen">
@@ -16,4 +15,45 @@
     </nav>
     <div class="text-4xl font-bold text-black">Hi, I am Hariharan</div>
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hariharan's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon-black-bg.svg" sizes="64x64">
+    <style>
+        .bg-overlay {
+            background: url('assets/background.jpg') no-repeat center center/cover;
+        }
+    </style>
+</head>
+<body class="relative h-screen w-screen flex items-center justify-center text-white">
+    <!-- Background with Blur Effect -->
+    <div class="absolute inset-0 bg-overlay blur-lg"></div>
+    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    
+    <!-- Navigation -->
+    <nav class="absolute top-6 right-6 flex space-x-6 text-lg font-semibold">
+        <a href="/resume" class="hover:text-gray-300 transition duration-300">Resume</a>
+        <a href="/cryptic-grove" class="hover:text-gray-300 transition duration-300">Study Notes</a>
+        <a href="https://bento.me/misterxcrypt" class="hover:text-gray-300 transition duration-300">My Social Links</a>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="relative z-10 flex items-center space-x-8">
+        <div class="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-white shadow-lg">
+            <img src="assets/profile.jpg" alt="Hariharan's Image" class="w-full h-full object-cover">
+        </div>
+        <div class="text-left">
+            <h1 class="text-5xl font-extrabold drop-shadow-lg">Hi, I am Hariharan</h1>
+            <p class="mt-4 text-xl text-white font-semibold drop-shadow-lg">Cyber Threat Intelligence Analyst | OSINT Researcher</p>
+        </div>
+    </div>
+</body>
 </html>
+
