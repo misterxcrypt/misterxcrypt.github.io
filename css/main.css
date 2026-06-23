@@ -593,6 +593,15 @@ nav a.active {
   margin: 0 auto;
 }
 
+.portfolio__group-title {
+  text-align: center;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 3rem auto 1.5rem;
+  max-width: 56rem;
+}
+
 .portfolio__item {
   background: var(--color-bg-variant);
   border: 1px solid transparent;
