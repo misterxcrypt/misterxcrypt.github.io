@@ -1,0 +1,33 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# AI / design tooling (local dev only)
+.cursor/
+.gemini/
+.impeccable/
+
+# Draft & working copies (content lives in index.html)
+rough-content.md
+resume-content.md
+
+# Build / deps (if added later)
+node_modules/
+dist/
+.cache/
+
+# Logs & env
+*.log
+.env
+.env.*
+
+DESIGN.md
+PRODUCT.md
