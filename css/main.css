@@ -662,20 +662,17 @@ nav a.active {
 
 .contact__container {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
-  gap: 2rem;
-  width: 65%;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  max-width: 56rem;
   margin: 0 auto;
 }
 
-.contact__options {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  min-width: 0;
-}
-
 .contact__option {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
   background: var(--color-bg-variant);
   border: 1px solid transparent;
   border-radius: 1.2rem;
@@ -691,6 +688,11 @@ nav a.active {
   border-color: var(--color-primary-variant);
 }
 
+.contact__option:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
 .contact__option-icon {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
@@ -700,9 +702,14 @@ nav a.active {
 .contact__option h4 {
   font-size: 0.95rem;
   margin-bottom: 0.35rem;
+  color: var(--color-white);
 }
 
-.contact__option h5,
+.contact__option:hover h4,
+.contact__option:focus-visible h4 {
+  color: var(--color-white);
+}
+
 .contact__option-detail {
   color: var(--color-light);
   font-size: 0.85rem;
@@ -711,55 +718,20 @@ nav a.active {
   overflow-wrap: anywhere;
   word-break: break-word;
   max-width: 100%;
+  margin: 0 0 0.5rem;
 }
 
-.contact__option-detail {
-  display: block;
-  text-decoration: none;
-  margin-bottom: 0.5rem;
-}
-
-.contact__option-detail:hover {
-  color: var(--color-primary);
-}
-
-.contact__option a:not(.contact__option-detail) {
+.contact__option-action {
   display: inline-block;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
   color: var(--color-primary);
   font-size: 0.85rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
-.contact__form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  min-width: 0;
-}
-
-.contact__form input,
-.contact__form textarea {
-  width: 100%;
-  padding: 1.25rem;
-  border-radius: 0.5rem;
-  background: transparent;
-  border: 2px solid var(--color-primary);
+.contact__option:hover .contact__option-detail,
+.contact__option:hover .contact__option-action {
   color: var(--color-white);
-  font-family: inherit;
-  font-size: 0.95rem;
-  resize: none;
-}
-
-.contact__form input::placeholder,
-.contact__form textarea::placeholder {
-  color: var(--color-light);
-}
-
-.contact__form input:focus-visible,
-.contact__form textarea:focus-visible {
-  outline: 2px solid var(--color-white);
-  outline-offset: 2px;
 }
 
 /* ——— Footer ——— */
@@ -886,8 +858,7 @@ footer {
 
   .contact__container {
     grid-template-columns: 1fr;
-    width: var(--container-width-md);
-    gap: 2rem;
+    max-width: var(--container-width-md);
   }
 }
 
@@ -940,7 +911,6 @@ footer {
   nav,
   .header__socials,
   .scroll__down,
-  .contact__form,
   footer {
     display: none;
   }
