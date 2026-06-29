@@ -699,6 +699,24 @@ nav a.active {
   color: var(--color-primary);
 }
 
+.contact__option-icon--img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avely-icon {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  object-fit: contain;
+}
+
+.contact__option-icon--img .avely-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
 .contact__option h4 {
   font-size: 0.95rem;
   margin-bottom: 0.35rem;
@@ -737,11 +755,12 @@ nav a.active {
 /* ——— Footer ——— */
 
 footer {
-  background: rgba(152, 153, 155, 0.82);
+  background: #ffffff;
   padding: 3rem 0;
   margin-top: 5rem;
   text-align: center;
   font-size: 0.9rem;
+  border-top: 1px solid oklch(0.88 0.01 230);
 }
 
 .footer__logo {
@@ -750,6 +769,11 @@ footer {
   margin-bottom: 1rem;
   display: inline-block;
   color: var(--color-bg);
+  text-decoration: none;
+}
+
+.footer__logo:hover {
+  color: var(--color-primary);
 }
 
 .permalinks {
@@ -766,10 +790,11 @@ footer {
   color: var(--color-bg);
   font-weight: 500;
   font-size: 0.85rem;
+  text-decoration: none;
 }
 
 .permalinks a:hover {
-  color: var(--color-white);
+  color: var(--color-primary);
 }
 
 .footer__socials {
@@ -801,8 +826,14 @@ footer {
   fill: currentColor;
 }
 
+.footer__socials .avely-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
 .footer__copyright {
   color: var(--color-bg);
+  opacity: 0.75;
   margin-bottom: 4rem;
   font-size: 0.85rem;
 }
