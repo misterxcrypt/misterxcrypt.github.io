@@ -50,8 +50,9 @@
   <nav aria-label="Section navigation">
     <a class="nav__link active" href="#home"><span>Home</span></a>
     <a class="nav__link" href="#about"><span>About</span></a>
-    <a class="nav__link" href="#experience"><span>Skills</span></a>
+    <a class="nav__link" href="#notable"><span>Works</span></a>
     <a class="nav__link" href="#work"><span>Work</span></a>
+    <a class="nav__link" href="#experience"><span>Skills</span></a>
     <a class="nav__link" href="#education"><span>Learning</span></a>
     <a class="nav__link" href="#portfolio"><span>Portfolio</span></a>
     <a class="nav__link" href="#contact"><span>Contact</span></a>
@@ -103,6 +104,85 @@
 
           <a class="btn btn--primary" href="#contact">Let's Talk</a>
         </div>
+      </div>
+    </section>
+
+    <section id="notable">
+      <h5>Selected highlights</h5>
+      <h2>Notable Works</h2>
+
+      <div class="notable__container">
+        <div class="notable__tabs" role="tablist" aria-label="Notable works">
+          <button type="button" class="notable__tab" role="tab" id="notable-tab-0" aria-controls="notable-panel" aria-selected="true" tabindex="0">1</button>
+          <button type="button" class="notable__tab" role="tab" id="notable-tab-1" aria-controls="notable-panel" aria-selected="false" tabindex="-1">2</button>
+          <button type="button" class="notable__tab" role="tab" id="notable-tab-2" aria-controls="notable-panel" aria-selected="false" tabindex="-1">3</button>
+          <button type="button" class="notable__tab" role="tab" id="notable-tab-3" aria-controls="notable-panel" aria-selected="false" tabindex="-1">4</button>
+        </div>
+
+        <div class="notable__panel" id="notable-panel" role="tabpanel" aria-labelledby="notable-tab-0" tabindex="0">
+          <h3 class="notable__title">Large-scale scam &amp; phishing indicator research</h3>
+          <p class="notable__desc">Analyzed 99,000+ scammer indicators, 2,000+ malicious ad domains, and 1,000+ phishing sites — turning raw OSINT into structured intelligence used for detection, reporting, and client briefings.</p>
+          <a class="notable__link" hidden>Read more</a>
+          <div class="notable__actions">
+            <button type="button" class="btn btn--outline notable__next">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="notable__data" hidden>
+        <article class="notable__item" data-notable-index="0">
+          <h3>Large-scale scam &amp; phishing indicator research</h3>
+          <p>Analyzed 99,000+ scammer indicators, 2,000+ malicious ad domains, and 1,000+ phishing sites — turning raw OSINT into structured intelligence used for detection, reporting, and client briefings.</p>
+        </article>
+        <article class="notable__item" data-notable-index="1">
+          <h3>High-stakes DRP for enterprise &amp; government clients</h3>
+          <p>Delivered digital risk protection assessments covering phishing, brand abuse, dark web exposure, and executive impersonation for organizations across India and Southeast Asia — including engagements where discretion and precision matter most.</p>
+        </article>
+        <article class="notable__item" data-notable-index="2">
+          <h3>Public writing on OSINT, CVEs &amp; threat research</h3>
+          <p>Maintain a public security persona through Medium essays on OSINT methodology, vulnerability research, and practical CTI — making complex investigations readable for practitioners and hiring managers alike.</p>
+          <a href="https://medium.com/@misterxcrypt" target="_blank" rel="noopener noreferrer">Read on Medium</a>
+        </article>
+        <article class="notable__item" data-notable-index="3">
+          <h3>Internet-scale exposure &amp; Telegram intelligence systems</h3>
+          <p>Designed and shipped scanning and monitoring architectures — from global IPv4 HTTPS exposure research on AWS/Terraform to Telegram channel intelligence for keyword tracking and threat-actor monitoring.</p>
+          <a href="https://github.com/misterxcrypt/telescribe" target="_blank" rel="noopener noreferrer">View Telescribe</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="work">
+      <h5>Where I've Worked</h5>
+      <h2>Professional Experience</h2>
+
+      <div class="work__container">
+        <article class="work__item">
+          <div class="work__header">
+            <h4>Redhunt Labs</h4>
+            <span>May 2025 – Present · Remote</span>
+          </div>
+          <p class="work__role">Security Consultant</p>
+          <ul>
+            <li><strong>DRP assessments</strong> for enterprise clients across India and Southeast Asia — phishing, brand abuse, dark web exposure, and executive impersonation.</li>
+            <li>Architected <strong>phishing detection</strong> using typosquatting, Certificate Transparency logs, and CTI feeds.</li>
+            <li>Built <strong>internet-scale scanning</strong> on AWS and Terraform for global IPv4 HTTPS exposure research.</li>
+            <li>Designed <strong>Telegram intelligence</strong> architecture — channel onboarding, keyword monitoring, threat-actor tracking.</li>
+          </ul>
+        </article>
+
+        <article class="work__item">
+          <div class="work__header">
+            <h4>Saptang Labs</h4>
+            <span>Jan 2023 – May 2025 · IIT MRP, India</span>
+          </div>
+          <p class="work__role">Cyber Threat Intelligence Analyst</p>
+          <ul>
+            <li>Analyzed <strong>99,000+ scammer indicators</strong>, <strong>2,000+ malicious ad domains</strong>, and <strong>1,000+ phishing sites</strong>.</li>
+            <li>Authored <strong>80+ intelligence reports</strong> and maintained internal threat databases and dashboards.</li>
+            <li>Shipped an MVP in <strong>under two weeks</strong> with <strong>10,000+ threat indicators</strong> for pilot validation.</li>
+            <li>EASM assessments helped close <strong>70–80% of initial client deals</strong>; automation raised detection <strong>75%</strong>.</li>
+          </ul>
+        </article>
       </div>
     </section>
 
@@ -170,41 +250,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="work">
-      <h5>Where I've Worked</h5>
-      <h2>Professional Experience</h2>
-
-      <div class="work__container">
-        <article class="work__item">
-          <div class="work__header">
-            <h4>Redhunt Labs</h4>
-            <span>May 2025 – Present · Remote</span>
-          </div>
-          <p class="work__role">Security Consultant</p>
-          <ul>
-            <li><strong>DRP assessments</strong> for enterprise clients across India and Southeast Asia — phishing, brand abuse, dark web exposure, and executive impersonation.</li>
-            <li>Architected <strong>phishing detection</strong> using typosquatting, Certificate Transparency logs, and CTI feeds.</li>
-            <li>Built <strong>internet-scale scanning</strong> on AWS and Terraform for global IPv4 HTTPS exposure research.</li>
-            <li>Designed <strong>Telegram intelligence</strong> architecture — channel onboarding, keyword monitoring, threat-actor tracking.</li>
-          </ul>
-        </article>
-
-        <article class="work__item">
-          <div class="work__header">
-            <h4>Saptang Labs</h4>
-            <span>Jan 2023 – May 2025 · IIT MRP, India</span>
-          </div>
-          <p class="work__role">Cyber Threat Intelligence Analyst</p>
-          <ul>
-            <li>Analyzed <strong>99,000+ scammer indicators</strong>, <strong>2,000+ malicious ad domains</strong>, and <strong>1,000+ phishing sites</strong>.</li>
-            <li>Authored <strong>80+ intelligence reports</strong> and maintained internal threat databases and dashboards.</li>
-            <li>Shipped an MVP in <strong>under two weeks</strong> with <strong>10,000+ threat indicators</strong> for pilot validation.</li>
-            <li>EASM assessments helped close <strong>70–80% of initial client deals</strong>; automation raised detection <strong>75%</strong>.</li>
-          </ul>
-        </article>
       </div>
     </section>
 
@@ -378,8 +423,9 @@
     <ul class="permalinks">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#experience">Skills</a></li>
+      <li><a href="#notable">Works</a></li>
       <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Skills</a></li>
       <li><a href="#education">Learning</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#contact">Contact</a></li>
