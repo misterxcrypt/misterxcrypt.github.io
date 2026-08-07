@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hariharan M, Cyber Threat Intelligence Analyst resume.">
+<title>Hariharan M, Resume</title>
+<style>
+  :root {
+    --ink: #16181d;
+    --ink-soft: #4a5262;
+    --rule: #d9dce2;
+    --accent: #a9762f;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    --font-display: Georgia, "Times New Roman", serif;
+  }
+
+  @page {
+    size: A4;
+    margin: 12mm 14mm;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: #eceef1;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 9.5pt;
+    line-height: 1.38;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 1.5rem auto;
+    background: #ffffff;
+    padding: 12mm 14mm;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+
+  header.resume-header {
+    text-align: center;
+    margin-bottom: 0.7rem;
+  }
+
+  header.resume-header h1 {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin: 0 0 0.2rem;
+  }
+
+  .contact-line {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  .contact-line a {
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+
+  .contact-line a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .contact-sep {
+    margin: 0 0.45rem;
+    color: var(--rule);
+  }
+
+  h2.section-title {
+    font-family: var(--font-display);
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 0.15rem;
+    margin: 0.75rem 0 0.4rem;
+  }
+
+  section:first-of-type h2.section-title {
+    margin-top: 0;
+  }
+
+  p.profile-text {
+    margin: 0;
+    font-size: 0.82rem;
+  }
+
+  .entry {
+    margin-bottom: 0.55rem;
+  }
+
+  .entry:last-child {
+    margin-bottom: 0;
+  }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.2rem 1rem;
+  }
+
+  .entry-title {
+    font-size: 0.86rem;
+    font-weight: 700;
+  }
+
+  .entry-org {
+    font-weight: 400;
+  }
+
+  .project-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .project-link:hover {
+    text-decoration: underline;
+  }
+
+  .project-link .link-icon {
+    font-size: 0.7em;
+    color: var(--accent);
+    margin-left: 0.15em;
+  }
+
+  .entry-meta {
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  .entry-role {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin: 0.05rem 0 0.2rem;
+  }
+
+  ul.bullets {
+    margin: 0.15rem 0 0;
+    padding-left: 1rem;
+  }
+
+  ul.bullets li {
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+
+  ul.bullets li:last-child {
+    margin-bottom: 0;
+  }
+
+  .note {
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 0.05rem 0 0.2rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem 1.75rem;
+  }
+
+  .skills-group h3 {
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    margin: 0 0 0.15rem;
+  }
+
+  .skills-group p {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  .cert-list {
+    columns: 2;
+    column-gap: 1.75rem;
+    margin: 0;
+    padding-left: 1rem;
+  }
+
+  .cert-list li {
+    font-size: 0.8rem;
+    margin-bottom: 0.18rem;
+    break-inside: avoid;
+  }
+
+  @media print {
+    body {
+      background: #ffffff;
+      font-size: 9.5pt;
+    }
+    .page {
+      width: auto;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .page {
+      width: auto;
+      min-height: 0;
+      padding: 1.25rem;
+      margin: 0;
+    }
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+    .cert-list {
+      columns: 1;
+    }
+  }
+
+  .download-bar {
+    max-width: 210mm;
+    margin: 1rem auto 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--ink);
+    color: #ffffff;
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.55rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .download-btn:hover {
+    background: var(--accent);
+  }
+
+  .download-hint {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin: 0.35rem 0 0;
+  }
+
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="download-bar no-print">
+  <div style="text-align: right;">
+    <button type="button" class="download-btn" onclick="window.print()">Download as PDF</button>
+    <p class="download-hint">Opens your browser's print dialog, choose "Save as PDF" as the destination.</p>
+  </div>
+</div>
+<div class="page">
+
+  <header class="resume-header">
+    <h1>Hariharan M</h1>
+    <p class="contact-line">
+      hariharan.mathankumar@gmail.com<span class="contact-sep">|</span>+91&nbsp;9566714246<span class="contact-sep">|</span><a href="https://misterxcrypt.github.io">Portfolio</a><span class="contact-sep">|</span><br><a href="https://linkedin.com/in/hariharanmathan">linkedin.com/in/hariharanmathan</a><span class="contact-sep">|</span><a href="https://github.com/misterxcrypt">github.com/misterxcrypt</a><span class="contact-sep">|</span><a href="https://medium.com/@misterxcrypt">medium.com/@misterxcrypt</a>
+    </p>
+  </header>
+
+  <section>
+    <h2 class="section-title">Executive Summary</h2>
+    <p class="profile-text">
+      Threat Intelligence Lead with 3+ years of experience in brand protection, dark web research, and cybercrime investigations. Built a money mule identification system that collected 100,000+ threat actor data points, helping government and financial institutions close nearly 90% of first-hop mule accounts within a day of creation. Skilled in OSINT, HUMINT, and dark web tradecraft, from sock-puppet operations to on-chain cryptocurrency tracing, with SOPs authored for team-wide use in persona management and brand-impersonation investigations. Looking to bring investigative, analyst-driven thinking to CTI teams delivering DRP, dark web monitoring, and threat actor/TTP intelligence that protects enterprise clients from emerging threats.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Professional Experience</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Threat Intelligence Lead, <span class="entry-org">Redhunt Labs Pvt Ltd</span></span>
+        <span class="entry-meta">May 2025 – July 2026 | Remote</span>
+      </div>
+      <ul class="bullets">
+        <li><strong>Internet-Scale Scanning Infrastructure:</strong> Built an internet-scale scanning infrastructure capable of scanning the global IPv4 HTTPS attack surface in under 28 hours.</li>
+        <li><strong>AI Security Research:</strong> Conducted AI security research focused on asset discovery, exposure monitoring, fingerprinting, and secret leakage detection to support emerging AI attack surface management initiatives.</li>
+        <li><strong>Digital Risk Protection (DRP):</strong> Led Digital Risk Protection investigations for enterprise clients, uncovering phishing campaigns, brand impersonation, rogue applications, exposed infrastructure, and dark web threats.</li>
+        <li><strong>SOP Authorship:</strong> Authored standard operating procedures for sock-puppet/persona management and brand-impersonation investigations, standardizing OPSEC practices and investigation workflow across the CTI team.</li>
+        <li><strong>Pre-Sales Security Consulting:</strong> Partnered with pre-sales teams to demonstrate ransomware intelligence and dark web monitoring capabilities, contributing technical expertise during customer evaluations and solution discussions.</li>
+        <li><strong>Phishing Detection Engineering:</strong> Built an automated phishing and typosquatting detection system that discovers brand look-alike domains and forensically scores them for risk, replacing manual domain hunting with faster, explainable takedown decisions.</li>
+        <li><strong>Telegram Intelligence Platform:</strong> Designed a Telegram intelligence platform monitoring hundreds of channels/groups for threat intelligence collection and enrichment.</li>
+        <li><strong>Client Reporting:</strong> Redesigned ASM reporting by introducing separate executive and technical reports, improving stakeholder communication and assessment effectiveness.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Cyber Threat Intelligence Analyst, <span class="entry-org">Saptang Labs Pvt Ltd</span></span>
+        <span class="entry-meta">January 2023 – May 2025 | IIT MRP, India</span>
+      </div>
+      <ul class="bullets">
+        <li><strong>Fraud &amp; Phishing Intelligence:</strong> Built a money mule identification system that collected and analyzed 100,000+ threat actor data points, 2,000+ malicious ad domains, and 1,000+ phishing sites, increasing real-time detection by 75% and helping government and financial institutions close nearly 90% of first-hop mule accounts within a day of creation.</li>
+        <li><strong>Financial Scam Investigations:</strong> Led OSINT, HUMINT, and social engineering investigations across a wide range of financial scams, cryptocurrency scams, lottery and gambling schemes, money mule networks, drawing on multiple sources and tools to uncover scammer tactics and infrastructure, potentially disrupting the operations.</li>
+        <li><strong>Dark Web &amp; Telegram Monitoring:</strong> Monitored 20+ underground forums, dark web marketplaces, and Telegram channels, tracking ransomware groups and scam operations, mapping adversary TTPs to the MITRE ATT&amp;CK framework, and conducting cybercrime ecosystem mapping, producing 80+ actionable intelligence reports.</li>
+        <li><strong>Threat Actor Engagement (HUMINT &amp; OPSEC):</strong> Conducted TA engagements using proper OPSEC procedures to verify data leaks and understand the modus operandi of scams and frauds.</li>
+        <li><strong>Brand Threat Monitoring:</strong> Detected phishing sites, cloned APKs, and impersonation campaigns, including 2,000+ SEO-poisoned .gov.in pages and 10,000+ fraudulent bank customer-care numbers on YouTube.</li>
+        <li><strong>Government Collaboration:</strong> Supported law enforcement and regulatory investigations into financial fraud, terrorist funding, and extremist networks across Telegram and online forums, producing actionable intelligence referrals.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Independent Research &amp; Personal Initiatives</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Dark Web Research &amp; On-Chain Analysis</span>
+      </div>
+      <p class="note">Independent research, unaffiliated with any employer.</p>
+      <ul class="bullets">
+        <li>Independently tracked illicit services operating on the dark web, including carding platforms and child-exploitation (CSAM) infrastructure and conducted cryptocurrency and blockchain transaction tracing (on-chain analysis) to follow illicit fund flows linked to identified threat actors.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Hacktivist &amp; Disinformation Network Tracking</span>
+      </div>
+      <p class="note">Independent research, unaffiliated with any employer.</p>
+      <ul class="bullets">
+        <li>Collaborated with fellow OSINT researchers to track coordinated hacktivist collectives and disinformation campaigns across Telegram and social platforms during a period of regional geopolitical conflict, profiling propaganda dissemination channels and cross-platform attack infrastructure.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Cybercrime Complaint &amp; Case Management Platform</span>
+      </div>
+      <p class="note">Independent initiative, unaffiliated with any employer, built on personal time for a local cybercrime response unit.</p>
+      <ul class="bullets">
+        <li>Independently designed and deployed a WhatsApp-based complaint intake and case-tracking system for a local cybercrime response unit, streamlining citizen complaint collection and reducing manual case-handling efforts. The solution improved response times and enabled investigators to manage cases more efficiently.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <section>
+    <h2 class="section-title">Projects</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title"><a class="project-link" href="https://github.com/misterxcrypt/telescribe" target="_blank" rel="noopener noreferrer">Telescribe<span class="link-icon">&#8599;</span></a> <span class="entry-org">(Python, Telegram Intelligence)</span></span>
+      </div>
+      <ul class="bullets">
+        <li>Telescribe builds an OSINT relationship map between Telegram channels, extracting t.me links shared in a channel's messages on the premise that a channel linking to another signals a real connection between them.</li>
+        <li>Also ingests and AI-classifies a channel's messages for threat relevance, generating a summary and surfacing IOCs (domains, IPs, file hashes) to help CTI analysts quickly triage a source.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title"><a class="project-link" href="https://forums-bank.vercel.app/" target="_blank" rel="noopener noreferrer">Forums Bank<span class="link-icon">&#8599;</span></a> <span class="entry-org">(Python, OSINT)</span></span>
+      </div>
+      <ul class="bullets">
+        <li>Forums Bank is a curated intelligence repository that centralizes cybercrime forums, marketplaces, leak sites, and underground communities for streamlined threat research and intelligence collection.</li>
+        <li>Contributed multiple dark web forums to the project's curated source list, expanding coverage across underground communities and marketplaces.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Certifications</h2>
+    <ul class="cert-list">
+      <li><a class="project-link" href="https://arcx.io/verify-certificate?id=dbb93077e48f46d02e79d4393649c6834b271fe8&amp;k=beb49bbc730c49d49be6f4cba47499ef" target="_blank" rel="noopener noreferrer">ArcX Foundation Level Threat Intelligence Analyst</a></li>
+      <li><a class="project-link" href="https://courses.kasescenarios.com/certificates/gyczgtf8sq" target="_blank" rel="noopener noreferrer">Kase Scenarios Betrayal OSINT Training</a></li>
+      <li><a class="project-link" href="https://www.credly.com/badges/62f2b514-817c-476a-86e0-b6bb8784975b" target="_blank" rel="noopener noreferrer">CISCO Introduction to Cyber Security</a></li>
+      <li><a class="project-link" href="https://factory.cancred.ca/obv3/credentials/494e232c6e6013a0a1889b00504a7d7d9dbffb12" target="_blank" rel="noopener noreferrer">Tracelabs OSINT Coach</a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skills-group">
+        <h3>Threat Intelligence &amp; Investigation</h3>
+        <p>Cyber Threat Intelligence, Digital Risk Protection, Dark Web Intelligence, OSINT, HUMINT, Attack Surface Management, MITRE ATT&amp;CK Framework</p>
+      </div>
+      <div class="skills-group">
+        <h3>Dark Web &amp; Fraud Tradecraft</h3>
+        <p>Sock-Puppet Operations, Cybercrime Ecosystem Mapping, Crypto On-Chain Analysis, Fraud &amp; Financial Crime Intelligence, Certificate Transparency Log Monitoring</p>
+      </div>
+      <div class="skills-group">
+        <h3>Tools &amp; Platforms</h3>
+        <p>Shodan, Censys, VirusTotal, URLScan.io, SecurityTrails, FOFA, Maltego, Google Dorking</p>
+      </div>
+      <div class="skills-group">
+        <h3>Technical &amp; Delivery</h3>
+        <p>Python, Selenium, MongoDB, Celery, Elasticsearch, Docker, Terraform, Cloud &amp; Automation, Rapid MVP Prototyping</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Education</h2>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">B.Tech in Computer Science and Business Systems</span>
+        <span class="entry-meta">2021 – 2025 | Coimbatore, India</span>
+      </div>
+      <p class="entry-role">Sri Eshwar College of Engineering | CGPA: 8.61</p>
+      <ul class="bullets">
+        <li><strong>Leadership:</strong> Organized cybersecurity seminars, workshops, and CTF events, mentoring students and fostering cybersecurity awareness within the college community.</li>
+        <!-- <li><strong>Coursework:</strong> Operating Systems, Project Management, Financial Analytics, Marketing Research, Operations Research.</li> -->
+        <li> <strong>Teamwork:</strong> Actively participated in CTFs and hackathons with team NandBytes; organized college CTFs and trainings.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Awards & Achievements</h2>
+    <!-- <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Teamwork</span>
+        <span class="entry-meta">2022 – Present</span>
+      </div>
+      <ul class="bullets">
+        <li>Actively participated in CTFs and hackathons with team NandBytes; organized college CTFs and trainings.</li>
+      </ul>
+    </div> -->
+    <div class="entry">
+      <!-- <div class="entry-header">
+        <span class="entry-title">Achievements</span>
+      </div> -->
+      <ul class="bullets">
+        <li>Published cybersecurity blogs on Medium, covering OSINT investigations, HackTheBox write-ups, and CVEs.</li>
+        <li>Co-authored the Payment Gateway Security Handbook, covering the threat intelligence for payment gateways.</li>
+        <li>Internal Smart Hack Challenge Hackathon Winner, 2022.</li>
+        <li>Rajya Puraskar Award, 2019.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

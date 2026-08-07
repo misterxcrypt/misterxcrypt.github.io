@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hariharan M — Cyber Threat Intelligence Analyst, OSINT researcher, and security consultant.">
+  <meta name="description" content="Hariharan M — Cyber Threat Intelligence Analyst, OSINT researcher, and Cybercrime Investigator.">
   <title>Hariharan M · Portfolio</title>
   <link rel="icon" href="assets/favicon-black-bg.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/main.css">
@@ -23,24 +23,25 @@
         </a>
       </div>
 
-      <p class="header__greeting">Hello, I'm</p>
-      <h1 class="header__name">Hariharan M</h1>
-      <p class="header__role">Cyber Threat Intelligence Analyst · OSINT Researcher · Security Consultant</p>
+      <div class="header__grid">
+        <div class="header__text">
+          <p class="header__greeting">Hello, I'm</p>
+          <h1 class="header__name">Hariharan M</h1>
+          <p class="header__role">Cyber Threat Intelligence Analyst · OSINT Researcher · Cybercrime Investigator</p>
 
-      <div class="cta">
-        <a class="btn btn--primary" href="assets/Hariharan M.pdf" download>Download CV</a>
-        <a class="btn btn--outline" href="/cryptic-grove">My study notes</a>
-        <a class="btn btn--outline" href="#contact">Let's Talk</a>
-      </div>
+          <div class="cta">
+            <a class="btn btn--primary" href="assets/Hariharan M - Resume.pdf" download>Download CV</a>
+            <a class="btn btn--outline" href="/cryptic-grove">My study notes</a>
+            <a class="btn btn--outline" href="#contact">Let's Talk</a>
+          </div>
+        </div>
 
-      <div class="me">
-        <img
-          src="assets/profile.jpg"
-          alt="Hariharan M"
-          width="352"
-          height="448"
-          onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'me__placeholder',textContent:'HM',role:'img','aria-label':'Hariharan M'}))"
-        >
+        <div class="header__visual" aria-hidden="true">
+          <span class="header__visual-reticle"></span>
+          <span class="header__visual-dot header__visual-dot--1"></span>
+          <span class="header__visual-dot header__visual-dot--2"></span>
+          <span class="header__visual-dot header__visual-dot--3"></span>
+        </div>
       </div>
 
       <a class="scroll__down" href="#about">Scroll Down</a>
@@ -64,42 +65,30 @@
       <h2>About Me</h2>
 
       <div class="about__container">
-        <div class="about__me">
-          <div class="about__me-image">
-            <img
-              src="assets/profile.jpg"
-              alt="Hariharan M portrait"
-              width="400"
-              height="400"
-              onerror="this.parentElement.innerHTML='<div class=\'me__placeholder\' style=\'aspect-ratio:1;border-radius:2rem\'>HM</div>'"
-            >
-          </div>
+        <div class="about__cards">
+          <article class="about__card">
+            <span class="about__icon" aria-hidden="true">★</span>
+            <h5>Experience</h5>
+            <small>3+ Years</small>
+          </article>
+          <article class="about__card">
+            <span class="about__icon" aria-hidden="true">✓</span>
+            <h5>Reports</h5>
+            <small>80+ Delivered</small>
+          </article>
+          <article class="about__card">
+            <span class="about__icon" aria-hidden="true">◆</span>
+            <h5>Projects</h5>
+            <small>4+ Built</small>
+          </article>
         </div>
 
         <div class="about__content">
-          <div class="about__cards">
-            <article class="about__card">
-              <span class="about__icon" aria-hidden="true">★</span>
-              <h5>Experience</h5>
-              <small>3+ Years</small>
-            </article>
-            <article class="about__card">
-              <span class="about__icon" aria-hidden="true">✓</span>
-              <h5>Reports</h5>
-              <small>80+ Delivered</small>
-            </article>
-            <article class="about__card">
-              <span class="about__icon" aria-hidden="true">◆</span>
-              <h5>Projects</h5>
-              <small>4+ Built</small>
-            </article>
-          </div>
-
           <p>
-            Cybersecurity professional with 3+ years of experience in Cyber Threat Intelligence, Digital Risk Protection, and Attack Surface Management. Experienced in dark web investigations, phishing detection, OSINT operations, internet-scale security research, and threat intelligence automation.
+            Cybersecurity professional with 3+ years of experience in Cyber Threat Intelligence, Digital Risk Protection, and Attack Surface Management. Experienced in dark web investigations, phishing detection, OSINT and HUMINT operations, internet-scale security research, and threat intelligence automation.
           </p>
           <p>
-            Proven track record of building intelligence platforms, conducting large-scale exposure analysis, and delivering actionable intelligence for enterprise clients. Currently a Security Consultant at Redhunt Labs, focused on DRP, phishing detection engineering, and AI security research.
+            Built a money mule identification system that collected 100,000+ threat actor data points, helping government and financial institutions close nearly 90% of first-hop mule accounts within a day of creation. Authored the standard operating procedures for persona management and brand-impersonation investigations now used team-wide. Currently a Threat Intelligence Lead at Redhunt Labs, focused on DRP, phishing detection engineering, and AI security research.
           </p>
 
           <a class="btn btn--primary" href="#contact">Let's Talk</a>
@@ -113,16 +102,18 @@
 
       <div class="notable__container">
         <div class="notable__tabs" role="tablist" aria-label="Notable works">
-          <button type="button" class="notable__tab" role="tab" id="notable-tab-0" aria-controls="notable-panel" aria-selected="true" tabindex="0">1</button>
-          <button type="button" class="notable__tab" role="tab" id="notable-tab-1" aria-controls="notable-panel" aria-selected="false" tabindex="-1">2</button>
-          <button type="button" class="notable__tab" role="tab" id="notable-tab-2" aria-controls="notable-panel" aria-selected="false" tabindex="-1">3</button>
-          <button type="button" class="notable__tab" role="tab" id="notable-tab-3" aria-controls="notable-panel" aria-selected="false" tabindex="-1">4</button>
-          <button type="button" class="notable__tab" role="tab" id="notable-tab-4" aria-controls="notable-panel" aria-selected="false" tabindex="-1">5</button>
+          <button type="button" class="notable__tab" role="tab" id="notable-tab-0" aria-controls="notable-panel" aria-selected="true" tabindex="0"><span class="notable__tab-index">01</span>Fraud &amp; Financial Intel</button>
+          <button type="button" class="notable__tab" role="tab" id="notable-tab-1" aria-controls="notable-panel" aria-selected="false" tabindex="-1"><span class="notable__tab-index">02</span>Dark Web Investigations</button>
+          <button type="button" class="notable__tab" role="tab" id="notable-tab-2" aria-controls="notable-panel" aria-selected="false" tabindex="-1"><span class="notable__tab-index">03</span>Cybercrime Response Platform</button>
+          <button type="button" class="notable__tab" role="tab" id="notable-tab-3" aria-controls="notable-panel" aria-selected="false" tabindex="-1"><span class="notable__tab-index">04</span>Digital Risk Protection</button>
+          <button type="button" class="notable__tab" role="tab" id="notable-tab-4" aria-controls="notable-panel" aria-selected="false" tabindex="-1"><span class="notable__tab-index">05</span>Internet-Scale Research</button>
+          <button type="button" class="notable__tab" role="tab" id="notable-tab-5" aria-controls="notable-panel" aria-selected="false" tabindex="-1"><span class="notable__tab-index">06</span>On-Chain Analysis</button>
+          <button type="button" class="notable__tab" role="tab" id="notable-tab-6" aria-controls="notable-panel" aria-selected="false" tabindex="-1"><span class="notable__tab-index">07</span>Disinformation Tracking</button>
         </div>
 
         <div class="notable__panel" id="notable-panel" role="tabpanel" aria-labelledby="notable-tab-0" tabindex="0">
           <h3 class="notable__title">Money Mule &amp; Financial Fraud Intelligence</h3>
-          <p class="notable__desc">Investigated large-scale investment scams, betting platforms, and money mule networks across India and Southeast Asia using a combination of OSINT, HUMINT, and fraud intelligence techniques. Collected and analyzed over 100,000 threat actor data points, uncovered fraud infrastructure and payment networks, and generated actionable intelligence that supported investigations by law enforcement agencies and financial institutions.</p>
+          <p class="notable__desc">Investigated large-scale investment scams, betting platforms, and money mule networks across India and Southeast Asia using OSINT, HUMINT, and fraud intelligence techniques. Built a money mule identification system that collected and analyzed 100,000+ threat actor data points, helping government agencies and financial institutions close nearly 90% of first-hop mule accounts within a day of creation.</p>
           <a class="notable__link" hidden>Read more</a>
           <div class="notable__actions">
             <button type="button" class="btn btn--outline notable__next">Next</button>
@@ -133,23 +124,31 @@
       <div class="notable__data" hidden>
         <article class="notable__item" data-notable-index="0">
           <h3>Money Mule &amp; Financial Fraud Intelligence</h3>
-          <p>Investigated large-scale investment scams, betting platforms, and money mule networks across India and Southeast Asia using a combination of OSINT, HUMINT, and fraud intelligence techniques. Collected and analyzed over 100,000 threat actor data points, uncovered fraud infrastructure and payment networks, and generated actionable intelligence that supported investigations by law enforcement agencies and financial institutions.</p>
+          <p>Investigated large-scale investment scams, betting platforms, and money mule networks across India and Southeast Asia using OSINT, HUMINT, and fraud intelligence techniques. Built a money mule identification system that collected and analyzed 100,000+ threat actor data points, helping government agencies and financial institutions close nearly 90% of first-hop mule accounts within a day of creation.</p>
         </article>
         <article class="notable__item" data-notable-index="1">
           <h3>Dark Web &amp; Threat Actor Investigations</h3>
-          <p>Conducted investigations across dark web forums, underground marketplaces, ransomware leak sites, and Telegram communities to identify threat actors, emerging cybercrime trends, and malicious infrastructure. Utilized sock-puppet operations, OPSEC-driven intelligence collection, and blockchain transaction analysis to track threat actor activity, uncover operational patterns, and enrich cyber threat intelligence investigations.</p>
+          <p>Conducted investigations across dark web forums, underground marketplaces, ransomware leak sites, and Telegram communities to identify threat actors, emerging cybercrime trends, and malicious infrastructure. Utilized sock-puppet operations and OPSEC-driven intelligence collection, mapping adversary TTPs to the MITRE ATT&amp;CK framework and conducting cybercrime ecosystem mapping, producing 80+ actionable intelligence reports.</p>
         </article>
         <article class="notable__item" data-notable-index="2">
           <h3>Public Sector Cybercrime Response Platform</h3>
-          <p>Designed and deployed a complaint management workflow for a local cybercrime unit to streamline the handling of hundreds of citizen reports received daily. By integrating WhatsApp-based intake, structured complaint collection, and centralized case tracking, the system reduced manual workload by approximately 75%, improved response efficiency, and enabled investigators to manage and prioritize cases more effectively.</p>
+          <p>As a personal initiative, designed and deployed a complaint management workflow for a local cybercrime unit to streamline the handling of hundreds of citizen reports received daily. By integrating WhatsApp-based intake, structured complaint collection, and centralized case tracking, the system reduced manual workload by approximately 75%, improved response efficiency, and enabled investigators to manage and prioritize cases more effectively.</p>
         </article>
         <article class="notable__item" data-notable-index="3">
           <h3>Digital Risk Protection &amp; Brand Protection Intelligence</h3>
-          <p>Delivered Digital Risk Protection (DRP) assessments and threat intelligence reports for enterprise and government clients across India and Southeast Asia. Investigated phishing campaigns, brand impersonation, executive impersonation, malicious mobile applications, credential leaks, dark web exposure, and social media abuse, translating technical findings into actionable intelligence for security and business stakeholders.</p>
+          <p>Delivered Digital Risk Protection (DRP) assessments for enterprise and government clients across India and Southeast Asia. Investigated phishing campaigns, brand impersonation, executive impersonation, malicious mobile applications, credential leaks, dark web exposure, and social media abuse — including 2,000+ SEO-poisoned government (.gov.in) pages and 10,000+ fraudulent bank customer-care numbers distributed via YouTube. Authored the team's standard operating procedures for persona management and brand-impersonation investigations, and contributed to the DRP product roadmap.</p>
         </article>
         <article class="notable__item" data-notable-index="4">
           <h3>Internet-Scale Security Research</h3>
-          <p>Contributed to the development and optimization of an internet-scale scanning infrastructure capable of collecting and processing large-scale IPv4 exposure data. Improved scanning efficiency, reliability, and data collection workflows, enabling internal security teams to perform large-scale exposure analysis, attack surface research, and intelligence-driven investigations more effectively.</p>
+          <p>Built an internet-scale scanning infrastructure capable of scanning the global IPv4 HTTPS attack surface in under 28 hours. Also built an automated phishing and typosquatting detection system that discovers brand look-alike domains and forensically scores them for risk, replacing manual domain hunting with faster, explainable takedown decisions.</p>
+        </article>
+        <article class="notable__item" data-notable-index="5">
+          <h3>Crypto On-Chain Analysis</h3>
+          <p>As an independent researcher, unaffiliated with any employer, tracked illicit services operating on the dark web — including carding platforms and child-exploitation (CSAM) infrastructure — and conducted cryptocurrency and blockchain transaction tracing (on-chain analysis) to follow illicit fund flows linked to identified threat actors.</p>
+        </article>
+        <article class="notable__item" data-notable-index="6">
+          <h3>Hacktivist &amp; Disinformation Network Tracking</h3>
+          <p>As an independent initiative, collaborated with fellow OSINT researchers to track coordinated hacktivist collectives and disinformation campaigns across Telegram and social platforms during a period of regional geopolitical conflict, profiling propaganda dissemination channels and cross-platform attack infrastructure.</p>
         </article>
       </div>
     </section>
@@ -162,13 +161,14 @@
         <article class="work__item">
           <div class="work__header">
             <h4>Redhunt Labs</h4>
-            <span>May 2025 – Present · Remote</span>
+            <span>May 2025 – July 2026 · Remote</span>
           </div>
-          <p class="work__role">Security Consultant</p>
+          <p class="work__role">Threat Intelligence Lead</p>
           <ul>
             <li><strong>DRP assessments</strong> for enterprise clients across India and Southeast Asia — phishing, brand abuse, dark web exposure, and executive impersonation.</li>
-            <li>Architected <strong>phishing detection</strong> using typosquatting, Certificate Transparency logs, and CTI feeds.</li>
-            <li>Built <strong>internet-scale scanning</strong> on AWS and Terraform for global IPv4 HTTPS exposure research.</li>
+            <li>Authored the team's <strong>SOPs</strong> for sock-puppet/persona management and brand-impersonation investigations, standardizing OPSEC practices across the CTI team.</li>
+            <li>Built an automated <strong>phishing detection</strong> system that discovers brand look-alike domains and forensically scores them for takedown.</li>
+            <li>Built <strong>internet-scale scanning</strong> on AWS and Terraform, covering the global IPv4 HTTPS attack surface in under 28 hours.</li>
             <li>Designed <strong>Telegram intelligence</strong> architecture — channel onboarding, keyword monitoring, threat-actor tracking.</li>
           </ul>
         </article>
@@ -180,10 +180,12 @@
           </div>
           <p class="work__role">Cyber Threat Intelligence Analyst</p>
           <ul>
-            <li>Analyzed <strong>99,000+ scammer indicators</strong>, <strong>2,000+ malicious ad domains</strong>, and <strong>1,000+ phishing sites</strong>.</li>
-            <li>Authored <strong>80+ intelligence reports</strong> and maintained internal threat databases and dashboards.</li>
+            <li>Built a <strong>money mule identification system</strong> that collected 100,000+ threat actor data points, helping close nearly <strong>90% of first-hop mule accounts</strong> within a day of creation.</li>
+            <li>Led <strong>OSINT, HUMINT, and social engineering</strong> investigations across financial scams — crypto, lottery/gambling, and money mule networks.</li>
+            <li>Monitored 20+ underground forums and Telegram channels, mapping TTPs to <strong>MITRE ATT&amp;CK</strong> and producing <strong>80+ intelligence reports</strong>.</li>
+            <li>Detected phishing sites, cloned APKs, and impersonation campaigns — including <strong>2,000+ SEO-poisoned .gov.in pages</strong> and <strong>10,000+ fraudulent customer-care numbers</strong> on YouTube.</li>
+            <li>Supported law enforcement and regulatory investigations into financial fraud, terrorist funding, and extremist networks.</li>
             <li>Shipped an MVP in <strong>under two weeks</strong> with <strong>10,000+ threat indicators</strong> for pilot validation.</li>
-            <li>EASM assessments helped close <strong>70–80% of initial client deals</strong>; automation raised detection <strong>75%</strong>.</li>
           </ul>
         </article>
       </div>
@@ -221,6 +223,14 @@
               <span class="experience__details-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
               <div><h4>Attack Surface Management</h4><small>Experienced</small></div>
             </div>
+            <div class="experience__details">
+              <span class="experience__details-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+              <div><h4>MITRE ATT&amp;CK Framework</h4><small>Experienced</small></div>
+            </div>
+            <div class="experience__details">
+              <span class="experience__details-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+              <div><h4>Fraud &amp; Financial Crime Intelligence</h4><small>Experienced</small></div>
+            </div>
           </div>
         </div>
 
@@ -233,11 +243,7 @@
             </div>
             <div class="experience__details">
               <span class="experience__details-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
-              <div><h4>AWS / Terraform</h4><small>Experienced</small></div>
-            </div>
-            <div class="experience__details">
-              <span class="experience__details-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
-              <div><h4>Nmap / Zmap</h4><small>Experienced</small></div>
+              <div><h4>AWS / Terraform / Docker</h4><small>Experienced</small></div>
             </div>
             <div class="experience__details">
               <span class="experience__details-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
@@ -245,11 +251,23 @@
             </div>
             <div class="experience__details">
               <span class="experience__details-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+              <div><h4>VirusTotal / URLScan.io</h4><small>Experienced</small></div>
+            </div>
+            <div class="experience__details">
+              <span class="experience__details-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+              <div><h4>SecurityTrails / FOFA</h4><small>Experienced</small></div>
+            </div>
+            <div class="experience__details">
+              <span class="experience__details-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+              <div><h4>Maltego / Google Dorking</h4><small>Experienced</small></div>
+            </div>
+            <div class="experience__details">
+              <span class="experience__details-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
               <div><h4>Burp Suite / Wireshark</h4><small>Intermediate</small></div>
             </div>
             <div class="experience__details">
               <span class="experience__details-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
-              <div><h4>MongoDB / Selenium</h4><small>Experienced</small></div>
+              <div><h4>MongoDB / Selenium / Celery</h4><small>Experienced</small></div>
             </div>
           </div>
         </div>
@@ -288,7 +306,7 @@
           <ul class="service__list">
             <li>
               <span class="service__list-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
-              <p>CISCO Introduction to Cyber Security</p>
+              <p><a href="https://www.credly.com/badges/62f2b514-817c-476a-86e0-b6bb8784975b" target="_blank" rel="noopener noreferrer">CISCO Introduction to Cyber Security</a></p>
             </li>
             <li>
               <span class="service__list-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
@@ -296,11 +314,15 @@
             </li>
             <li>
               <span class="service__list-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
-              <p>ArcX Foundation Threat Intelligence Analyst</p>
+              <p><a href="https://arcx.io/verify-certificate?id=dbb93077e48f46d02e79d4393649c6834b271fe8&amp;k=beb49bbc730c49d49be6f4cba47499ef" target="_blank" rel="noopener noreferrer">ArcX Foundation Threat Intelligence Analyst</a> — Dec 2024</p>
             </li>
             <li>
               <span class="service__list-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
-              <p>Kase Scenarios Betrayal OSINT Training</p>
+              <p><a href="https://courses.kasescenarios.com/certificates/gyczgtf8sq" target="_blank" rel="noopener noreferrer">Kase Scenarios Betrayal OSINT Training</a></p>
+            </li>
+            <li>
+              <span class="service__list-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+              <p><a href="https://factory.cancred.ca/obv3/credentials/494e232c6e6013a0a1889b00504a7d7d9dbffb12" target="_blank" rel="noopener noreferrer">Tracelabs OSINT Coach</a></p>
             </li>
           </ul>
         </article>
@@ -317,6 +339,10 @@
             <li>
               <span class="service__list-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
               <p>Cybersecurity blogs on Medium — OSINT &amp; CVEs</p>
+            </li>
+            <li>
+              <span class="service__list-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+              <p>Co-authored the Payment Gateway Security Handbook</p>
             </li>
             <li>
               <span class="service__list-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
@@ -340,8 +366,8 @@
           <div class="portfolio__item-image">
             <img src="assets/telescribe.png" alt="TeleScribe CTI Telegram Threat Channel Analyzer screenshot" width="640" height="400" loading="lazy">
           </div>
-          <h3>Telescribe — Telegram Intelligence Platform</h3>
-          <p>Python platform for monitoring Telegram channels and groups at scale with automated collection, keyword tracking, and intelligence enrichment for CTI investigations.</p>
+          <h3>Telescribe — Telegram Channel Analyzer</h3>
+          <p>Builds an OSINT relationship map between Telegram channels by extracting shared t.me links from channel messages, plus AI-classifies threat relevance and surfaces IOCs for fast CTI triage.</p>
           <div class="portfolio__item-cta">
             <a href="https://github.com/misterxcrypt/telescribe" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
@@ -352,7 +378,7 @@
             <img src="assets/forumsbank.png" alt="Hacking Forums Bank dashboard screenshot" width="640" height="400" loading="lazy">
           </div>
           <h3>Forums Bank — OSINT Intelligence Repository</h3>
-          <p>Curated repository of cybercrime forums, marketplaces, and underground communities — organized and searchable for faster threat research and dark web investigations.</p>
+          <p>Curated repository of cybercrime forums, marketplaces, and underground communities — organized and searchable for faster threat research and dark web investigations. Contributed multiple dark web forums to expand its coverage.</p>
           <div class="portfolio__item-cta">
             <a href="https://forums-bank.vercel.app/" target="_blank" rel="noopener noreferrer">Live Demo</a>
             <a href="https://github.com/misterxcrypt/forums-bank" target="_blank" rel="noopener noreferrer">GitHub</a>
