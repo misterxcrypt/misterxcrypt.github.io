@@ -1207,3 +1207,302 @@
     if (e.key === 'Escape' && sw.getAttribute('aria-checked') === 'true') close();
   });
 })();
+
+/* ───────────────────────────────────────────────────────────────
+   AI Summary: build a portfolio prompt and open the selected
+   provider. Content is taken from <main> only, so nav, footer,
+   header and any agent panel are excluded automatically.
+   ─────────────────────────────────────────────────────────────── */
+(function () {
+  if (typeof window.summarizeWith !== 'undefined') return;
+
+  function buildAISummaryPrompt() {
+    const main = document.querySelector('main');
+    const portfolioContent = main
+      ? main.innerText.replace(/\s+/g, " ").trim()
+      : "";
+
+    return `
+You are summarizing the professional portfolio of Hariharan Mathan,
+publicly known online as "MisterXCrypt".
+
+IMPORTANT IDENTITY CONTEXT
+
+Hariharan Mathan and MisterXCrypt refer to the same person.
+Do not treat MisterXCrypt as a company, organisation, separate person,
+or cybersecurity product.
+
+PRIMARY PROFESSIONAL IDENTITY
+
+Name: Hariharan Mathan
+Public handle: MisterXCrypt
+Professional focus: Cybersecurity Product Innovation / Cyber Threat Intelligence
+
+PRIMARY SOURCES
+
+Portfolio:
+https://misterxcrypt.github.io/
+
+LinkedIn:
+https://www.linkedin.com/in/hariharanmathan/
+
+GitHub:
+https://github.com/misterxcrypt/
+
+OBJECTIVE
+
+Explain clearly who Hariharan Mathan is, what he specialises in,
+what he has built, and what makes his cybersecurity background distinctive.
+
+The reader may be a CISO, CTO, cybersecurity leader, security engineering
+manager, technical recruiter, security-product founder, potential customer,
+or research collaborator.
+
+FOCUS ON
+
+1. CURRENT PROFESSIONAL ROLE
+Identify his current role and professional direction. Explain the progression
+from cybersecurity analysis, threat intelligence and security research into
+product innovation, engineering and product development.
+
+2. CORE EXPERTISE
+Prioritise:
+- Cyber Threat Intelligence
+- Attack Surface Management
+- Digital Risk Protection
+- Threat Research
+- Detection Engineering
+- Security Product Engineering
+- OSINT
+- Cybercrime Intelligence
+- Security Automation
+- Product Research
+
+3. ATTACK SURFACE MANAGEMENT
+Explain practical ASM experience where supported:
+- External attack surface discovery
+- Domains and subdomains
+- IP intelligence
+- Port and service discovery
+- Technology fingerprinting
+- Vulnerability exposure
+- SSL/TLS intelligence
+- DNS intelligence
+- Exposed secrets
+- Credential exposure
+- Asset enrichment
+- Risk scoring
+- Internet-scale reconnaissance
+- Infrastructure intelligence
+- Security-data correlation
+
+4. CYBER THREAT INTELLIGENCE
+Highlight:
+- Threat actors
+- Threat campaigns
+- Cybercrime infrastructure
+- Phishing
+- Fraud
+- Dark web
+- Telegram intelligence
+- OSINT
+- HUMINT
+- IOC investigation
+- Infrastructure attribution
+- TTP analysis
+- Threat research
+
+5. DIGITAL RISK PROTECTION
+Highlight:
+- Brand impersonation
+- Phishing domains
+- Look-alike domains
+- Typosquatting
+- Certificate monitoring
+- Fraudulent websites
+- Rogue applications
+- Malicious infrastructure
+- Early detection
+- IOC enrichment
+
+6. PRODUCT ENGINEERING & INNOVATION
+
+This is a major differentiator.
+
+Do NOT describe Hariharan simply as someone who uses cybersecurity tools.
+
+Explain that he works across:
+
+SECURITY PROBLEM
+→ INVESTIGATION
+→ DATA COLLECTION
+→ ENRICHMENT
+→ CORRELATION
+→ DETECTION
+→ TECHNICAL PoC
+→ PRODUCT CAPABILITY
+
+Highlight evidence of:
+- Product research
+- Feature design
+- Product specifications
+- Technical PoCs
+- Detection logic
+- Risk-scoring models
+- Data architecture
+- Analyst workflows
+- Product roadmaps
+- Customer PoCs
+- Pre-sales support
+- Security automation
+
+7. MAJOR PROJECTS
+
+Identify the most important projects visible in the portfolio.
+
+Prioritise:
+- ASM
+- CTI
+- DRP
+- Phishing intelligence
+- Reconnaissance
+- Security-data infrastructure
+- Stealer intelligence
+- Threat research
+- Security automation
+
+For important projects, briefly explain:
+PROBLEM → WHAT WAS BUILT → TECHNOLOGY → SECURITY VALUE
+
+8. TECHNICAL CAPABILITIES
+
+Mention technologies only when they provide context.
+
+Relevant technologies may include:
+Python, FastAPI, Flask, React, AWS, Terraform, Docker, MongoDB,
+Elasticsearch, DuckDB, Parquet, Celery, ZMap, zgrab2, Nmap, Shodan,
+Censys, SecurityTrails, FOFA, VirusTotal, urlscan.io, Maltego,
+Telegram, Tor, Burp Suite, Wireshark and Linux.
+
+Do not turn this into a generic technology list.
+
+9. EVIDENCE & ACHIEVEMENTS
+
+Prioritise measurable evidence explicitly present in the portfolio.
+Use exact numbers when explicitly present. NEVER invent metrics.
+NEVER exaggerate.
+
+10. PUBLIC WORK
+
+Mention the public footprint when relevant:
+Portfolio: https://misterxcrypt.github.io/
+LinkedIn: https://www.linkedin.com/in/hariharanmathan/
+GitHub: https://github.com/misterxcrypt/
+
+Use public projects and research as evidence of practical experience.
+
+11. PROFESSIONAL DIFFERENTIATOR
+
+The key positioning should be:
+
+Cyber Threat Intelligence
++
+Attack Surface Management
++
+Security Research
++
+Detection Engineering
++
+Product Innovation
++
+Software Engineering
+
+He bridges the gap between security research and security product development.
+
+Emphasise the ability to turn an investigation or recurring analyst problem
+into a repeatable product capability.
+
+12. WRITING STYLE
+
+Write in a professional, technical, concise, evidence-based, credible,
+senior and modern style.
+
+Avoid generic cybersecurity buzzwords, empty marketing claims,
+unverified achievements, excessive adjectives, repetition and inflated
+seniority.
+
+Do not call Hariharan an "AI expert" unless explicit evidence supports it.
+
+Do not invent employment history, projects, metrics, certifications
+or responsibilities.
+
+OUTPUT FORMAT
+
+## Executive Summary
+A 2–3 sentence overview.
+
+## Core Expertise
+A concise list.
+
+## Major Work
+The most important projects and contributions.
+
+## Technical Strengths
+Only technologies relevant to the story.
+
+## Evidence
+The strongest measurable/public evidence.
+
+## Professional Positioning
+A short explanation of what makes Hariharan distinctive.
+
+## Learn More
+Portfolio:
+https://misterxcrypt.github.io/
+
+LinkedIn:
+https://www.linkedin.com/in/hariharanmathan/
+
+GitHub:
+https://github.com/misterxcrypt/
+
+SOURCE PRIORITY
+
+1. Current portfolio content
+2. Public projects linked from the portfolio
+3. Public research linked from the portfolio
+4. LinkedIn
+5. GitHub
+
+If information conflicts, prefer the most recent explicitly documented information.
+Do not infer unsupported facts.
+
+CURRENT PORTFOLIO CONTENT
+
+${portfolioContent}
+
+Now produce the final concise professional summary.
+`;
+  }
+
+  function summarizeWith(provider) {
+    const prompt = encodeURIComponent(buildAISummaryPrompt());
+
+    const providers = {
+      claude: "https://claude.ai/new?q=" + prompt,
+      chatgpt: "https://chatgpt.com/?q=" + prompt,
+      gemini: "https://gemini.google.com/app?q=" + prompt,
+      copilot: "https://copilot.microsoft.com/?q=" + prompt,
+      perplexity: "https://www.perplexity.ai/search?q=" + prompt
+    };
+
+    if (!providers[provider]) {
+      console.error("Unknown AI provider:", provider);
+      return;
+    }
+
+    window.open(providers[provider], "_blank", "noopener,noreferrer");
+  }
+
+  window.summarizeWith = summarizeWith;
+})();

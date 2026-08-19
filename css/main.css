@@ -627,12 +627,14 @@ code {
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
   font-weight: 500;
-  line-height: 1;
-  letter-spacing: -.045em;
-  text-wrap: balance;
+  line-height: 1.4;
+  letter-spacing: -.01em;
+  color: var(--text-muted);
+  max-width: 44ch;
   margin-bottom: 1.1rem;
+  text-wrap: balance;
 }
 
 .hero__lede { color: var(--text-muted); font-size: var(--step-1); max-width: 34rem; text-wrap: pretty; }
@@ -1322,6 +1324,118 @@ code {
 .footer__socials img { width: 1rem; height: 1rem; object-fit: contain; }
 
 .footer__legal { color: var(--text-dim); font-size: .78rem; width: 100%; }
+
+/* ── AI Summary ──────────────────────────────────────────────────── */
+.ai-summary {
+  width: 100%;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.ai-summary-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px 20px 24px;
+  text-align: center;
+}
+
+.ai-summary-title {
+  margin: 0 0 17px;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -.025em;
+}
+
+.ai-providers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.ai-providers button {
+  width: 50px;
+  height: 50px;
+  padding: 9px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 180ms var(--ease), transform 180ms var(--ease), opacity 180ms var(--ease);
+}
+
+.ai-providers button:hover {
+  background: var(--surface-2);
+  transform: translateY(-3px);
+}
+
+.ai-providers button:active {
+  transform: translateY(0);
+}
+
+.ai-providers button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.ai-providers svg,
+.ai-providers img {
+  display: block;
+  width: 32px;
+  height: 32px;
+  transition: transform 180ms var(--ease);
+}
+
+.ai-providers button:hover svg,
+.ai-providers button:hover img {
+  transform: scale(1.08);
+}
+
+.ai-summary-hint {
+  margin-top: 13px;
+  color: var(--text-dim);
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .ai-summary-inner {
+    padding: 23px 12px 20px;
+  }
+
+  .ai-summary-title {
+    font-size: var(--step-0);
+    margin-bottom: 14px;
+  }
+
+  .ai-providers {
+    gap: 8px;
+  }
+
+  .ai-providers button {
+    width: 44px;
+    height: 44px;
+    padding: 7px;
+  }
+
+  .ai-providers svg,
+  .ai-providers img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .ai-summary-hint {
+    font-size: .7rem;
+    margin-top: 10px;
+  }
+}
 
 /* ═══════════════════════════════════════════════════════════════════
    RESPONSIVE
@@ -3078,8 +3192,7 @@ code {
 /* ── Type: editorial weight, technical detail ──────────────────────
    Headlines get a touch more optical tightening on the dark ground,
    where light type on dark always reads slightly looser. */
-:root[data-dark] .section__title,
-:root[data-dark] .hero__title { letter-spacing: -.035em; }
+:root[data-dark] .section__title { letter-spacing: -.035em; }
 :root[data-dark] .head__num { opacity: .06; }
 
 /* ── Field art recedes ─────────────────────────────────────────────
@@ -3958,18 +4071,6 @@ code {
    Body stays at its readable size; the display sizes climb. The ratio
    is achieved by raising the headline, never by shrinking the prose
    below comfort. */
-:root[data-dark] {
-  --step-4: clamp(2.4rem, 5.5vw, 4rem);
-  --step-5: clamp(3rem, 8vw, 6rem);
-}
-
-:root[data-dark] .hero__title {
-  font-size: clamp(3.2rem, 10.5vw, 9.5rem);
-  line-height: .86;
-  letter-spacing: -.045em;
-  font-weight: 700;
-}
-
 :root[data-dark] .section__title {
   font-size: clamp(2.2rem, 6vw, 4.5rem);
   line-height: .92;
@@ -4069,47 +4170,8 @@ code {
    The headline was boxed into a 1.2fr column, so a fourteen-word title
    at display size wrapped to six lines and filled 173% of the viewport.
    Giving it the full measure is what makes the size usable: fewer, much
-   longer lines. The graph moves behind it and off the right edge, so the
-   composition is weighted left and cropped rather than balanced. */
-:root[data-dark] .hero__grid {
-  grid-template-columns: 1fr;
-  gap: 1.75rem;
-  align-items: start;
-}
-:root[data-dark] .hero__copy { position: relative; z-index: 2; }
-
-:root[data-dark] .hero__title {
-  font-size: clamp(2.8rem, 7.4vw, 6.6rem);
-  max-width: 16ch;
-}
-
-/* Supporting text stays deliberately small and set well left of the
-   headline's measure — the gap between the two is the composition. */
-:root[data-dark] .hero__lede { max-width: 34rem; font-size: .95rem; }
-:root[data-dark] .hero__disciplines { max-width: 40rem; }
-
-/* The graph sits behind the type, cropped by the viewport edge. */
-:root[data-dark] .hero__visual {
-  position: absolute;
-  top: 6%;
-  right: -8%;
-  width: min(46%, 34rem);
-  z-index: 0;
-  opacity: .55;
-  pointer-events: none;
-}
-:root[data-dark] .hero__inner { position: relative; }
-
-@media (max-width: 68rem) {
-  :root[data-dark] .hero__visual {
-    position: static;
-    width: 100%;
-    opacity: 1;
-    margin-inline: auto;
-    max-width: 20rem;
-  }
-  :root[data-dark] .hero__title { max-width: none; }
-}
+   longer lines. The graph sits in the right column, keeping the
+   composition weighted left and balanced. */
 
 /* ── Corrections ───────────────────────────────────────────────────
    The marker fill is gone from the headline figures: white on #FFCC00
@@ -4136,28 +4198,11 @@ code {
    headline at 30–50% of the field, but this headline is a fourteen-word
    sentence: at true display scale it stops being readable and starts
    being wallpaper. Sentence first, scale second. */
-:root[data-dark] .hero__title {
-  font-size: clamp(2.2rem, 4.6vw, 3.9rem);
-  line-height: 1.02;
-  letter-spacing: -.03em;
-  max-width: 22ch;
-}
 
-/* ── Display headline ──────────────────────────────────────────────
-   The brief's structure: one enormous word, then a small precise
-   statement. That is what lets the ratio reach display scale without
-   the sentence becoming wallpaper — the word carries the impact, the
-   sentence carries the meaning.
-
-   It is aria-hidden and the <h1> is untouched, so the document outline
-   and every machine reader still see the full sentence as the heading.
-   Dark only; light keeps the sentence as its headline. */
-.hero__display { display: none; }
-
-:root[data-dark] .hero__display {
+.hero__display {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(4rem, 15.5vw, 13rem);
+  font-size: clamp(3rem, 15.5vw, 7rem);
   font-weight: 700;
   line-height: .82;
   letter-spacing: -.05em;
@@ -4165,18 +4210,6 @@ code {
   color: var(--text);
   margin: .1em 0 .45rem;
   user-select: none;
-}
-
-/* With the word carrying the impact, the sentence becomes the small
-   statement it was always meant to be. */
-:root[data-dark] .hero__title {
-  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
-  font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: -.01em;
-  color: var(--text-muted);
-  max-width: 44ch;
-  margin-bottom: 1.1rem;
 }
 
 /* ── Yellow marker, restored ───────────────────────────────────────
