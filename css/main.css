@@ -1,1169 +1,4272 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
+/* Geist and Geist Mono, self-hosted. SIL Open Font License, latin subset only,
+   so every visitor gets the real typeface instead of a fallback. No external
+   request, no CDN dependency. */
+
+@font-face {
+  font-family: "Geist";
+  src: url("../assets/fonts/geist-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("../assets/fonts/geist-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("../assets/fonts/geist-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("../assets/fonts/geist-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../assets/fonts/geist-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../assets/fonts/geist-mono-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TOKENS
+   Light is the base. Dark is redefined at token level only, three times:
+   once for the OS preference (guarded so an explicit light choice wins),
+   once for the explicit toggle. Components never read a raw colour.
+   ═══════════════════════════════════════════════════════════════════ */
 
 :root {
-  --color-bg: #0d1117;
-  --color-bg-variant: #151b23;
-  --color-primary: #d7a34e;
-  --color-primary-variant: rgba(215, 163, 78, 0.35);
-  --color-secondary: #4c7a9c;
-  --color-white: #e9ebf0;
-  --color-light: rgba(233, 235, 240, 0.65);
-  --color-border: rgba(233, 235, 240, 0.1);
+  --bg:            #fbfbfc;
+  --surface:       #ffffff;
+  --surface-2:     #f2f3f6;
+  --text:          #0f1216;
+  --text-muted:    #454d5c;
+  --text-dim:      #5f6878;
+  --border:        #e3e5ea;
+  --border-strong: #c4c9d3;
+  --accent:        #1463FF;
+  --accent-hover:  #0b47c4;
+  --accent-soft:   #e8f0ff;
+  --accent-on:     #ffffff;
+  --slate:         #3f5670;
+  --shadow:        0 1px 2px rgba(15, 18, 22, .05), 0 10px 28px rgba(15, 18, 22, .07);
+  --shadow-sm:     0 1px 2px rgba(15, 18, 22, .06);
+  --grain:         .02;
 
-  --font-main: "IBM Plex Sans", system-ui, sans-serif;
-  --font-display: "Source Serif 4", Georgia, serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
-  --transition: all 400ms ease;
+  --graph-ring:    rgba(15, 18, 22, .08);
+  --graph-tick:    rgba(15, 18, 22, .15);
+  --graph-solid:   rgba(20, 99, 255, .45);
+  --graph-dash:    rgba(15, 18, 22, .2);
+  --graph-node:    rgba(20, 99, 255, .7);
+  --graph-leaf:    rgba(15, 18, 22, .28);
 
-  --container-width-lg: 75%;
-  --container-width-md: 86%;
-  --container-width-sm: 92%;
+  /* One family carries display, body and interface. Geist Mono is reserved
+     for technical annotation: references, metadata, code, ASCII. */
+  --font-display: "Geist", system-ui, -apple-system, sans-serif;
+  --font-body:    "Geist", system-ui, -apple-system, sans-serif;
+  --font-ui:      "Geist", system-ui, -apple-system, sans-serif;
+  --font-code:    "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --z-nav: 20;
+  --step--1: .875rem;
+  --step-0:  1rem;
+  --step-1:  1.125rem;
+  --step-2:  1.4rem;
+  --step-3:  1.8rem;
+  --step-4:  clamp(1.9rem, 3.2vw, 2.4rem);
+  --step-5:  clamp(2.1rem, 4.2vw, 3.1rem);
+
+  --gutter: 1.5rem;
+  --shell:  70rem;
+  --radius: .6rem;
+  --radius-lg: .9rem;
+  --topbar-h: 4rem;
+
+  --grad-accent:  linear-gradient(135deg, #3d80ff 0%, #1463FF 55%, #0b47c4 100%);
+  --grad-glow:    radial-gradient(closest-side, rgba(20, 99, 255, .15), transparent 70%);
+  --grad-sheen:   linear-gradient(180deg, rgba(15, 18, 22, .035), transparent 60%);
+  --grad-rule:    linear-gradient(90deg, transparent, var(--border-strong) 25%, var(--accent) 50%, var(--border-strong) 75%, transparent);
+
+  /* ── Motion scale ───────────────────────────────────────────────
+     One vocabulary for every moving thing on the page. Four durations
+     and three curves, chosen so the reason for each is legible:
+
+       t-1  a state change you should feel, not watch (colour, opacity)
+       t-2  the standard: hover, borders, small transforms
+       t-3  something arriving — a reveal, an entrance
+       t-4  something being drawn, where the drawing is the point
+
+     Curves follow the same logic. Things arriving decelerate, because
+     that is how objects with mass stop. Things changing state in place
+     ease both ends. Ambient movement is near-linear, so nothing about
+     it reads as an event. --ease is kept as an alias for t-2 so the
+     forty-odd existing call sites stay correct. */
+  --t-1: 140ms;
+  --t-2: 220ms;
+  --t-3: 380ms;
+  --t-4: 640ms;
+
+  --ease-out:   cubic-bezier(.22, .61, .36, 1);
+  --ease-inout: cubic-bezier(.4, 0, .2, 1);
+  --ease-soft:  cubic-bezier(.45, 0, .55, 1);
+
+  --ease: var(--t-2) var(--ease-inout);
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  list-style: none;
-  text-decoration: none;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:            #0a0d12;
+    --surface:       #12161f;
+    --surface-2:     #1a1f2a;
+    --text:          #e8eaf0;
+    --text-muted:    rgba(232, 234, 240, .7);
+    --text-dim:      rgba(232, 234, 240, .56);
+    --border:        rgba(232, 234, 240, .12);
+    --border-strong: rgba(232, 234, 240, .22);
+    --accent:        #8ab0ff;
+    --accent-hover:  #a9c6ff;
+    --accent-soft:   rgba(138, 176, 255, .13);
+    --accent-on:     #0a0d12;
+    --slate:         #8f9db5;
+    --shadow:        0 1px 2px rgba(0, 0, 0, .45), 0 14px 34px rgba(0, 0, 0, .4);
+    --shadow-sm:     0 1px 2px rgba(0, 0, 0, .45);
+    --grain:         .03;
+
+    --graph-ring:    rgba(232, 234, 240, .07);
+    --graph-tick:    rgba(232, 234, 240, .12);
+    --graph-solid:   rgba(138, 176, 255, .45);
+    --graph-dash:    rgba(232, 234, 240, .2);
+    --graph-node:    rgba(138, 176, 255, .75);
+    --graph-leaf:    rgba(232, 234, 240, .3);
+
+    --grad-accent:  linear-gradient(135deg, #a9c6ff 0%, #8ab0ff 55%, #6b93f0 100%);
+    --grad-glow:    radial-gradient(closest-side, rgba(138, 176, 255, .14), transparent 70%);
+    --grad-sheen:   linear-gradient(180deg, rgba(232, 234, 240, .045), transparent 60%);
+    --grad-rule:    linear-gradient(90deg, transparent, var(--border-strong) 25%, var(--accent) 50%, var(--border-strong) 75%, transparent);
+  }
 }
+
+:root[data-theme="dark"] {
+  --bg:            #0a0d12;
+  --surface:       #12161f;
+  --surface-2:     #1a1f2a;
+  --text:          #e8eaf0;
+  --text-muted:    rgba(232, 234, 240, .7);
+  --text-dim:      rgba(232, 234, 240, .56);
+  --border:        rgba(232, 234, 240, .12);
+  --border-strong: rgba(232, 234, 240, .22);
+  --accent:        #8ab0ff;
+  --accent-hover:  #a9c6ff;
+  --accent-soft:   rgba(138, 176, 255, .13);
+  --accent-on:     #0a0d12;
+  --slate:         #8f9db5;
+  --shadow:        0 1px 2px rgba(0, 0, 0, .45), 0 14px 34px rgba(0, 0, 0, .4);
+  --shadow-sm:     0 1px 2px rgba(0, 0, 0, .45);
+  --grain:         .03;
+
+  --graph-ring:    rgba(232, 234, 240, .07);
+  --graph-tick:    rgba(232, 234, 240, .12);
+  --graph-solid:   rgba(138, 176, 255, .45);
+  --graph-dash:    rgba(232, 234, 240, .2);
+  --graph-node:    rgba(138, 176, 255, .75);
+  --graph-leaf:    rgba(232, 234, 240, .3);
+
+    --grad-accent:  linear-gradient(135deg, #a9c6ff 0%, #8ab0ff 55%, #6b93f0 100%);
+  --grad-glow:    radial-gradient(closest-side, rgba(138, 176, 255, .14), transparent 70%);
+  --grad-sheen:   linear-gradient(180deg, rgba(232, 234, 240, .045), transparent 60%);
+  --grad-rule:    linear-gradient(90deg, transparent, var(--border-strong) 25%, var(--accent) 50%, var(--border-strong) 75%, transparent);
+}
+
+/* Elements GSAP will reveal start hidden only once JS has confirmed it can
+   run, so a no-JS or reduced-motion visitor never sees a blank page. */
+.js-anim [data-reveal] { opacity: 0; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  scroll-padding-top: calc(var(--topbar-h) + 1.5rem);
+  -webkit-text-size-adjust: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
   }
 }
 
 body {
-  font-family: var(--font-main);
-  background: var(--color-bg);
-  color: var(--color-white);
-  line-height: 1.7;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--step-0);
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-img {
-  display: block;
-  width: 100%;
-  object-fit: cover;
-}
-
-.container {
-  width: var(--container-width-lg);
-  margin: 0 auto;
-}
-
-section {
-  margin-top: 6rem;
-  min-height: auto;
-}
-
-section > h5 {
-  color: var(--color-primary);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-section > h2 {
-  color: var(--color-white);
-  font-family: var(--font-display);
-  font-size: clamp(1.85rem, 3vw, 2.4rem);
-  font-weight: 500;
-  text-align: center;
-  margin-bottom: 2.5rem;
-}
-
-section > h3 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: var(--color-white);
-  font-family: var(--font-display);
-  font-weight: 500;
-}
-
-/* ——— Header / Hero ——— */
-
-header {
-  height: 100vh;
-  padding-top: 5rem;
-  overflow: hidden;
-  position: relative;
-}
-
-.header__container {
-  height: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.header__grid {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 3rem;
-  align-items: center;
-  margin-top: 5rem;
-}
-
-.header__text {
-  max-width: 34rem;
-}
-
-.header__socials {
-  position: absolute;
-  left: 0;
-  bottom: 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  align-items: center;
-}
-
-.header__socials::after {
+/* ── Content rails ─────────────────────────────────────────────────
+   Two hairlines pinned at the reading column's edges, running the full
+   viewport height. They frame the page: content set inside a plate
+   rather than floating on a background. Fixed rather than scrolled, so
+   they read as the frame the content moves through. Dropped below the
+   width where the shell stops being inset, since a rail flush to the
+   viewport edge is just a border.
+   ────────────────────────────────────────────────────────────────── */
+body::before {
   content: "";
-  width: 1px;
-  height: 2rem;
-  background: var(--color-primary);
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(90deg, var(--border) 0 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 0 1px, transparent 1px);
+  background-repeat: no-repeat;
+  background-position:
+    calc(50% - var(--shell) / 2 - var(--gutter)) 0,
+    calc(50% + var(--shell) / 2 + var(--gutter)) 0;
+  background-size: 1px 100%;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 10%, #000 90%, transparent);
 }
 
-.header__socials a {
-  font-size: 1.1rem;
-  color: var(--color-light);
-  transition: var(--transition);
+@media (max-width: 82rem) {
+  body::before { display: none; }
+}
+
+/* A single fine grain wash. Registers as material, not as pattern. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 90;
+  opacity: var(--grain);
+  background-image:
+    url("../assets/textures/az-subtle.png"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Athelas carries the reading text. Everything operational (nav, buttons,
+   labels, figures) stays in the UI sans so it reads as interface, not prose. */
+.hero__lede,
+.section__lede,
+.case__col p,
+.record dd,
+.tile p,
+.job li,
+.project__body > p,
+.project__facts li,
+.cred p,
+.cred li,
+.contact__card p,
+.banner {
+  font-family: var(--font-body);
+}
+
+ul, ol { list-style: none; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+code {
+  font-family: var(--font-code);
+  font-size: .88em;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: .08em .34em;
+}
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip-link {
+  position: fixed;
+  top: -4rem;
+  left: 1rem;
+  z-index: 200;
+  background: var(--accent);
+  color: var(--accent-on);
+  padding: .6rem 1rem;
+  border-radius: var(--radius);
+  font-size: var(--step--1);
+  font-weight: 500;
+  transition: top var(--ease);
+}
+.skip-link:focus { top: 1rem; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   TOPBAR
+   ═══════════════════════════════════════════════════════════════════ */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--bg) 62%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 7%, transparent);
+}
+
+/* Gradient hairline instead of a flat border, so the glass edge reads. */
+.topbar::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: var(--grad-rule);
+  opacity: .6;
+}
+
+.subnav {
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+
+.topbar__inner {
+  height: var(--topbar-h);
   display: flex;
-  padding: 0.25rem;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-.header__socials a:hover {
-  color: var(--color-primary);
+.brand { display: flex; align-items: center; gap: .6rem; flex-shrink: 0; }
+
+.brand__mark {
+  width: 1.95rem;
+  height: 1.95rem;
+  border-radius: 5px;
+  background: var(--grad-accent);
+  color: var(--accent-on);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: -.02em;
 }
 
-.header__socials svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  fill: currentColor;
+.brand__name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; letter-spacing: -.02em; letter-spacing: -.01em; }
+
+.topbar__nav { display: flex; gap: .25rem; margin-left: auto; }
+
+.topbar__nav a {
+  padding: .7rem .7rem;
+  border-radius: var(--radius);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--ease), background var(--ease);
+  white-space: nowrap;
+}
+.topbar__nav a:hover { color: var(--text); background: var(--surface-2); }
+.topbar__nav a.active { color: var(--accent); background: var(--accent-soft); }
+
+.topbar__end { display: flex; align-items: center; gap: .5rem; flex-shrink: 0; }
+
+.icon-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  background: var(--surface);
+  transition: color var(--ease), border-color var(--ease);
+}
+.icon-btn:hover { color: var(--text); border-color: var(--border-strong); }
+.icon-btn svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── Theme glyph ───────────────────────────────────────────────────
+   One path that morphs between a disc and a crescent, rather than two
+   glyphs swapped by display. Both states are written with the identical
+   command structure — M, A, A, Z — which is the requirement for the
+   browser to interpolate `d` at all. The rays fade and rotate out on
+   the way to the crescent, so the sun loses its light rather than
+   vanishing.
+
+   If a browser cannot animate `d`, both states are still valid paths,
+   so the toggle degrades to the same instant swap it had before. */
+.themeglyph__body {
+  d: path("M12 7.8A4.2 4.2 0 1 0 12 16.2A4.2 4.2 0 1 0 12 7.8Z");
+  transition: d var(--t-3) var(--ease-inout);
+}
+:root[data-dark] .themeglyph__body {
+  d: path("M12 3.4A8.6 8.6 0 1 0 12 20.6A6.6 6.6 0 1 1 12 3.4Z");
 }
 
-.header__greeting {
-  color: var(--color-light);
-  font-weight: 300;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+.themeglyph__rays {
+  opacity: 1;
+  transform-origin: 12px 12px;
+  transition:
+    opacity   var(--t-2) var(--ease-inout),
+    transform var(--t-3) var(--ease-out);
+}
+:root[data-dark] .themeglyph__rays {
+  opacity: 0;
+  transform: rotate(45deg) scale(.4);
 }
 
-.header__name {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 600;
-  line-height: 1.1;
-  margin-bottom: 0.75rem;
+@media (prefers-reduced-motion: reduce) {
+  .themeglyph__body,
+  .themeglyph__rays { transition: none; }
 }
 
-.header__role {
-  color: var(--color-light);
-  font-size: 1.05rem;
-  font-weight: 400;
-  margin: 0 0 1.5rem;
+/* Secondary scrollable nav strip, mobile only. */
+.subnav { display: none; border-bottom: 1px solid var(--border); background: var(--bg); }
+.subnav__inner { display: flex; gap: .25rem; overflow-x: auto; scrollbar-width: none; padding-block: .5rem; }
+.subnav__inner::-webkit-scrollbar { display: none; }
+.subnav a {
+  padding: .35rem .7rem;
+  border-radius: var(--radius);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
 }
+.subnav a.active { color: var(--accent); background: var(--accent-soft); }
 
-.cta {
-  display: flex;
-  gap: 1.2rem;
-  flex-wrap: wrap;
-  margin-top: 1.5rem;
-}
+/* ═══════════════════════════════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════════════════════════════ */
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.75rem;
-  border-radius: 0.5rem;
+  gap: .45rem;
+  padding: .62rem 1.1rem;
+  border-radius: var(--radius);
+  font-size: var(--step--1);
   font-weight: 500;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: var(--transition);
   border: 1px solid transparent;
-}
-
-.btn--primary {
-  background: var(--color-primary);
-  color: var(--color-bg);
-}
-
-.btn--primary:hover {
-  background: var(--color-white);
-  color: var(--color-bg);
-}
-
-.btn--outline {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-  background: transparent;
-}
-
-.btn--outline:hover {
-  background: var(--color-primary);
-  color: var(--color-bg);
-}
-
-.header__visual {
-  position: relative;
-  width: 100%;
-  max-width: 24rem;
-  aspect-ratio: 1;
-  margin: 0 auto;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 22% 18%, rgba(76, 122, 156, 0.35), transparent 55%),
-    repeating-linear-gradient(0deg, transparent 0 7px, rgba(255, 255, 255, 0.035) 7px 8px);
-}
-
-.header__visual-reticle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 42%;
-  aspect-ratio: 1;
-  border: 1px solid var(--color-primary-variant);
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.header__visual-reticle::before {
-  content: "";
-  position: absolute;
-  inset: 22%;
-  border: 1px solid var(--color-primary-variant);
-}
-
-.header__visual-dot {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  box-shadow: 0 0 10px var(--color-primary-variant);
-  animation: header-visual-pulse 3.4s ease-in-out infinite;
-}
-
-.header__visual-dot--1 { top: 18%; left: 72%; }
-.header__visual-dot--2 { top: 64%; left: 20%; animation-delay: 0.8s; }
-.header__visual-dot--3 { top: 80%; left: 66%; animation-delay: 1.6s; }
-
-@keyframes header-visual-pulse {
-  0%, 100% { opacity: 0.35; transform: scale(0.85); }
-  50% { opacity: 1; transform: scale(1); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .header__visual-dot {
-    animation: none;
-    opacity: 0.8;
-  }
-}
-
-.scroll__down {
-  position: absolute;
-  right: -2rem;
-  bottom: 7rem;
-  transform: rotate(90deg);
-  font-weight: 500;
-  font-size: 0.9rem;
-  color: var(--color-primary);
-}
-
-/* ——— Bottom nav ——— */
-
-nav {
-  background: rgba(0, 0, 0, 0.35);
-  width: max-content;
-  display: flex;
-  padding: 0.7rem 1.5rem;
-  border-radius: 3rem;
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 2rem;
-  gap: 0.5rem;
-  z-index: var(--z-nav);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-nav a {
-  background: transparent;
-  padding: 0.75rem;
-  border-radius: 50%;
-  display: flex;
-  color: var(--color-light);
-  font-size: 0.8rem;
-  font-weight: 500;
-  transition: var(--transition);
+  transition: background var(--ease), color var(--ease), border-color var(--ease);
   white-space: nowrap;
 }
 
-nav a:hover {
-  background: rgba(0, 0, 0, 0.3);
-  color: var(--color-white);
+.btn--primary { background: var(--grad-accent); color: var(--accent-on); }
+.btn--primary:hover { background: var(--accent-hover); }
+
+.btn--outline { border-color: var(--border-strong); color: var(--text); background: var(--surface); }
+.btn--outline:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn--lg { padding: .78rem 1.4rem; font-size: var(--step-0); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   SECTION FRAME
+   ═══════════════════════════════════════════════════════════════════ */
+
+.section { padding-block: 4.5rem; position: relative; }
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--grad-rule);
+  opacity: .5;
+}
+.section:first-of-type::before { display: none; }
+.section:first-of-type { border-top: 0; }
+
+.section__head { max-width: 46rem; margin-bottom: 2.5rem; }
+
+.eyebrow {
+  font-family: var(--font-code);
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .7rem;
 }
 
-nav a.active {
-  background: var(--color-primary);
-  color: var(--color-bg);
-}
-
-@media (min-width: 768px) {
-  nav {
-    gap: 0.25rem;
-    padding: 0.7rem 1.25rem;
-  }
-
-  nav a {
-    border-radius: 2rem;
-    padding: 0.65rem 1rem;
-    gap: 0.35rem;
-  }
-}
-
-@media (max-width: 767px) {
-  nav a {
-    font-size: 0.7rem;
-    padding: 0.55rem 0.65rem;
-  }
-}
-
-@media (max-width: 480px) {
-  nav {
-    max-width: calc(100vw - 2rem);
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  nav::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-/* ——— About ——— */
-
-.about__container {
-  max-width: 46rem;
-  margin: 0 auto;
-  display: grid;
-  gap: 2rem;
-}
-
-.about__cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
-.about__card {
-  background: var(--color-bg-variant);
-  border: 1px solid transparent;
-  border-radius: 1rem;
-  padding: 1.5rem 1rem;
-  text-align: center;
-  transition: var(--transition);
-}
-
-.about__card:hover {
-  background: transparent;
-  border-color: var(--color-primary-variant);
-}
-
-.about__icon {
-  color: var(--color-primary);
-  font-size: 1.35rem;
-  margin-bottom: 0.75rem;
-  display: block;
-}
-
-.about__card h5 {
-  font-size: 0.95rem;
-  font-weight: 500;
-  margin-bottom: 0.25rem;
-}
-
-.about__card small {
-  color: var(--color-light);
-  font-size: 0.72rem;
-}
-
-.about__content p {
-  color: var(--color-light);
-  margin: 0 0 1.5rem;
-  text-wrap: pretty;
-}
-
-/* ——— Notable Works ——— */
-
-.notable__container {
-  display: grid;
-  grid-template-columns: 13.5rem 1fr;
-  gap: 2.5rem;
-  align-items: stretch;
-  max-width: 52rem;
-  margin: 0 auto;
-}
-
-.notable__tabs {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.notable__tab {
-  width: 100%;
-  border-radius: 0.75rem;
-  background: var(--color-bg-variant);
-  border: 1px solid transparent;
-  color: var(--color-light);
-  font-family: var(--font-main);
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.8rem 1rem;
-  text-align: left;
-}
-
-.notable__tab-index {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--color-light);
-  flex-shrink: 0;
-}
-
-.notable__tab[aria-selected="true"] .notable__tab-index {
-  color: var(--color-bg);
-}
-
-.notable__tab:hover {
-  border-color: var(--color-primary-variant);
-  background: transparent;
-  color: var(--color-white);
-}
-
-.notable__tab[aria-selected="true"] {
-  background: var(--color-primary);
-  color: var(--color-bg);
-  border-color: transparent;
-}
-
-.notable__tab:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-.notable__panel {
-  background: var(--color-bg-variant);
-  border: 1px solid transparent;
-  border-radius: 2rem;
-  padding: 2rem 2.25rem;
-  display: flex;
-  flex-direction: column;
-  min-height: 14rem;
-  transition: border-color 400ms ease, background 400ms ease;
-}
-
-.notable__panel.is-switching .notable__title,
-.notable__panel.is-switching .notable__desc,
-.notable__panel.is-switching .notable__link {
-  opacity: 0;
-}
-
-.notable__title {
+.section__title {
   font-family: var(--font-display);
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
   font-weight: 500;
-  color: var(--color-white);
-  margin-bottom: 1rem;
+  line-height: 1;
+  letter-spacing: -.04em;
   text-wrap: balance;
-  transition: opacity 300ms ease;
 }
 
-.notable__desc {
-  color: var(--color-light);
-  font-size: 0.95rem;
-  max-width: 65ch;
-  margin-bottom: 1.25rem;
+.section__lede { color: var(--text-muted); margin-top: .8rem; text-wrap: pretty; }
+
+.subhead {
+  font-family: var(--font-ui);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--text-dim);
+  margin: 3rem 0 1.25rem;
+  padding-bottom: .65rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.banner {
+  border: 1px dashed var(--accent);
+  background: var(--accent-soft);
+  border-radius: var(--radius);
+  padding: .9rem 1.15rem;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  margin-bottom: 2rem;
   text-wrap: pretty;
-  flex: 1;
-  transition: opacity 300ms ease;
+}
+.banner strong { color: var(--accent); font-weight: 600; }
+
+.card {
+  background: var(--grad-sheen), var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
-.notable__link {
-  color: var(--color-primary);
+/* ═══════════════════════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hero { position: relative; padding-block: 4rem 4.5rem; overflow: hidden; }
+
+/* Masked technical grid: strongest behind the graph, gone before it
+   reaches the headline. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--graph-ring) 1px, transparent 1px) 0 0 / 100% 34px,
+    linear-gradient(90deg, var(--graph-ring) 1px, transparent 1px) 0 0 / 34px 100%;
+  -webkit-mask-image: radial-gradient(90% 78% at 82% 38%, #000, transparent 70%);
+  mask-image: radial-gradient(90% 78% at 82% 38%, #000, transparent 70%);
+}
+
+.hero__inner { position: relative; z-index: 1; }
+
+/* Gradient bloom anchored to the graph, not a free-floating blob. A real
+   element rather than a pseudo so ScrollTrigger can parallax it. */
+.hero__glow {
+  position: absolute;
+  top: 10%;
+  right: 4%;
+  width: min(48rem, 70vw);
+  aspect-ratio: 1;
+  pointer-events: none;
+  background: var(--grad-glow);
+  will-change: transform;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--font-code);
+  font-size: .82rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.1rem;
+}
+.hero__kicker::before { content: ""; width: 1.5rem; height: 1px; background: var(--accent); }
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
   font-weight: 500;
-  font-size: 0.95rem;
-  width: fit-content;
-  margin-bottom: 1.5rem;
-  transition: var(--transition);
+  line-height: 1;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+  margin-bottom: 1.1rem;
 }
 
-.notable__link:hover {
-  color: var(--color-white);
-  text-decoration: underline;
-}
+.hero__lede { color: var(--text-muted); font-size: var(--step-1); max-width: 34rem; text-wrap: pretty; }
 
-.notable__link[hidden] {
-  display: none;
-}
-
-.notable__actions {
+.availability {
   display: flex;
-  justify-content: flex-end;
-  margin-top: auto;
-}
-
-.notable__next {
-  min-width: 7rem;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .notable__panel.is-switching .notable__title,
-  .notable__panel.is-switching .notable__desc,
-  .notable__panel.is-switching .notable__link {
-    opacity: 1;
-  }
-
-  .notable__title,
-  .notable__desc,
-  .notable__link {
-    transition: none;
-  }
-}
-
-/* ——— Experience / Skills ——— */
-
-.experience__container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.experience__box {
-  background: var(--color-bg-variant);
-  border: 1px solid transparent;
-  border-radius: 1.5rem;
-  padding: 2rem 2.5rem;
-  transition: var(--transition);
-}
-
-.experience__box:hover {
-  background: transparent;
-  border-color: var(--color-primary-variant);
-}
-
-.experience__box h3 {
-  color: var(--color-primary);
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-size: 1.1rem;
-}
-
-.experience__content {
-  display: grid;
-  row-gap: 1rem;
-}
-
-.experience__details {
-  display: flex;
-  gap: 1rem;
   align-items: flex-start;
+  gap: .6rem;
+  font-family: var(--font-ui);
+  font-size: .74rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .6rem .85rem;
+  margin-top: 1.5rem;
+  max-width: 34rem;
 }
 
-.experience__details-icon {
-  color: var(--color-primary);
+.availability .dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
   flex-shrink: 0;
-  margin-top: 4px;
+  margin-top: .48rem;
 }
 
-.experience__details-icon svg {
-  width: 1.1rem;
-  height: 1.1rem;
-  fill: currentColor;
+.hero__cta { display: flex; gap: .7rem; flex-wrap: wrap; margin-top: 1.75rem; }
+
+/* Hero focal graphic
+   An infrastructure relationship graph: one indicator pivoted out to the
+   network behind it. It depicts the work rather than decorating around it. */
+
+.hero__visual { margin: 0; }
+.graph { width: 100%; aspect-ratio: 1; }
+
+.graph__caption {
+  display: flex;
+  justify-content: center;
+  gap: 1.1rem;
+  font-family: var(--font-ui);
+  font-size: .64rem;
+  letter-spacing: .05em;
+  color: var(--text-dim);
+  margin-top: .5rem;
+}
+.graph__caption span { display: inline-flex; align-items: center; gap: .35rem; }
+.graph__caption i { width: 14px; height: 0; border-top: 1.5px solid var(--graph-solid); }
+.graph__caption .is-dashed { border-top-style: dashed; border-color: var(--graph-dash); }
+
+.graph__surface circle { fill: none; stroke: var(--graph-ring); stroke-width: 1; }
+.graph__surface path { fill: none; stroke: var(--graph-tick); stroke-width: 1; }
+
+.graph__edges path { fill: none; stroke-linecap: round; }
+.graph__edges--confirmed path { stroke: var(--graph-solid); stroke-width: 1.15; }
+.graph__edges--inferred path { stroke: var(--graph-dash); stroke-width: 1; stroke-dasharray: 3 5; }
+
+.graph__nodes .n { fill: var(--bg); stroke: var(--graph-node); stroke-width: 1.4; }
+.graph__nodes .n--leaf { stroke: var(--graph-leaf); stroke-width: 1.2; }
+.graph__nodes .n--key { stroke: var(--accent); }
+.graph__nodes .n--root { fill: var(--accent); stroke: var(--accent); }
+.graph__nodes .n__halo { fill: none; stroke: var(--accent); opacity: .35; stroke-width: 1; }
+
+/* Motion is opt-in: the static composition is the baseline, so a
+   reduced-motion visitor sees a finished graph rather than an empty frame. */
+@media (prefers-reduced-motion: no-preference) {
+  .graph__edges--confirmed path {
+    stroke-dasharray: 170;
+    stroke-dashoffset: 170;
+    animation: draw 1.4s cubic-bezier(.22, .61, .36, 1) forwards;
+  }
+  .graph__edges--confirmed path:nth-child(1) { animation-delay: .15s; }
+  .graph__edges--confirmed path:nth-child(2) { animation-delay: .27s; }
+  .graph__edges--confirmed path:nth-child(3) { animation-delay: .39s; }
+  .graph__edges--confirmed path:nth-child(4) { animation-delay: .51s; }
+  .graph__edges--confirmed path:nth-child(5) { animation-delay: .63s; }
+  .graph__edges--confirmed path:nth-child(6) { animation-delay: .78s; }
+  .graph__edges--confirmed path:nth-child(7) { animation-delay: .88s; }
+  .graph__edges--confirmed path:nth-child(8) { animation-delay: .98s; }
+
+  .graph__edges--inferred path {
+    opacity: 0;
+    animation: fade .9s ease-out 1.15s forwards,
+               march 22s linear 1.15s infinite;
+  }
+  .graph__nodes circle { opacity: 0; animation: fade .5s ease-out .9s forwards; }
+  .graph__nodes .n--root { animation-delay: .1s; }
+  .graph__nodes .n--key { animation-delay: .7s; }
+  .graph__nodes .n__halo {
+    transform-origin: 200px 205px;
+    animation: fade .5s ease-out .1s forwards, halo 4s ease-in-out 1.4s infinite;
+  }
 }
 
-.experience__details h4 {
-  font-size: 0.95rem;
-  font-weight: 500;
-  margin-bottom: 0.15rem;
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fade { to { opacity: 1; } }
+@keyframes march { to { stroke-dashoffset: -160; } }
+@media (prefers-reduced-motion: no-preference) {
+  .grove-nodes circle { animation: breathe-strong 5s ease-in-out infinite; }
+  .grove-nodes circle:nth-child(n+2):nth-child(-n+3) {
+    animation: breathe-mid 6.2s ease-in-out infinite;
+    animation-delay: .9s;
+  }
+  .grove-nodes circle:nth-child(n+4) {
+    animation: breathe-soft 7.4s ease-in-out infinite;
+    animation-delay: 1.8s;
+  }
+  .grove-nodes circle:nth-child(even) { animation-delay: 2.6s; }
 }
 
-.experience__details small {
-  color: var(--color-light);
-  font-size: 0.8rem;
+@keyframes breathe-strong { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes breathe-mid    { 0%, 100% { opacity: .38; } 50% { opacity: .8; } }
+@keyframes breathe-soft   { 0%, 100% { opacity: .24; } 50% { opacity: .58; } }
+
+@keyframes halo {
+  0%, 100% { opacity: .35; transform: scale(1); }
+  50%      { opacity: .1;  transform: scale(1.3); }
 }
 
-/* ——— Work history ——— */
+/* Proof strip */
 
-.work__container {
+.proof {
   display: grid;
-  gap: 1.5rem;
-  max-width: 52rem;
-  margin: 0 auto;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 3rem;
+  box-shadow: var(--shadow-sm);
 }
 
-.work__item {
-  background: var(--color-bg-variant);
-  border: 1px solid transparent;
-  border-radius: 1.5rem;
-  padding: 2rem 2.25rem;
-  transition: var(--transition);
+.proof__item { background: var(--surface); padding: 1.15rem 1.2rem; }
+
+.proof__n {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1.1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: .3rem;
 }
 
-.work__item:hover {
-  border-color: var(--color-primary-variant);
-  background: transparent;
+.proof__label { display: block; font-size: var(--step--1); font-weight: 500; text-wrap: pretty; }
+
+.proof__scope {
+  display: block;
+  font-family: var(--font-code);
+  font-size: .78rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+  margin-top: .45rem;
+  text-wrap: pretty;
 }
 
-.work__header {
+/* ═══════════════════════════════════════════════════════════════════
+   CASE STUDIES
+   ═══════════════════════════════════════════════════════════════════ */
+
+.case { padding: 1.9rem 2rem; margin-bottom: 1.5rem; position: relative; isolation: isolate; overflow: hidden; }
+
+/* Faint coordinate field in the corner: material, not pattern. */
+.case::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--graph-ring) 1px, transparent 1px) 0 0 / 100% 26px,
+    linear-gradient(90deg, var(--graph-ring) 1px, transparent 1px) 0 0 / 26px 100%;
+  -webkit-mask-image: radial-gradient(58% 72% at 100% 0%, rgba(0,0,0,.9), transparent 78%);
+  mask-image: radial-gradient(58% 72% at 100% 0%, rgba(0,0,0,.9), transparent 78%);
+}
+
+.case__index {
+  font-family: var(--font-ui);
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .4rem;
+}
+
+.case__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 2.9vw, 2.3rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+  margin-bottom: .65rem;
+}
+
+.case__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem .9rem;
+  font-family: var(--font-ui);
+  font-size: .7rem;
+  color: var(--text-dim);
+  margin-bottom: 1.75rem;
+}
+
+.tag {
+  font-family: var(--font-ui);
+  font-size: .63rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .18rem .5rem;
+  border-radius: 3px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.case__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-bottom: 1.9rem; }
+
+.case__col h4 {
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: .5rem;
+}
+.case__col p { color: var(--text-muted); font-size: var(--step-0); text-wrap: pretty; max-width: 62ch; }
+
+/* Diagrams */
+
+.diagram {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  padding: .6rem .9rem;
+  margin-bottom: 1.75rem;
+  overflow-x: auto;
+}
+.diagram svg { width: 100%; min-width: 33rem; height: auto; color: var(--accent); }
+
+.dg__box { fill: var(--surface); stroke: var(--border-strong); stroke-width: 1; }
+.dg__box--out { stroke: var(--accent); }
+.dg__track { fill: none; stroke: var(--border-strong); stroke-width: 2; }
+.dg__packet { fill: var(--accent); }
+.dg__t { fill: var(--text); font-family: var(--font-display); font-size: 14px; font-weight: 500; letter-spacing: -.02em; text-anchor: middle; }
+.dg__t--out { fill: var(--accent); }
+.dg__s { fill: var(--text-dim); font-family: var(--font-code); font-size: 10.5px; text-anchor: middle; }
+.dg__cap { fill: var(--text-dim); font-family: var(--font-code); font-size: 12px; }
+
+/* ── Case-study diagram vocabulary ─────────────────────────────────
+   Four case studies, four different diagram FORMS, because each is a
+   different shape of problem: a convergence graph, an address-space
+   sweep, a permutation fan into score bands, and a state machine. They
+   share this token vocabulary so they read as one system, while the
+   geometry stays specific to what each of them actually does.
+   ────────────────────────────────────────────────────────────────── */
+
+/* Shared micro-annotation. Uppercase mono, set at the top of a column
+   so each region of a diagram declares what it is. */
+.dg__lab {
+  fill: var(--text-dim);
+  font-family: var(--font-code);
+  font-size: 9px;
+  letter-spacing: .16em;
+}
+.dg__lab--key { fill: var(--accent); }
+
+.dg__s--l { text-anchor: start; }
+.dg__s--r { text-anchor: end; }
+.dg__s--c { text-anchor: middle; }
+
+/* Flow lines. Hairline for the many-to-few fan, heavier for the spine
+   that carries the actual result through the system. */
+.dg__flow { fill: none; stroke: var(--graph-dash); stroke-width: .75; opacity: .5; }
+.dg__flow--strong { stroke: var(--border-strong); stroke-width: 1.5; opacity: 1; }
+
+/* 001 — convergence */
+.dg__node circle { fill: var(--graph-leaf); }
+.dg__hub { fill: var(--surface); stroke: var(--accent); stroke-width: 1.5; }
+.dg__hub-core { fill: var(--accent); }
+.dg__halo { color: var(--accent); }
+.dg__stack rect { fill: var(--surface); stroke: var(--border-strong); stroke-width: 1; }
+
+/* 002 — address-space sweep */
+/* The plane is a tiled pattern, so the fill on the plate must stay the
+   pattern reference — colour lives on the tile itself, or CSS would
+   override the url() and paint a solid block. */
+.dg__cell { opacity: .6; }
+.dg__cell-dot { fill: var(--graph-tick); }
+.dg__cell--hot rect { fill: var(--accent); opacity: .9; }
+.dg__scan { color: var(--accent); }
+.dg__brace { fill: none; stroke: var(--border-strong); stroke-width: 1; }
+.dg__chip { fill: var(--surface); stroke: var(--border-strong); stroke-width: 1; }
+
+/* 003 — permutation fan into confidence bands */
+.dg__seed { fill: var(--surface); stroke: var(--accent); stroke-width: 1.5; }
+.dg__gate { fill: none; stroke: var(--border-strong); stroke-width: 1; stroke-dasharray: 2 3; }
+.dg__band { fill: var(--surface); stroke: var(--border-strong); stroke-width: 1; }
+.dg__band--hi  { stroke: var(--accent); fill: var(--accent-soft); }
+.dg__band--med { stroke: var(--border-strong); }
+.dg__band--lo  { stroke: var(--border); }
+.dg__t--band { font-size: 11px; letter-spacing: .12em; text-anchor: start; fill: var(--text-muted); }
+.dg__band--hi + .dg__t--band { fill: var(--accent); }
+.dg__pip { fill: var(--accent); opacity: .75; }
+
+/* 004 — state machine. The return and escalation arcs are dashed so the
+   happy path stays the one solid line through the diagram. */
+.dg__flow--return,
+.dg__flow--esc { stroke-dasharray: 3 4; stroke-width: 1; opacity: .7; }
+.dg__ghost { display: none; }
+
+/* Packets: a plain one is a candidate moving through discovery, a hot one
+   is a confirmed result moving along the spine. */
+.diagram .dg__packet { fill: var(--graph-node); }
+.diagram .dg__packet--hot { fill: var(--accent); }
+
+/* SMIL cannot be halted from CSS, so reduced motion is handled in JS by
+   pausing each diagram's animations. This only softens the sweep bar,
+   which is an ordinary painted element. */
+@media (prefers-reduced-motion: reduce) {
+  .dg__scan { opacity: .35; }
+}
+
+/* Investigation record */
+
+.record-wrap { border-top: 1px solid var(--border); padding-top: 1.2rem; }
+
+.record-wrap summary {
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  color: var(--accent);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+.record-wrap summary::-webkit-details-marker { display: none; }
+
+.record-wrap summary::before {
+  content: "+";
+  font-family: var(--font-ui);
+  font-size: .95rem;
+  line-height: 1;
+  width: 1.2rem;
+  height: 1.2rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+}
+.record-wrap[open] summary::before { content: "–"; }
+.record-wrap summary:hover span { text-decoration: underline; }
+
+.record { display: grid; gap: 1.05rem; padding-top: 1.4rem; }
+
+.record dt {
+  font-family: var(--font-ui);
+  font-size: .76rem;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: .3rem;
+}
+.record dd { color: var(--text-muted); font-size: var(--step-0); max-width: 52rem; text-wrap: pretty; }
+.record dd strong { color: var(--text); font-weight: 600; }
+
+/* Artifact + brief grids */
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+.grid-2 + .subhead, .grid-3 + .subhead, .workgrid + .subhead { margin-top: 4rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
+
+@media (max-width: 820px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+.tile { padding: 1.75rem 1.85rem; transition: border-color var(--ease), box-shadow var(--ease); }
+.tile:hover { border-color: var(--border-strong); box-shadow: var(--shadow); }
+.tile--todo { border-style: dashed; }
+
+.tile__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 1.1rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--grad-glow), var(--surface-2);
+  color: var(--accent);
+}
+.tile__icon svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tile__kicker {
+  font-family: var(--font-code);
+  font-size: .75rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .5rem;
+}
+
+.tile h3 {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 500;
+  letter-spacing: -.02em;
+  line-height: 1.25;
+  margin-bottom: .5rem;
+  text-wrap: balance;
+}
+
+.tile p { color: var(--text-muted); font-size: var(--step-0); text-wrap: pretty; max-width: 62ch; }
+
+.tile__status {
+  font-family: var(--font-ui);
+  font-size: .68rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+  margin-top: .8rem;
+}
+
+.tile__meta {
+  font-family: var(--font-ui);
+  font-size: .64rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: .8rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   EXPERIENCE
+   ═══════════════════════════════════════════════════════════════════ */
+
+.jobs { display: grid; gap: 1.25rem; }
+
+.job { padding: 1.75rem 1.9rem; transition: border-color var(--ease), box-shadow var(--ease); }
+.job:hover { border-color: var(--border-strong); box-shadow: var(--shadow); }
+
+.job__head {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: baseline;
-  gap: 0.5rem 1rem;
-  margin-bottom: 0.35rem;
+  align-items: center;
+  gap: .75rem 1rem;
+  margin-bottom: .7rem;
 }
 
-.work__header h4 {
-  color: var(--color-primary);
+.job__when { font-family: var(--font-code); font-size: .8rem; color: var(--text-dim); }
+
+.job__company { display: flex; align-items: center; }
+
+.job__label {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: var(--step-1);
+  font-weight: 700;
+  letter-spacing: -.01em;
 }
 
-.work__header span {
-  color: var(--color-light);
-  font-size: 0.8rem;
-}
+/* Chips are tinted per brand asset: the Redhunt mark is dark-ink artwork and
+   needs a light plate in either theme; the Saptang mark is the light version
+   and needs a dark plate or its white wordmark disappears. */
+.logo-chip { display: inline-flex; align-items: center; border-radius: var(--radius); padding: .38rem .68rem; }
+.logo-chip--light { background: #f4f5f7; border: 1px solid var(--border); }
+.logo-chip--dark  { background: #1b222c; border: 1px solid var(--border); }
+.logo-chip img { width: auto; height: 1.35rem; object-fit: contain; }
 
-.work__role {
-  font-weight: 500;
-  margin-bottom: 1rem;
-  font-size: 0.95rem;
-}
+.job__role { font-weight: 600; font-size: var(--step-0); margin-bottom: 1rem; }
 
-.work__item ul {
-  display: grid;
-  gap: 0.65rem;
-}
+.job ul { display: grid; gap: .55rem; }
 
-.work__item li {
-  color: var(--color-light);
-  font-size: 0.9rem;
-  padding-left: 1.25rem;
+.job li {
+  color: var(--text-muted);
+  font-size: var(--step-0);
+  padding-left: 1.15rem;
   position: relative;
   text-wrap: pretty;
+  max-width: 78ch;
 }
-
-.work__item li::before {
+.job li::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0.55rem;
-  width: 6px;
-  height: 6px;
+  left: 0; top: .58rem;
+  width: 5px; height: 5px;
   border-radius: 50%;
-  background: var(--color-primary);
+  background: var(--accent);
 }
+.job strong { color: var(--text); font-weight: 600; }
 
-.work__item strong {
-  color: var(--color-white);
-  font-weight: 500;
-}
+/* ═══════════════════════════════════════════════════════════════════
+   PROJECTS
+   ═══════════════════════════════════════════════════════════════════ */
 
-/* ——— Services / Learning ——— */
+.projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
 
-.services__container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.service {
-  background: var(--color-bg-variant);
-  border: 1px solid transparent;
-  border-radius: 1.5rem;
-  overflow: hidden;
-  transition: var(--transition);
-}
-
-.service:hover {
-  background: transparent;
-  border-color: var(--color-primary-variant);
-}
-
-.service__head {
-  padding: 1.5rem 1.5rem 1rem;
-  border-bottom: 1px solid var(--color-primary-variant);
-}
-
-.service__head h3 {
-  color: var(--color-primary);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-align: left;
-  margin: 0;
-}
-
-.service__list {
-  padding: 1.75rem 1.5rem;
-}
-
-.service__list li {
+.project {
   display: flex;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-  font-size: 0.88rem;
-  color: var(--color-light);
-}
-
-.service__list-icon {
-  color: var(--color-primary);
-  flex-shrink: 0;
-  margin-top: 3px;
-}
-
-.service__list-icon svg {
-  width: 1rem;
-  height: 1rem;
-  fill: currentColor;
-}
-
-.service__list a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.service__list a:hover {
-  color: var(--color-primary);
-  text-decoration: underline;
-}
-
-/* ——— Portfolio ——— */
-
-.portfolio__container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  max-width: 56rem;
-  margin: 0 auto;
-}
-
-.portfolio__group-title {
-  text-align: center;
-  color: var(--color-primary);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin: 3rem auto 1.5rem;
-  max-width: 56rem;
-}
-
-.portfolio__item {
-  background: var(--color-bg-variant);
-  border: 1px solid transparent;
-  border-radius: 1.5rem;
-  padding: 1.25rem;
-  transition: var(--transition);
-}
-
-.portfolio__item:hover {
-  background: transparent;
-  border-color: var(--color-primary-variant);
-}
-
-.portfolio__item-image {
-  border-radius: 1.25rem;
+  flex-direction: column;
   overflow: hidden;
-  aspect-ratio: 16 / 10;
-  background: var(--color-bg-variant);
+  transition: border-color var(--ease), box-shadow var(--ease);
+}
+.project:hover { border-color: var(--border-strong); box-shadow: var(--shadow); }
+/* Every project sits in the two-column grid. The full-width span was
+   making the first card a banner, which read as a hierarchy that does
+   not exist — they are six comparable things. */
+.project--wide { grid-column: auto; }
+
+.project__art {
+  aspect-ratio: 21 / 9;
+  border-bottom: 1px solid var(--border);
+  background: var(--grad-glow), var(--surface-2);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.project__art svg { width: 100%; height: 100%; color: var(--accent); }
+
+.project__media { aspect-ratio: 16 / 9; overflow: hidden; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+.project__media img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+.project__body { padding: 1.4rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
+
+.project__head { display: flex; align-items: center; gap: .7rem; margin-bottom: .25rem; }
+.project__head h3 { font-family: var(--font-display); font-size: var(--step-2); font-weight: 500; letter-spacing: -.03em; letter-spacing: -.01em; }
+
+.stars {
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 3px;
+  padding: .12rem .4rem;
 }
 
-.portfolio__item-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
+.project__stack {
+  font-family: var(--font-ui);
+  font-size: .68rem;
+  letter-spacing: .05em;
+  color: var(--text-dim);
+  margin-bottom: .8rem;
 }
 
-.portfolio__item h3 {
-  font-family: var(--font-display);
-  margin: 1.25rem 0 0.75rem;
-  font-size: 1.1rem;
-  text-align: left;
-  color: var(--color-white);
+.project__body > p { color: var(--text-muted); font-size: var(--step-0); text-wrap: pretty; }
+
+.project__facts { display: grid; gap: .35rem; margin-top: .8rem; }
+.project__facts li { color: var(--text-muted); font-size: .82rem; padding-left: .95rem; position: relative; }
+.project__facts li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .55rem;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--slate);
 }
 
-.portfolio__item p {
-  color: var(--color-light);
-  font-size: 0.88rem;
+.project__note { font-family: var(--font-ui); font-size: .68rem; line-height: 1.55; color: var(--text-dim); margin-top: .8rem; }
+
+.project__cta { display: flex; gap: 1.1rem; margin-top: auto; padding-top: 1.2rem; }
+.project__cta a { display: inline-flex; align-items: center; min-height: 44px; }
+.project__cta a { color: var(--accent); font-size: var(--step--1); font-weight: 600; }
+.project__cta a:hover { text-decoration: underline; }
+
+.aside-note { color: var(--text-dim); font-size: var(--step--1); margin-top: 1.25rem; }
+.aside-note a { color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px; }
+.aside-note a:hover { color: var(--accent); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   SKILLS + CREDENTIALS
+   ═══════════════════════════════════════════════════════════════════ */
+
+.skillgroup { padding: 1.4rem 1.5rem; }
+
+.skillgroup h3 {
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--accent);
   margin-bottom: 1rem;
-  text-wrap: pretty;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid var(--border);
 }
 
-.portfolio__item-cta {
-  display: flex;
-  gap: 1rem;
-}
+.skillgroup ul { display: grid; gap: .8rem; }
+.skillgroup li { display: grid; gap: .05rem; }
+.skillgroup li strong { font-size: var(--step--1); font-weight: 600; }
+.skillgroup li span { font-size: .78rem; line-height: 1.5; color: var(--text-dim); }
 
-.portfolio__item-cta a {
-  color: var(--color-primary);
-  font-size: 0.85rem;
+.cred { padding: 1.3rem 1.4rem; }
+
+.cred h3 {
+  font-family: var(--font-ui);
+  font-size: .78rem;
   font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .85rem;
 }
 
-.portfolio__item-cta a:hover {
-  color: var(--color-white);
-}
+.cred p { color: var(--text-muted); font-size: var(--step--1); }
+.cred p strong { color: var(--text); font-weight: 600; }
+.cred__note { margin-top: .6rem; font-size: .8rem; color: var(--text-dim); }
 
-/* ——— Contact ——— */
+.cred ul { display: grid; gap: .5rem; }
+.cred li { color: var(--text-muted); font-size: .82rem; line-height: 1.5; }
+.cred a { text-decoration: underline; text-underline-offset: 2px; }
+.cred a:hover { color: var(--accent); }
 
-.contact__container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
-  max-width: 56rem;
-  margin: 0 auto;
-}
+/* ═══════════════════════════════════════════════════════════════════
+   CONTACT
+   ═══════════════════════════════════════════════════════════════════ */
 
-.contact__option {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  background: var(--color-bg-variant);
-  border: 1px solid transparent;
-  border-radius: 1.2rem;
-  padding: 1.2rem;
+.contact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+
+.contact__card {
+  padding: 1.5rem 1.4rem;
   text-align: center;
-  transition: var(--transition);
-  min-width: 0;
+  transition: border-color var(--ease), box-shadow var(--ease);
   overflow-wrap: break-word;
 }
+.contact__card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
 
-.contact__option:hover {
-  background: transparent;
-  border-color: var(--color-primary-variant);
+.contact__icon {
+  width: 2.4rem; height: 2.4rem;
+  margin: 0 auto .7rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--grad-glow), var(--accent-soft);
+  color: var(--accent);
+  font-size: 1.05rem;
 }
 
-.contact__option:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 3px;
-}
+.contact__card h3 { font-size: var(--step-0); font-weight: 600; margin-bottom: .3rem; }
+.contact__card p { color: var(--text-muted); font-size: .82rem; overflow-wrap: anywhere; margin-bottom: .6rem; }
+.contact__action { color: var(--accent); font-size: var(--step--1); font-weight: 600; }
 
-.contact__option-icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--color-primary);
-}
+/* ═══════════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════════ */
 
-.contact__option-icon--img {
+.footer { border-top: 1px solid var(--border); background: var(--surface); padding-block: 2.5rem; }
+
+.footer__inner {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.avely-icon {
-  display: block;
-  width: 1.25rem;
-  height: 1.25rem;
-  object-fit: contain;
-}
-
-.contact__option-icon--img .avely-icon {
-  width: 2rem;
-  height: 2rem;
-}
-
-.contact__option h4 {
-  font-size: 0.95rem;
-  margin-bottom: 0.35rem;
-  color: var(--color-white);
-}
-
-.contact__option:hover h4,
-.contact__option:focus-visible h4 {
-  color: var(--color-white);
-}
-
-.contact__option-detail {
-  color: var(--color-light);
-  font-size: 0.85rem;
-  font-weight: 400;
-  line-height: 1.45;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  max-width: 100%;
-  margin: 0 0 0.5rem;
-}
-
-.contact__option-action {
-  display: inline-block;
-  margin-top: 0.25rem;
-  color: var(--color-primary);
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
-.contact__option:hover .contact__option-detail,
-.contact__option:hover .contact__option-action {
-  color: var(--color-white);
-}
-
-/* ——— Footer ——— */
-
-footer {
-  background: #ffffff;
-  padding: 3rem 0;
-  margin-top: 5rem;
-  text-align: center;
-  font-size: 0.9rem;
-  border-top: 1px solid oklch(0.88 0.01 230);
-}
-
-.footer__logo {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  display: inline-block;
-  color: var(--color-bg);
-  text-decoration: none;
-}
-
-.footer__logo:hover {
-  color: var(--color-primary);
-}
-
-.permalinks {
-  display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 1.5rem 2rem;
-  margin: 0 auto 1.5rem;
-  list-style: none;
-  padding: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
 }
 
-.permalinks a {
-  color: var(--color-bg);
-  font-weight: 500;
-  font-size: 0.85rem;
-  text-decoration: none;
-}
+.footer__links { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; }
+.footer__links a { color: var(--text-muted); font-size: var(--step--1); display: inline-flex; align-items: center; min-height: 44px; }
+.footer__links a:hover { color: var(--accent); }
 
-.permalinks a:hover {
-  color: var(--color-primary);
-}
-
-.footer__socials {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
+.footer__socials { display: flex; gap: .5rem; }
 .footer__socials a {
-  background: var(--color-bg);
-  color: var(--color-white);
-  padding: 0.7rem;
-  border-radius: 0.7rem;
-  border: 1px solid transparent;
-  display: flex;
-  transition: var(--transition);
+  width: 2.75rem; height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  transition: color var(--ease), border-color var(--ease);
+}
+.footer__socials a:hover { color: var(--accent); border-color: var(--accent); }
+.footer__socials svg { width: 1rem; height: 1rem; fill: currentColor; }
+.footer__socials img { width: 1rem; height: 1rem; object-fit: contain; }
+
+.footer__legal { color: var(--text-dim); font-size: .78rem; width: 100%; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 960px) {
+  .topbar__nav { display: none; }
+  .subnav { display: block; position: sticky; top: var(--topbar-h); z-index: 99; }
+  .topbar__end { margin-left: auto; }
+
+  .hero { padding-block: 3rem; }
+  .hero__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero__visual { max-width: 20rem; margin-inline: auto; }
+
+  .proof { grid-template-columns: repeat(2, 1fr); }
+  .case__cols { grid-template-columns: 1fr; gap: 1.2rem; }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .projects { grid-template-columns: 1fr; }
+  .contact { grid-template-columns: 1fr; }
 }
 
-.footer__socials a:hover {
-  background: transparent;
-  border-color: var(--color-bg);
-  color: var(--color-bg);
-}
+@media (max-width: 600px) {
+  :root { --gutter: 1.15rem; }
 
-.footer__socials svg {
-  width: 1.1rem;
-  height: 1.1rem;
-  fill: currentColor;
-}
+  .hero__visual { display: none; }
+  .proof { grid-template-columns: 1fr; }
 
-.footer__socials .avely-icon {
-  width: 1.1rem;
-  height: 1.1rem;
-}
+  .section { padding-block: 3.25rem; }
+  .case { padding: 1.4rem 1.2rem; }
+  .job { padding: 1.4rem 1.25rem; }
+  .project__body { padding: 1.2rem; }
 
-.footer__copyright {
-  color: var(--color-bg);
-  opacity: 0.75;
-  margin-bottom: 4rem;
-  font-size: 0.85rem;
-}
+  .hero__cta { flex-direction: column; align-items: stretch; }
+  .hero__cta .btn { width: 100%; }
 
-/* ——— Responsive ——— */
-
-@media screen and (max-width: 1024px) {
-  .container {
-    width: var(--container-width-md);
-  }
-
-  section {
-    margin-top: 5rem;
-  }
-
-  header {
-    height: 100vh;
-  }
-
-  .header__socials,
-  .scroll__down {
-    display: none;
-  }
-
-  .header__grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    text-align: center;
-  }
-
-  .header__text {
-    max-width: none;
-    margin: 0 auto;
-  }
-
-  .header__role {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 32rem;
-  }
-
-  .cta {
-    justify-content: center;
-  }
-
-  .header__visual {
-    max-width: 16rem;
-  }
-
-  .notable__container {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .notable__panel {
-    padding: 1.75rem 1.75rem;
-  }
-
-  .experience__container {
-    grid-template-columns: 1fr;
-  }
-
-  .experience__box {
-    width: 85%;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-
-  .services__container {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .contact__container {
-    grid-template-columns: 1fr;
-    max-width: var(--container-width-md);
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .container {
-    width: var(--container-width-sm);
-  }
-
-  .header__visual {
-    display: none;
-  }
-
-  .about__cards {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .about__content {
-    text-align: center;
-  }
-
-  .experience__box {
-    width: 100%;
-    padding: 1.5rem 1.25rem;
-  }
-
-  .services__container {
-    grid-template-columns: 1fr;
-  }
-
-  .portfolio__container {
-    grid-template-columns: 1fr;
-  }
-
-  .work__item {
-    padding: 1.5rem;
-  }
-
-  .notable__panel {
-    padding: 1.5rem 1.25rem;
-    border-radius: 1.5rem;
-    min-height: 12rem;
-  }
-
-  nav a {
-    padding: 0.65rem;
-  }
+  .brand__name { display: none; }
+  .footer__inner { flex-direction: column; align-items: flex-start; }
 }
 
 @media print {
-  nav,
-  .header__socials,
-  .scroll__down,
-  footer {
-    display: none;
+  .topbar, .subnav, .footer, body::after, .hero::before { display: none; }
+  body { background: #fff; color: #000; }
+  .record-wrap[open] .record { display: grid; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TOOLSTRIP
+   A continuous marquee of the stack. Two identical tracks scroll as one
+   and the second is aria-hidden, so assistive tech reads the list once.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.toolstrip {
+  padding-block: 2rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+  /* The fade belongs on the viewport-width element, not on the max-content
+     rail inside it, or the right edge never fades. */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.toolstrip__label {
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 1.1rem;
+}
+
+.toolstrip__viewport {
+  display: flex;
+  width: max-content;
+  gap: .75rem;
+}
+
+.toolstrip__track {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding-right: .75rem;
+  animation: toolstrip-scroll 46s linear infinite;
+}
+
+/* The tool strip never stops either. Hover still lights the chip and its
+   purpose label, it just does not halt the scroll. */
+
+@keyframes toolstrip-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toolstrip__track { animation: none; }
+  .toolstrip { overflow-x: auto; scrollbar-width: none; }
+  .toolstrip::-webkit-scrollbar { display: none; }
+}
+
+.toolstrip__item {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  flex-shrink: 0;
+  padding: .5rem .85rem;
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background: var(--grad-sheen), var(--surface);
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: color var(--ease), border-color var(--ease);
+}
+.toolstrip__item:hover { color: var(--text); border-color: var(--border-strong); }
+
+.toolstrip__mark { display: inline-flex; color: var(--accent); }
+.toolstrip__mark svg { width: 1rem; height: 1rem; }
+
+/* Raster vendor marks sit on a light plate so their own colours read in
+   either theme, matching the company logo chips in Experience. */
+.toolstrip__mark--img {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #fff;
+  display: grid;
+  place-items: center;
+}
+.toolstrip__mark--img img { width: 100%; height: 100%; object-fit: contain; }
+
+.toolstrip__name {
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .01em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   EDITORIAL LAYER
+   Section composition varies by section instead of repeating one
+   header-plus-grid pattern. Oversized ghost numerals anchor each
+   section, a spine carries the experience, and case studies split
+   into a sticky meta rail plus a reading column.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Register bar ──────────────────────────────────────────────────
+   Every section opens with a catalogue register: an identifier on the
+   left, a ruled span, and the section's position in the set on the
+   right. It reads as a case-file index rather than decoration, and it
+   gives the eye a fixed landmark to reacquire on every scroll stop.
+   The rule carries fine ticks so the line is measured, not just drawn.
+   ────────────────────────────────────────────────────────────────── */
+
+.register {
+  display: grid;
+  grid-template-columns: auto minmax(2rem, 1fr) auto;
+  align-items: center;
+  gap: .85rem;
+  margin-bottom: 1.6rem;
+  font-family: var(--font-code);
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.register__id { color: var(--accent); white-space: nowrap; }
+
+/* The chevron is drawn as content so it never depends on a glyph the
+   loaded font might not carry. */
+.register__id::before {
+  content: "\232A";
+  margin-right: .55rem;
+  opacity: .42;
+}
+
+.register__idx {
+  color: var(--text-dim);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.register__idx b { color: var(--text-muted); font-weight: 500; }
+
+/* Hairline plus tick marks. The ticks sit on a 12px rhythm and fade in
+   from the left so the rule appears to be measured off the identifier. */
+.register__rule {
+  position: relative;
+  height: 7px;
+  border-bottom: 1px solid var(--border);
+}
+.register__rule::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 4px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--border-strong) 0 1px,
+    transparent 1px 12px
+  );
+  opacity: .5;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+}
+
+@media (max-width: 640px) {
+  .register { font-size: .6rem; letter-spacing: .14em; gap: .6rem; }
+}
+
+/* ── Section header: numeral, rule, right-aligned meta ── */
+
+.section__head { position: relative; max-width: none; }
+
+.head__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 1.5rem 2rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* The register bar above now states the index precisely, so the ghost
+   numeral is texture rather than information. It sits clear of the rule
+   and drops back far enough that it never competes with the meta text
+   it shares a corner with. */
+.head__num {
+  position: absolute;
+  right: -.5rem;
+  top: -.6rem;
+  font-family: var(--font-display);
+  font-size: clamp(4.2rem, 10.5vw, 8.5rem);
+  font-weight: 500;
+  line-height: .8;
+  letter-spacing: -.04em;
+  color: var(--accent);
+  opacity: .07;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* Section numerals breathe in the accent. Staggered per section so they
+   never pulse in unison, which would read as a page-wide flash rather
+   than a set of independent markers. */
+@media (prefers-reduced-motion: no-preference) {
+  .head__num { animation: numpulse 4.2s ease-in-out infinite; }
+  #case-studies .head__num { animation-delay: .5s; }
+  #experience   .head__num { animation-delay: 1.0s; }
+  #research     .head__num { animation-delay: 1.5s; }
+  #projects     .head__num { animation-delay: 2.0s; }
+  #skills       .head__num { animation-delay: 2.5s; }
+  #faq          .head__num { animation-delay: 3.0s; }
+  #contact      .head__num { animation-delay: 3.5s; }
+}
+
+@keyframes numpulse {
+  0%, 100% { opacity: .06; }
+  50%      { opacity: .22; }
+}
+
+.head__main { position: relative; z-index: 1; }
+
+.head__meta {
+  font-family: var(--font-ui);
+  font-size: .8rem;
+  letter-spacing: .02em;
+  color: var(--text-dim);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ── Experience: a vertical spine with logo nodes on it ── */
+
+.timeline { position: relative; padding-left: 3.25rem; }
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 1.05rem;
+  top: .6rem;
+  bottom: .6rem;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--border-strong) 8%, var(--border-strong) 92%, transparent);
+}
+
+.timeline .job { position: relative; }
+
+.timeline .job::before {
+  content: "";
+  position: absolute;
+  left: -2.7rem;
+  top: 2rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 5px var(--bg);
+}
+
+.timeline .job::after {
+  content: "";
+  position: absolute;
+  left: -2.2rem;
+  top: 2.5rem;
+  width: 1.55rem;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+.job__year {
+  position: absolute;
+  left: -3.25rem;
+  top: -1.5rem;
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: var(--text-dim);
+}
+
+/* ── Case study: sticky meta rail beside the reading column ── */
+
+.case { padding: 0; overflow: visible; }
+
+.case__layout {
+  display: grid;
+  grid-template-columns: 13.5rem minmax(0, 1fr);
+  gap: 0;
+}
+
+.case__rail {
+  padding: 1.9rem 1.4rem;
+  align-self: start;
+  position: sticky;
+  top: calc(var(--topbar-h) + 1.25rem);
+}
+
+.case__main { padding: 1.9rem 2rem; min-width: 0; border-left: 1px solid var(--border); }
+
+.rail__row { margin-bottom: 1.1rem; }
+.rail__row:last-child { margin-bottom: 0; }
+
+.rail__k {
+  display: block;
+  font-family: var(--font-code);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: .25rem;
+}
+
+.rail__v { font-family: var(--font-ui); font-size: .82rem; font-weight: 500; }
+
+.rail__tags { display: flex; flex-wrap: wrap; gap: .3rem; }
+
+.rail__tag {
+  font-family: var(--font-code);
+  font-size: .78rem;
+  padding: .16rem .45rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-muted);
+}
+
+/* ── Outcome callout: the number gets its own composition ── */
+
+.callout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 0;
+  margin: 1.75rem 0;
+}
+
+.callout__n {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -.04em;
+  line-height: .9;
+  letter-spacing: -.03em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.callout__t { font-family: var(--font-body); font-size: var(--step-0); color: var(--text-muted); text-wrap: pretty; }
+.callout__t b { color: var(--text); font-weight: 600; }
+
+/* ── Marginalia: small annotations set beside content ── */
+
+.margin-note {
+  font-family: var(--font-ui);
+  font-size: .68rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+  padding-left: .75rem;
+  border-left: 1px solid var(--border-strong);
+  margin-top: 1rem;
+}
+
+/* ── Footer wordmark ── */
+
+.footer__wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 13vw, 9rem);
+  font-weight: 500;
+  line-height: .85;
+  letter-spacing: -.04em;
+  color: var(--text);
+  opacity: .06;
+  text-align: center;
+  margin-top: 2.5rem;
+  user-select: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media (max-width: 960px) {
+  .case__layout { grid-template-columns: 1fr; }
+  .case__rail {
+    position: static;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .9rem 1.25rem;
+  }
+  .case__main { padding: 1.5rem 1.25rem; border-left: 0; }
+  .timeline { padding-left: 2.25rem; }
+  .timeline::before { left: .5rem; }
+  .timeline .job::before { left: -2.25rem; }
+  .timeline .job::after { display: none; }
+  .job__year { left: -2.25rem; top: -1.35rem; }
+  .head__grid { grid-template-columns: 1fr; align-items: start; }
+  .head__meta { text-align: left; }
+  .head__num { top: -.75rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SECTION BACKGROUNDS
+   One treatment per section, each masked to a different corner so the
+   page reads with rhythm rather than one texture repeated everywhere.
+   All of them inherit --graph-ring, so they follow the theme and never
+   need a second definition. Content sits above via .shell z-index.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.section > .shell,
+.hero > .shell { position: relative; z-index: 1; }
+
+.section__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Technical grid, anchored bottom-left. */
+.bg-grid {
+  background:
+    linear-gradient(var(--graph-ring) 1px, transparent 1px) 0 0 / 100% 40px,
+    linear-gradient(90deg, var(--graph-ring) 1px, transparent 1px) 0 0 / 40px 100%;
+  -webkit-mask-image: radial-gradient(58% 62% at 4% 96%, #000, transparent 76%);
+  mask-image: radial-gradient(58% 62% at 4% 96%, #000, transparent 76%);
+}
+
+/* Dot matrix, anchored top-left. */
+.bg-dots {
+  background-image: radial-gradient(var(--graph-tick) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(52% 68% at 2% 6%, #000, transparent 74%);
+  mask-image: radial-gradient(52% 68% at 2% 6%, #000, transparent 74%);
+}
+
+/* Ledger rules, anchored right. Echoes the timeline spine. */
+.bg-rules {
+  background: repeating-linear-gradient(
+    180deg, transparent 0 43px, var(--graph-ring) 43px 44px);
+  -webkit-mask-image: linear-gradient(270deg, #000, transparent 46%);
+  mask-image: linear-gradient(270deg, #000, transparent 46%);
+}
+
+/* Diagonal hatch, anchored bottom-right. */
+.bg-hatch {
+  background: repeating-linear-gradient(
+    45deg, transparent 0 13px, var(--graph-ring) 13px 14px);
+  -webkit-mask-image: radial-gradient(56% 70% at 98% 96%, #000, transparent 72%);
+  mask-image: radial-gradient(56% 70% at 98% 96%, #000, transparent 72%);
+}
+
+/* SVG-backed fields get their strokes from currentColor. */
+.section__bg svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--graph-node);
+}
+
+.bg-figure--constellation {
+  -webkit-mask-image: radial-gradient(62% 72% at 88% 42%, #000, transparent 76%);
+  mask-image: radial-gradient(62% 72% at 88% 42%, #000, transparent 76%);
+  opacity: .5;
+}
+
+.bg-figure--converge {
+  -webkit-mask-image: radial-gradient(58% 74% at 50% 44%, #000, transparent 72%);
+  mask-image: radial-gradient(58% 74% at 50% 44%, #000, transparent 72%);
+  opacity: .45;
+}
+
+@media (max-width: 600px) {
+  /* Backgrounds are atmosphere, not content. On small screens they cost
+     more in legibility than they return, so they thin out. */
+  .section__bg { opacity: .55; }
+}
+
+/* SMIL-driven figures: the pulse traversing a graph edge and the radar
+   sweep both carry meaning, so they run by default. Neither survives a
+   reduced-motion request, and SMIL cannot read a media query itself. */
+.graph__pulse circle { fill: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .graph__pulse,
+  .radar__sweep,
+  .radar__ping,
+  .dg__packet { display: none; }
+}
+
+/* Issuer marks beside credentials. Inline so they inherit the row colour
+   and stay legible in both themes. */
+.cred__mark {
+  display: inline-flex;
+  vertical-align: -2px;
+  margin-right: .4rem;
+  color: var(--text-dim);
+}
+.cred__mark svg { width: .85rem; height: .85rem; }
+.cred li:hover .cred__mark { color: var(--accent); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   WRITING
+   Company research gets cards because each one is a destination.
+   Medium posts get dense lists because they are an index, not a
+   showcase, and 19 cards would bury the four that matter.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.pubs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
+
+.pub {
+  display: block;
+  padding: 1.4rem 1.5rem;
+  transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
+}
+.pub:hover { border-color: var(--accent); box-shadow: var(--shadow); transform: translateY(-2px); }
+
+.pub__kicker {
+  font-family: var(--font-code);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .5rem;
+}
+
+.pub h3 {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 500;
+  letter-spacing: -.02em;
+  line-height: 1.25;
+  margin-bottom: .45rem;
+  text-wrap: balance;
+}
+
+.pub__desc { font-family: var(--font-body); font-size: var(--step--1); color: var(--text-muted); max-width: 62ch; }
+
+/* Authorship is stated, never implied. Solo and team work read differently. */
+.pub__credit {
+  display: inline-block;
+  margin-top: .9rem;
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  letter-spacing: .04em;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border);
+  padding-top: .6rem;
+  width: 100%;
+}
+
+.postgroups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem 2.5rem; }
+
+.postgroup h3 {
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding-bottom: .55rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: .75rem;
+}
+
+.postgroup ul { display: grid; gap: .1rem; }
+
+.postgroup a {
+  display: block;
+  padding: .42rem 0;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  border-bottom: 1px solid transparent;
+  transition: color var(--ease);
+}
+.postgroup a:hover { color: var(--accent); }
+.postgroup a::after { content: " ↗"; font-size: .78em; opacity: .45; }
+
+/* ── Dense fact rows, replacing six prose cards ── */
+
+.facts { border-top: 1px solid var(--border); }
+
+.fact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .5rem 2rem;
+  align-items: baseline;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.fact h3 { font-size: var(--step-0); font-weight: 600; margin-bottom: .2rem; }
+.fact p { font-family: var(--font-body); font-size: var(--step--1); color: var(--text-muted); max-width: 54ch; }
+
+.fact__meta {
+  font-family: var(--font-ui);
+  font-size: .66rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+@media (max-width: 820px) {
+  .pubs, .postgroups { grid-template-columns: 1fr; }
+  .fact { grid-template-columns: 1fr; gap: .35rem; }
+  .fact__meta { order: -1; }
+}
+
+/* Conversion points placed where the reader has just been given a reason to
+   act: after the evidence, and after the code. Full-width band so it reads as
+   a deliberate pause, not another card in the grid. */
+.cta-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--grad-glow), var(--surface);
+}
+
+.cta-band__lead {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+}
+
+.cta-band__sub {
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  margin-top: .3rem;
+  max-width: 46ch;
+}
+
+.cta-band__actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+
+@media (max-width: 600px) {
+  .cta-band { padding: 1.25rem; }
+  .cta-band__actions { width: 100%; flex-direction: column; }
+  .cta-band__actions .btn { width: 100%; }
+}
+
+/* Selected work as a card grid: six items scan better in three columns than
+   as stacked rows. */
+.workgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+
+.workcard {
+  padding: 1.6rem 1.7rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--ease), box-shadow var(--ease);
+}
+.workcard:hover { border-color: var(--border-strong); box-shadow: var(--shadow); }
+.workcard h3 { font-size: var(--step-0); font-weight: 600; margin-bottom: .45rem; text-wrap: balance; }
+.workcard p { font-family: var(--font-body); font-size: var(--step--1); color: var(--text-muted); max-width: 62ch; }
+
+.workcard__meta {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-family: var(--font-ui);
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Each section title points at its machine-readable twin. */
+.head__file {
+  font-family: var(--font-code);
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: .22rem .45rem;
+  vertical-align: middle;
+  margin-left: .6rem;
+  white-space: nowrap;
+  transition: color var(--ease), border-color var(--ease);
+}
+.head__file:hover { color: var(--accent); border-color: var(--accent); }
+
+@media (max-width: 960px) { .workgrid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .workgrid { grid-template-columns: 1fr; } .head__file { display: none; } }
+
+/* ═══════════════════════════════════════════════════════════════════
+   CASE REFERENCE, FAQ, ABOUT
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Technical reference line above each case title. Reads as a document
+   identifier, which is what it is. */
+.case__ref {
+  font-family: var(--font-code);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .5rem;
+}
+
+/* ── FAQ: answers live in the DOM, open or closed, so answer engines and
+      screen readers get them either way. ── */
+.faqs { border-top: 1px solid var(--border); }
+
+.faq { border-bottom: 1px solid var(--border); }
+
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.15rem 0;
+}
+.faq summary::-webkit-details-marker { display: none; }
+
+.faq summary h3 {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 500;
+  letter-spacing: -.02em;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.faq summary::after {
+  content: "+";
+  font-family: var(--font-ui);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.faq[open] summary::after { content: "\2013"; }
+.faq summary:hover h3 { color: var(--accent); }
+
+.faq > p {
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  color: var(--text-muted);
+  max-width: 68ch;
+  padding-bottom: 1.35rem;
+}
+
+/* ── About ── */
+
+.about { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 3rem; }
+
+.about__body p {
+  font-family: var(--font-body);
+  font-size: var(--step-1);
+  color: var(--text-muted);
+  max-width: 64ch;
+  margin-bottom: 1.15rem;
+}
+.about__body p:last-child { margin-bottom: 0; }
+
+.about__side {
+  border-left: 1px solid var(--border);
+  padding-left: 2rem;
+}
+
+.about__side h3 {
+  font-family: var(--font-ui);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--text-dim);
+  padding-bottom: .7rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.1rem;
+}
+
+.brings dt {
+  font-size: var(--step-0);
+  font-weight: 600;
+  margin-bottom: .2rem;
+}
+.brings dd {
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  max-width: 46ch;
+}
+.brings dd:last-child { margin-bottom: 0; }
+
+/* Converging rays behind Contact, as a CSS pattern rather than inline SVG. */
+.bg-converge {
+  background:
+    repeating-conic-gradient(from 0deg at 50% 45%,
+      var(--graph-ring) 0deg 0.35deg, transparent 0.35deg 15deg);
+  -webkit-mask-image: radial-gradient(52% 66% at 50% 45%, #000, transparent 72%);
+  mask-image: radial-gradient(52% 66% at 50% 45%, #000, transparent 72%);
+  opacity: .8;
+}
+
+@media (max-width: 960px) {
+  .about { grid-template-columns: 1fr; gap: 2rem; }
+  .about__side { border-left: 0; border-top: 1px solid var(--border); padding-left: 0; padding-top: 1.5rem; }
+}
+
+/* Employer mark in the case rail. Same per-brand plate logic as Experience:
+   the Redhunt artwork is dark ink, the Saptang artwork is the light version. */
+.rail__logo {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius);
+  padding: .35rem .6rem;
+  margin-top: .1rem;
+}
+.rail__logo--light { background: #f4f5f7; border: 1px solid var(--border); }
+.rail__logo--dark  { background: #1b222c; border: 1px solid var(--border); }
+.rail__logo img { width: auto; height: 1.1rem; object-fit: contain; }
+
+/* Publisher mark beside the group label, so the Medium archive is
+   identifiable at a glance rather than by heading text alone. */
+.subhead--brand { display: flex; align-items: center; gap: .5rem; }
+.subhead__mark { display: inline-flex; color: var(--text-dim); }
+.subhead__mark svg { width: 1rem; height: 1rem; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   NAVIGATION
+   Reading progress, a condensed state once you leave the hero, and a
+   sliding indicator that tracks the active section.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.scrollrail {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 2px;
+  z-index: 120;
+  pointer-events: none;
+  background: transparent;
+}
+.scrollrail span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--grad-accent);
+  transform-origin: left center;
+}
+
+.topbar { transition: height var(--ease), background var(--ease), box-shadow var(--ease); }
+
+/* Condensed once the hero is behind you: shorter bar, stronger separation. */
+.topbar.is-stuck {
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  box-shadow: 0 1px 0 var(--border), 0 6px 24px -12px rgba(0, 0, 0, .3);
+}
+.topbar.is-stuck .topbar__inner { height: 3.4rem; }
+.topbar__inner { transition: height var(--ease); }
+
+/* Sliding indicator. A single element that moves, rather than a background
+   appearing and disappearing on each link. */
+.topbar__nav { position: relative; }
+
+.topbar__nav .navpill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  transition: transform var(--ease), width var(--ease), opacity var(--ease);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.topbar__nav a { position: relative; z-index: 1; }
+.topbar__nav a.active { color: var(--accent); background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  .topbar__nav .navpill { transition: none; }
+}
+
+/* Mobile strip inherits the same active treatment. */
+.subnav a.active { color: var(--accent); background: var(--accent-soft); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   BRAND MARK, FOOTER SIGNATURE, CAPABILITY STRIP
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* The rabbit replaces the HM initials. Inlined so it inherits currentColor
+   and works in both themes without a second asset. */
+.brand__mark {
+  background: var(--grad-accent);
+  overflow: hidden;
+}
+.brand__mark .rabbit {
+  width: 68%;
+  height: 68%;
+  color: var(--accent-on);
+}
+
+/* ── Footer signature: ASCII mark above a typewriter wordmark ── */
+
+.footer__sig {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+  padding-top: 2.5rem;
+  overflow: hidden;
+}
+
+.footer__ascii {
+  font-family: var(--font-code);
+  font-size: clamp(.42rem, 1.1vw, .68rem);
+  /* Tight leading: the art is a silhouette traced from the logo, so the rows
+     need to close up vertically or the shape reads as texture, not a rabbit. */
+  line-height: .92;
+  letter-spacing: .04em;
+  color: var(--text);
+  opacity: .28;
+  white-space: pre;
+  margin: 0;
+  user-select: none;
+}
+
+.footer__wordmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .12em;
+  font-family: var(--font-code);
+  font-size: clamp(1.4rem, 5.5vw, 3.6rem);
+  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1;
+  color: var(--text);
+  opacity: .5;
+  white-space: nowrap;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Block caret, the way a terminal draws one. */
+.tw__caret {
+  display: inline-block;
+  width: .52em;
+  height: .95em;
+  background: var(--accent);
+  translate: 0 .08em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tw__caret { animation: caret 1.05s steps(1) infinite; }
+}
+@keyframes caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+/* ── Disciplines marquee, running the opposite way to the tool strip so the
+      two never read as the same component ── */
+
+.capstrip {
+  padding-block: 2.5rem 1rem;
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.capstrip__label {
+  font-family: var(--font-code);
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 1.1rem;
+}
+
+.capstrip__viewport { display: flex; width: max-content; }
+
+.capstrip__track {
+  display: flex;
+  align-items: center;
+  animation: capstrip-scroll 58s linear infinite;
+}
+
+/* The disciplines strip never stops. Hover highlights a term without
+   halting the scroll, so the section always reads as live. */
+
+@keyframes capstrip-scroll {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capstrip__track { animation: none; }
+  .capstrip { overflow-x: auto; scrollbar-width: none; }
+  .capstrip::-webkit-scrollbar { display: none; }
+}
+
+.capstrip__item {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.4vw, 1.9rem);
+  font-weight: 500;
+  letter-spacing: -.03em;
+  color: var(--text);
+  opacity: .32;
+  white-space: nowrap;
+  padding-inline: 1.1rem;
+  transition: opacity var(--ease), color var(--ease);
+}
+.capstrip__item:hover { opacity: 1; color: var(--accent); }
+
+/* Interpunct between terms, drawn rather than typed so it never wraps. */
+.capstrip__item::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: .5;
+  margin-left: 1.35rem;
+  vertical-align: middle;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   INTERACTIVE HERO GRAPH
+   Nine typed entities from real investigations. Hovering or focusing a
+   node states what the entity is and its role in the pivot. It carries
+   no numbers: the figures live in the proof strip and case studies,
+   where they are attributable.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.graphwrap { position: relative; }
+
+.gnode { cursor: pointer; }
+.gnode__hit { fill: transparent; }
+.gnode:focus { outline: none; }
+.gnode:focus-visible .gn { stroke: var(--accent); stroke-width: 2.4; }
+
+.gn {
+  fill: var(--bg);
+  stroke: var(--graph-node);
+  stroke-width: 1.5;
+  transition: r 160ms var(--ease), stroke 160ms var(--ease), fill 160ms var(--ease);
+}
+.gn--root { fill: var(--accent); stroke: var(--accent); }
+
+.gnode:hover .gn,
+.gnode:focus-visible .gn { stroke: var(--accent); r: 8; }
+.gnode:hover .gn--root,
+.gnode:focus-visible .gn--root { r: 11; }
+
+/* Dim the rest of the graph while one entity is being read. */
+.graphwrap.is-probing .graph__edges path,
+.graphwrap.is-probing .graph__surface { opacity: .35; transition: opacity 160ms; }
+
+.gcard {
+  position: absolute;
+  z-index: 3;
+  width: 15rem;
+  padding: .8rem .9rem;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 14px));
+  animation: gcard-in 140ms var(--ease);
+}
+.gcard[hidden] { display: none; }
+
+@keyframes gcard-in { from { opacity: 0; transform: translate(-50%, calc(-100% - 6px)); } }
+
+.gcard__type {
+  font-family: var(--font-code);
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .3rem;
+}
+.gcard__desc { font-size: .82rem; line-height: 1.5; color: var(--text-muted); }
+
+.graph__note { color: var(--text-dim); font-size: .78rem; }
+
+.contact--4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1100px) { .contact--4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .contact--4 { grid-template-columns: 1fr; } }
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESEARCH FILTER, TOOL USES, SKILL LINKS, CONTACT SIGNAL
+   ═══════════════════════════════════════════════════════════════════ */
+
+.filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .5rem .85rem;
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background: var(--surface);
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--ease), border-color var(--ease), background var(--ease);
+}
+.filter:hover { color: var(--text); border-color: var(--border-strong); }
+.filter span { font-family: var(--font-code); font-size: .78rem; color: var(--text-dim); }
+
+.filter.is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-on);
+}
+.filter.is-on span { color: var(--accent-on); opacity: .75; }
+
+/* Filtering hides, it does not delete: everything stays in the DOM so
+   crawlers and answer engines still see all 23 items. */
+[data-cat].is-out { display: none; }
+
+/* Tool purpose, revealed on hover. Present in the DOM either way, so the
+   information is not locked behind a pointer. */
+.toolstrip__item { position: relative; }
+
+.toolstrip__use {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + .5rem);
+  translate: -50% 0;
+  white-space: nowrap;
+  font-family: var(--font-code);
+  font-size: .78rem;
+  color: var(--accent-on);
+  background: var(--text);
+  padding: .3rem .55rem;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--ease), translate var(--ease);
+}
+.toolstrip__item:hover .toolstrip__use { opacity: 1; translate: -50% -2px; }
+
+/* Skills that point at the evidence proving them. */
+.skill-link { display: grid; gap: .05rem; }
+.skill-link strong { transition: color var(--ease); }
+.skill-link:hover strong { color: var(--accent); }
+.skill-link strong::after {
+  content: " \2197";
+  font-size: .8em;
+  color: var(--accent);
+  opacity: .55;
+}
+
+/* Contact: the four endpoints the graph resolves into. */
+#contact .contact__card { position: relative; }
+#contact .contact__icon { transition: background var(--ease), color var(--ease); }
+#contact .contact__card:hover .contact__icon { background: var(--accent); color: var(--accent-on); }
+
+/* LinkedIn link in About, placed where the reader has just finished the
+   prose and is most likely to want to reach out. */
+.profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  margin-top: 1.6rem;
+  padding: .8rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
+}
+.profile-link:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.profile-link__mark {
+  display: inline-flex;
+  width: 2.1rem;
+  height: 2.1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.profile-link__mark svg { width: 1.15rem; height: 1.15rem; fill: currentColor; }
+
+.profile-link__text { display: grid; gap: .05rem; }
+.profile-link__text strong { font-size: var(--step-0); font-weight: 600; }
+.profile-link__text span { font-family: var(--font-code); font-size: .78rem; color: var(--text-dim); }
+
+.profile-link__go { margin-left: .3rem; color: var(--accent); font-size: .9rem; }
+
+/* Positioning hierarchy. CTI reads as the core; everything else is stated as
+   where that expertise gets applied, rather than as a flat list of titles. */
+.stack {
+  border-top: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+
+.stack__row {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: .35rem 2rem;
+  align-items: baseline;
+  padding: .95rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.stack__k {
+  font-family: var(--font-code);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.stack__v { font-size: var(--step-0); color: var(--text-muted); text-wrap: pretty; }
+.stack__v strong { color: var(--accent); font-weight: 600; }
+
+@media (max-width: 700px) {
+  .stack__row { grid-template-columns: 1fr; gap: .2rem; }
+}
+
+/* Evidence notation. Every figure states how it is known, so a sceptical
+   reader never has to guess whether a number was counted or estimated. */
+.ev {
+  display: inline-block;
+  font-family: var(--font-code);
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: .1rem .4rem;
+  border-radius: 3px;
+  margin-right: .5rem;
+  vertical-align: 1px;
+  border: 1px solid transparent;
+}
+.ev--m { background: var(--accent-soft); color: var(--accent); }
+.ev--o { background: var(--surface-2); color: var(--text-muted); border-color: var(--border); }
+.ev--e { background: transparent; color: var(--text-dim); border-color: var(--border-strong); border-style: dashed; }
+
+/* Discipline line: the scannable version of the positioning, directly under
+   the headline, before any prose. */
+.hero__disciplines {
+  font-family: var(--font-code);
+  font-size: .88rem;
+  letter-spacing: .02em;
+  color: var(--text-muted);
+  margin-bottom: 1.1rem;
+  text-wrap: pretty;
+}
+
+/* The tool strip now sits after the evidence, so it reads as supporting
+   detail rather than as the first thing about the person. */
+.toolstrip { padding-block: 1.5rem 2.5rem; }
+
+/* Skills: every entry carries its own proof, so the section reads as
+   evidence rather than as a keyword list. Tools drop into a closed
+   disclosure because the tooling is the least interesting part. */
+.skillgroup__note {
+  font-family: var(--font-code);
+  font-size: .75rem;
+  color: var(--text-dim);
+  margin: -.6rem 0 1.1rem;
+}
+
+.skillgroup li strong { display: block; margin-bottom: .15rem; }
+.skillgroup li span { font-family: var(--font-body); font-size: .84rem; line-height: 1.55; }
+
+.toolbox {
+  margin-top: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.toolbox summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.4rem;
+  font-family: var(--font-ui);
+  font-size: var(--step-0);
+  font-weight: 600;
+}
+.toolbox summary::-webkit-details-marker { display: none; }
+.toolbox summary::after { content: "+"; color: var(--accent); font-size: 1.2rem; line-height: 1; }
+.toolbox[open] summary::after { content: "\2013"; }
+.toolbox summary:hover span { color: var(--accent); }
+
+.toolbox__body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem 2rem;
+  padding: 0 1.4rem 1.4rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.4rem;
+}
+
+.toolbox__body h4 {
+  font-family: var(--font-code);
+  font-size: .75rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: .4rem;
+}
+.toolbox__body p { font-size: .84rem; line-height: 1.7; color: var(--text-muted); }
+
+@media (max-width: 700px) { .toolbox__body { grid-template-columns: 1fr; } }
+
+/* Continuous investigation cycle in the hero graph. A signal leaves the
+   actor node, travels an edge, and the far node acknowledges when it
+   lands. Staggered across eight edges on a 9s loop so something is always
+   moving and nothing ever flashes in unison. */
+.gpulse { fill: var(--accent); }
+.gring  { stroke: var(--accent); stroke-width: 1.2; }
+
+/* Edges sit slightly brighter now that pulses ride them. */
+.graph__edges--confirmed path { stroke: var(--graph-solid); stroke-width: 1.25; }
+
+/* The draw-in runs once on load, then the cycle carries the motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .graph__edges--confirmed path {
+    stroke-dasharray: 170;
+    stroke-dashoffset: 170;
+    animation: draw 1.3s cubic-bezier(.22,.61,.36,1) forwards;
+  }
+  .graph__edges--confirmed path:nth-child(1) { animation-delay: .10s; }
+  .graph__edges--confirmed path:nth-child(2) { animation-delay: .20s; }
+  .graph__edges--confirmed path:nth-child(3) { animation-delay: .30s; }
+  .graph__edges--confirmed path:nth-child(4) { animation-delay: .40s; }
+  .graph__edges--confirmed path:nth-child(5) { animation-delay: .50s; }
+  .graph__edges--confirmed path:nth-child(6) { animation-delay: .62s; }
+  .graph__edges--confirmed path:nth-child(7) { animation-delay: .72s; }
+  .graph__edges--confirmed path:nth-child(8) { animation-delay: .82s; }
+
+  /* Root breathes continuously: the investigation is never finished. */
+  .gn--root { animation: rootbeat 3.6s ease-in-out 1.4s infinite; transform-origin: 200px 205px; }
+}
+
+@keyframes rootbeat {
+  0%, 100% { r: 9; }
+  50%      { r: 10.5; }
+}
+
+/* SMIL cannot read a media query, so the cycle is disabled from CSS. The
+   static graph underneath is complete on its own. */
+@media (prefers-reduced-motion: reduce) {
+  .graph__signal { display: none; }
+}
+
+/* While a node is being probed, the ambient cycle steps back so the card
+   is the only thing asking for attention. */
+.graphwrap.is-probing .graph__signal { opacity: .25; transition: opacity 160ms; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   TERMINAL CARET ON HEADINGS
+   A block cursor sits before every section title and the page H1, so
+   each heading reads as a prompt about to be answered. Drawn as a
+   pseudo-element, so no heading markup changes and screen readers
+   never announce it.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.section__title::before {
+  content: "";
+  display: inline-block;
+  width: .46em;
+  height: .70em;
+  margin-right: .28em;
+  translate: 0 -.02em;
+  background: var(--accent);
+  vertical-align: baseline;
+}
+
+/* Blink is opt-in. Under reduced motion the caret stays solid, which
+   still reads as a prompt without the flicker. */
+@media (prefers-reduced-motion: no-preference) {
+  .section__title::before { animation: caret-blink 1.06s steps(1) infinite; }
+
+  /* Offset per section so the page never blinks in unison. */
+  #about      .section__title::before { animation-delay: .13s; }
+  #case-studies .section__title::before { animation-delay: .26s; }
+  #experience .section__title::before { animation-delay: .39s; }
+  #research   .section__title::before { animation-delay: .52s; }
+  #projects   .section__title::before { animation-delay: .65s; }
+  #skills     .section__title::before { animation-delay: .78s; }
+  #faq        .section__title::before { animation-delay: .91s; }
+  #contact    .section__title::before { animation-delay: 1.04s; }
+}
+
+@keyframes caret-blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+
+/* Vendor marks that ship with their own background keep it, rather than
+   being forced onto the white plate the transparent logos need. */
+.toolstrip__item:has(img[src*="censys"]) .toolstrip__mark--img { background: transparent; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MARGINALIA
+   The outer gutters were empty. Rather than fill them with decoration,
+   they carry instruments: a measuring rule down the left that ticks on
+   the same 8px unit the spacing scale uses, and a glyph column down the
+   right built from the brand mark. Both are functional in origin — the
+   rule reads as a position scale, the glyph column as a spine — which
+   is why they can sit at very low contrast and still feel deliberate
+   rather than pasted on. They are the first thing to go when the window
+   is too narrow to hold them without crowding the text.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.marginalia {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  display: none;
+}
+/* Dark-world only. The edge instruments belong to the investigative
+   register; the light theme is off-limits and stays as it was. */
+@media (min-width: 84rem) and (min-height: 38rem) {
+  .marginalia { display: block; }
+}
+
+.marg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* Never wider than the gutter it lives in, so it cannot run off-screen
+     on a narrow desktop. */
+  width: min(12rem, calc((100vw - var(--shell)) / 2 - var(--gutter) - .25rem));
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent);
+}
+.marg--l { right: calc(50% + var(--shell) / 2 + var(--gutter)); }
+.marg--r { left:  calc(50% + var(--shell) / 2 + var(--gutter)); }
+
+/* ── Left: the rule ────────────────────────────────────────────────
+   Minor ticks on the 8px unit, major ticks every 64px. Drawn with
+   gradients so the whole instrument costs no elements. */
+.marg__rule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 1.6rem;
+  width: 2.4rem;
+  background-image:
+    repeating-linear-gradient(180deg, var(--border-strong) 0 1px, transparent 1px 8px),
+    repeating-linear-gradient(180deg, var(--border-strong) 0 1px, transparent 1px 64px);
+  background-size: .55rem 100%, 1.35rem 100%;
+  background-position: right top, right top;
+  background-repeat: repeat-y;
+  opacity: .5;
+}
+
+/* A single index mark that tracks reading position: the one live part
+   of the instrument, driven by the scroll progress custom property. */
+.marg__index {
+  position: absolute;
+  right: 1.6rem;
+  top: calc(var(--read, 0) * 100%);
+  width: 2.9rem;
+  height: 1px;
+  background: var(--accent);
+  opacity: .85;
+}
+.marg__index::after {
+  content: attr(data-read);
+  position: absolute;
+  right: 0;
+  top: .3rem;
+  font-family: var(--font-code);
+  font-size: .58rem;
+  letter-spacing: .1em;
+  color: var(--accent);
+}
+
+/* ── Right: the glyph column ───────────────────────────────────────
+   The brand mark reduced to a repeating monospace spine. Set in the
+   technical face so it reads as system output, not ornament. */
+.marg__glyphs {
+  position: absolute;
+  top: 0;
+  left: 1.6rem;
+  font-family: var(--font-code);
+  font-size: .56rem;
+  line-height: 1.25;
+  letter-spacing: .02em;
+  color: var(--text);
+  opacity: .16;
+  white-space: pre;
+  user-select: none;
+}
+
+/* Dark mode pushes the marginalia toward terminal phosphor: the rule
+   recedes, the glyph column comes forward, so the margins read as an
+   instrument panel rather than as faint print. */
+:root[data-theme="dark"] .marg__glyphs,
+:root:not([data-theme="light"]) .marg__glyphs { opacity: .2; }
+:root[data-theme="dark"] .marg__rule,
+:root:not([data-theme="light"]) .marg__rule { opacity: .38; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   CONSOLE
+   Box-drawing and block shading to show the shape of a pivot. Built on
+   the theme tokens, so it is a dark panel in dark mode and a paper
+   panel in light, rather than a black box floating in a white page.
+   Every figure in it is computable from the source workbook.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.console {
+  margin: 2rem 0 0;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.console__bar {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .7rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+.console__dots { color: var(--text-dim); letter-spacing: .18em; font-size: .7rem; }
+
+.console__title {
+  font-family: var(--font-code);
+  font-size: .78rem;
+  color: var(--text-muted);
+}
+
+.console__tag {
+  margin-left: auto;
+  font-family: var(--font-code);
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: .1rem .4rem;
+}
+
+.console__body {
+  margin: 0;
+  padding: 1.25rem 1.1rem;
+  overflow-x: auto;
+  font-family: var(--font-code);
+  font-size: clamp(9px, .82vw, 12.5px);
+  line-height: 1.5;
+  color: var(--text-muted);
+  white-space: pre;
+}
+.console__body code { font: inherit; background: none; border: 0; padding: 0; }
+
+/* Three shading depths carry hierarchy: seed, expansion, inferred. */
+.c-hi  { color: var(--accent); }
+.c-mid { color: color-mix(in srgb, var(--accent) 55%, var(--text-dim)); }
+.c-low { color: var(--text-dim); }
+.c-num { color: var(--text); font-weight: 600; }
+
+@media (max-width: 800px) {
+  .console__body { font-size: 8.5px; padding: 1rem .8rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   THE DARK WORLD
+   Everything below is scoped to [data-dark], a flag the head script
+   resolves once before paint. Light mode never matches this selector,
+   so none of it can reach the light theme — which is the whole point:
+   the two themes are different visual worlds over identical content,
+   not one palette flipped.
+
+   The register is investigative rather than "dark mode": near-black
+   ground, off-white type, and a single muted ember accent used at low
+   frequency. Blue is retained only inside the case-study diagrams,
+   where it carries meaning (flow, confirmed result) that a warm accent
+   would confuse with alarm.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root[data-dark] {
+  --bg:            #0a0b0d;
+  --surface:       #101215;
+  --surface-2:     #15181c;
+  --text:          #ecedf0;
+  --text-muted:    #a2a8b4;
+  --text-dim:      #767d8b;
+  --border:        #21252b;
+  --border-strong: #333942;
+
+  /* Ember: warm, low-saturation, closer to a signal lamp than to neon. */
+  --accent:        #e04640;
+  --accent-hover:  #f2635c;
+  --accent-soft:   rgba(156, 0, 0, .12);
+  --accent-on:     #0a0b0d;
+
+  --shadow:    0 1px 2px rgba(0, 0, 0, .5), 0 18px 46px rgba(0, 0, 0, .55);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .45);
+  --grain: .05;
+}
+
+/* The base plate: near-black, with two very slow atmospheric pools that
+   keep large empty areas from reading as flat black. */
+:root[data-dark] body { background-color: var(--bg); }
+
+/* The atmosphere lives on its own fixed layer rather than on the body as
+   background-attachment: fixed. Identical picture, but a compositor layer
+   that never repaints on scroll instead of a full-viewport repaint every
+   frame — which is what made scrolling expensive. */
+/* Atmosphere and scanlines on one layer. They were two fixed
+   full-viewport elements composited independently for what reads as a
+   single ground; stacking six such layers is what pushed dark-mode
+   scrolling to ~30fps. One element, three background images, one pass. */
+:root[data-dark] body > .atmos {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, .014) 0 1px, transparent 1px 3px),
+    radial-gradient(58% 42% at 78% 8%,  rgba(156, 0, 0, .07), transparent 70%),
+    radial-gradient(50% 45% at 12% 62%, rgba(96, 124, 168, .06), transparent 72%);
+}
+
+/* Grain sits heavier here. On a near-black ground a little tooth is what
+   separates "cinematic" from "switched off". */
+/* No blend mode: compositing a full-viewport overlay every frame cost
+   far more than the small tonal gain it bought. Opacity alone. */
+:root[data-dark] body::after { opacity: .06; }
+
+/* ── Chrome quietens ───────────────────────────────────────────────
+   The brief wants navigation to recede so the work dominates: the bar
+   loses its plate and keeps only a hairline. */
+:root[data-dark] .topbar {
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+:root[data-dark] .topbar.is-stuck { box-shadow: 0 1px 0 rgba(0, 0, 0, .6); }
+
+/* Cards stop being raised panels and become plates cut out of the dark. */
+:root[data-dark] .card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .022), transparent 40%), var(--surface);
+  border-color: var(--border);
+}
+:root[data-dark] .card:hover { border-color: var(--border-strong); }
+
+/* ── The register reads as a case-file header ──────────────────────
+   Same component, different voice: the identifier takes the ember, the
+   rule dims, and the index gains a status lamp. */
+:root[data-dark] .register__id { color: var(--accent); }
+:root[data-dark] .register__rule { border-bottom-color: var(--border); }
+:root[data-dark] .register__idx::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: .6rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+  vertical-align: middle;
+  animation: lamp 3.4s ease-in-out infinite;
+}
+@keyframes lamp { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  [data-dark] .register__idx::after { animation: none; opacity: .8; }
+}
+
+/* ── Marginalia becomes case-file edge art ─────────────────────────
+   The measuring rule stays (it is functional), but the glyph column
+   gains a dossier header and the index mark reads as a live tracker. */
+:root[data-dark] .marg__glyphs { color: var(--accent); opacity: .13; }
+:root[data-dark] .marg__rule { opacity: .32; }
+:root[data-dark] .marg__index { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+:root[data-dark] .marg__index::after { color: var(--accent); }
+
+/* ── Type: editorial weight, technical detail ──────────────────────
+   Headlines get a touch more optical tightening on the dark ground,
+   where light type on dark always reads slightly looser. */
+:root[data-dark] .section__title,
+:root[data-dark] .hero__title { letter-spacing: -.035em; }
+:root[data-dark] .head__num { opacity: .06; }
+
+/* ── Field art recedes ─────────────────────────────────────────────
+   The decorative section backgrounds were tuned for a light ground and
+   read as smears on black. Pull them back and let the atmosphere and
+   grain do the work instead. */
+:root[data-dark] .section__bg { opacity: .5; }
+
+/* ── Diagrams keep their blue ──────────────────────────────────────
+   Flow and confirmed-result carry meaning in the case studies. An ember
+   packet would read as an alert, so the analytical palette is preserved
+   and only the plate around it goes dark. */
+:root[data-dark] .diagram { background: #0d0f12; border-color: var(--border); }
+:root[data-dark] .diagram svg { color: #6f9bff; }
+:root[data-dark] .dg__box, [data-dark] .dg__chip,
+:root[data-dark] .dg__stack rect, [data-dark] .dg__seed { fill: #14171c; }
+:root[data-dark] .dg__band { fill: #14171c; }
+:root[data-dark] .dg__band--hi { fill: rgba(111, 155, 255, .1); }
+
+/* ── Selection and focus take the ember ────────────────────────────── */
+:root[data-dark] ::selection { background: rgba(156, 0, 0, .28); color: #fff; }
+
+/* The primary button still carried the analytical blue gradient from the
+   old dark tokens. In the dark world it takes the ember, flat rather than
+   gradient — a lamp, not a highlight. */
+:root[data-dark] {
+  --grad-accent: linear-gradient(135deg, #e04640 0%, #7a0000 100%);
+  --grad-glow:   radial-gradient(closest-side, rgba(156, 0, 0, .16), transparent 70%);
+  --grad-rule:   linear-gradient(90deg, transparent, var(--border-strong) 25%, var(--accent) 50%, var(--border-strong) 75%, transparent);
+}
+:root[data-dark] .btn--primary { color: #fff; }
+:root[data-dark] .navpill { background: rgba(156, 0, 0, .14); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   DARK WORLD — ARTIFACTS
+   Case files, operator portraits, terminal fragments and screen
+   texture. All of it is injected by JS, carries aria-hidden, and is
+   display:none unless [data-dark] matches — so the light theme sees
+   nothing, and a text extractor reading the page never picks up a
+   column of hashes as if it were content.
+
+   The rule these follow: nothing here invents information. Every field
+   in a dossier is read out of the case study it sits on, and the
+   redacted line hides real text and gives it back on interaction. A
+   fabricated "84% CONFIDENCE" bar would look the part and quietly
+   undermine a portfolio whose entire argument is verified numbers.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Case files and the terminal fragment work in both themes — one as a
+   paper file, one as printed rule. Scanlines do not: on a white ground
+   they read as a screen fault rather than as texture, so .crt is the one
+   layer that stays inside the dark world. */
+:root {
+  --dsr-plate: #ffffff;
+  --dsr-tint:  rgba(20, 99, 255, .05);
+  --dsr-bar:   rgba(20, 99, 255, .07);
+  --dsr-mug:   #f4f5f7;
+  --dsr-bar-a: #dfe2e8;
+  --dsr-bar-b: #e8eaef;
+}
+:root[data-dark] {
+  --dsr-plate: #0d0f12;
+  --dsr-tint:  rgba(156, 0, 0, .06);
+  --dsr-bar:   rgba(156, 0, 0, .08);
+  --dsr-mug:   #0a0b0d;
+  --dsr-bar-a: #2a2f36;
+  --dsr-bar-b: #22262c;
+}
+
+/* Case files and the archive fragment belong to the investigative
+   register, so they stay inside the dark world along with the scanlines.
+   Light keeps the notebook language — scribbles, margin notes, the
+   measuring rule — and none of the dossier furniture. */
+.dossier,
+.asciibreak { display: none; }
+
+:root[data-dark] .dossier    { display: block; }
+:root[data-dark] .asciibreak { display: block; }
+
+/* .crt is retired: its scanlines now ride on .atmos above. */
+.crt { display: none !important; }
+
+/* ── Case file ─────────────────────────────────────────────────────── */
+
+.dossier {
+  margin-top: 1.5rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgba(156, 0, 0, .05), transparent 42%),
+    #0d0f12;
+  font-family: var(--font-code);
+  font-size: .68rem;
+  line-height: 1.75;
+  letter-spacing: .04em;
+  overflow: hidden;
+}
+
+.dossier__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .45rem .8rem;
+  border-bottom: 1px solid var(--border-strong);
+  background: rgba(156, 0, 0, .07);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+}
+
+.dossier__state { display: inline-flex; align-items: center; gap: .45rem; color: var(--text-dim); }
+.dossier__state::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+.dossier__body { display: flex; gap: .9rem; padding: .8rem; align-items: flex-start; }
+
+/* Operator portrait: a head-and-shoulders mass resolved as scan bars,
+   which is what an identity looks like when you only have fragments of
+   it. Abstract on purpose — no stock hacker iconography. */
+.dossier__mug {
+  flex: 0 0 auto;
+  width: 54px;
+  height: 62px;
+  border: 1px solid var(--border-strong);
+  border-radius: 2px;
+  background: var(--dsr-mug);
+  color: var(--accent);
+}
+.dossier__mug svg { width: 100%; height: 100%; display: block; }
+
+.dossier__rows { flex: 1 1 auto; min-width: 0; display: grid; gap: .05rem; }
+.dossier__row { display: grid; grid-template-columns: 6.2rem minmax(0, 1fr); gap: .6rem; }
+.dossier__k { color: var(--text-dim); text-transform: uppercase; letter-spacing: .12em; }
+.dossier__v { color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; }
+
+/* Redaction that gives the text back. The content is real, so hiding it
+   permanently would be theatre; revealing it on hover or focus makes the
+   bar an interaction rather than an ornament. */
+.dossier__redact {
+  position: relative;
+  color: transparent;
+  cursor: help;
+  border-radius: 2px;
+  outline: none;
+}
+.dossier__redact::before {
+  content: "";
+  position: absolute;
+  inset: .12em -.2em;
+  background: repeating-linear-gradient(90deg, var(--dsr-bar-a) 0 6px, var(--dsr-bar-b) 6px 12px);
+  border-radius: 2px;
+  transition: opacity .28s var(--ease, ease);
+}
+.dossier__redact:hover,
+.dossier__redact:focus-visible { color: var(--text-muted); }
+.dossier__redact:hover::before,
+.dossier__redact:focus-visible::before { opacity: 0; }
+
+/* ── Terminal fragment between sections ────────────────────────────── */
+
+.asciibreak {
+  font-family: var(--font-code);
+  font-size: .58rem;
+  line-height: 1.35;
+  letter-spacing: .02em;
+  color: var(--accent);
+  opacity: .26;
+  white-space: pre;
+  user-select: none;
+  overflow: hidden;
+  margin: 0 auto;
+  padding-block: 1.5rem;
+  text-align: center;
+}
+
+/* ── Screen texture ────────────────────────────────────────────────
+   Scanlines at a weight you feel rather than see, plus one slow sweep.
+   Sits under the grain and above nothing else, so text is never dimmed. */
+.crt {
+  position: fixed;
+  inset: 0;
+  z-index: 89;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, .014) 0 1px,
+    transparent 1px 3px
+  );
+}
+/* The sweep was a large translating gradient running forever, which kept
+   the compositor busy for an effect almost nobody would consciously see.
+   The scanlines carry the texture on their own, at zero running cost. */
+
+/* Two reds, deliberately. The sampled investigation-board red (#9c0000)
+   is beautiful on a wall and unreadable as body text: it lands at 2.5:1
+   on this ground. So the deep red does the graphic work — button fills,
+   lamps, connector strings, washes — and a lifted red carries anything
+   the eye has to actually read, at 4.8:1. */
+:root[data-dark] {
+  --accent-deep: #9c0000;
+  --grad-accent: linear-gradient(135deg, #b31217 0%, #7a0000 100%);
+}
+:root[data-dark] .register__idx::after,
+:root[data-dark] .dossier__state::before {
+  background: var(--accent-deep);
+  box-shadow: 0 0 7px rgba(156, 0, 0, .9);
+}
+
+/* ── Connector strings ─────────────────────────────────────────────
+   The one motif taken from the reference, and taken as vocabulary
+   rather than artwork: a detective board pins evidence and runs string
+   between the pieces. Here the strings run down the case-study stack,
+   linking one file to the next. Drawn, not an image. */
+/* Both themes. Light takes the blue ink at lower weight so the strings
+   read as pencil on paper; dark keeps the deep investigative red. */
+.strings {
+  display: block;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.strings svg { width: 100%; height: 100%; }
+.strings path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.1;
+  opacity: .5;
+}
+.strings circle { fill: var(--accent); opacity: .7; }
+:root[data-dark] .strings path { stroke: var(--accent-deep); }
+:root[data-dark] .strings circle { fill: var(--accent-deep); opacity: .8; }
+:root[data-dark] #case-studies .shell { position: relative; z-index: 1; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   DARK WORLD — MARGIN HAND
+   A small set of drawn marks: the things you scrawl on a page you are
+   thinking through. Circled emphasis, an arrow, a bracket, a spark.
+
+   They are drawn rather than typed, and drawn imperfectly on purpose —
+   each path is generated with jitter so no two strokes are identical
+   and nothing sits perfectly level. That imperfection is the whole
+   point: it is the one layer of this site that is meant to look like a
+   person made it in the margin rather than a system rendering it.
+
+   Used sparingly, and only in dark. Six marks on the page, not sixty.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.atmos { display: none; }
+
+/* Both themes now. Light takes the blue ink and sits lighter, so the
+   marks read as notebook pencil beside the content; dark takes the deep
+   investigative red. Same strokes, two inks. */
+.hand {
+  display: block;
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  color: var(--accent);
+}
+:root[data-dark] .hand { color: var(--accent-deep); }
+.hand svg { width: 100%; height: 100%; overflow: visible; }
+.hand path,
+.hand ellipse,
+.hand line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .55;
+}
+
+:root[data-dark] .hand path,
+:root[data-dark] .hand ellipse,
+:root[data-dark] .hand line { opacity: .55; }
+
+/* The stroke draws itself the first time it comes into view, the way a
+   mark is actually made — rather than fading in as a finished object. */
+.hand.is-drawn path,
+.hand.is-drawn ellipse {
+  animation: hand-draw 1.1s ease-out both;
+}
+@keyframes hand-draw {
+  from { stroke-dashoffset: var(--len, 400); }
+  to   { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hand.is-drawn path,
+  .hand.is-drawn ellipse { animation: none; stroke-dashoffset: 0; }
+}
+
+/* A jotted note. No handwriting face is loaded, so rather than fake one
+   badly this leans on the technical face set small and off-axis, which
+   reads as something added in the margin after the fact. */
+.handnote {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  font-family: var(--font-code);
+  font-size: .6rem;
+  letter-spacing: .08em;
+  line-height: 1.5;
+  color: var(--accent);
+  opacity: .62;
+  white-space: nowrap;
+  transform: rotate(-3.5deg);
+}
+
+/* 79.99rem, not 80rem: the script builds these at min-width 80rem, and a
+   max-width of the same value matches at exactly 1280px too — so at that
+   one width the marks were created and then hidden by their own gate. */
+@media (max-width: 79.99rem) {
+  .hand,
+  .handnote { display: none; }
+}
+
+/* Narrow screens: the fixed 6.2rem label column left roughly 130px for
+   values, so a title like "PhishSquat — Phishing Domain Intelligence
+   Platform" broke over four lines against its own label. Stack the label
+   above the value and let the portrait sit beside the whole block, which
+   gives the value the full column width. */
+@media (max-width: 30rem) {
+  :root[data-dark] .dossier { font-size: .64rem; }
+  :root[data-dark] .dossier__body { gap: .7rem; padding: .7rem; }
+  :root[data-dark] .dossier__mug { width: 42px; height: 50px; }
+  :root[data-dark] .dossier__row {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-bottom: .35rem;
+  }
+  :root[data-dark] .dossier__k { font-size: .56rem; opacity: .8; }
+  :root[data-dark] .dossier__v { white-space: normal; }
+
+  /* The terminal fragment is 48 characters wide; below this width it has
+     to shrink or it stops reading as a box. */
+  :root[data-dark] .asciibreak { font-size: .46rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   INVESTIGATION BOARD  (dark only, one section)
+   Pinned documents, redaction bars and connector string — drawn from
+   scratch as SVG rather than lifted from anyone's artwork. It sits
+   behind the case studies at low opacity, because that is the one part
+   of the site the metaphor is actually true of: those four files really
+   are an investigation, and they really do connect.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Both themes. The pinned documents are drawn in an ink token rather
+   than a fixed light paper colour, so light gets dark type on a pale
+   card and dark gets the reverse — the same board under two lights. */
+.board {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: .85;
+}
+.board svg { width: 100%; height: 100%; }
+
+:root { --bd-ink: #0f1216; --bd-doc-op: .035; --bd-line-op: .06; --bd-redact-op: .1; }
+:root[data-dark] { --bd-ink: #f2f2f0; --bd-doc-op: .045; --bd-line-op: .05; --bd-redact-op: .085; }
+
+.board .bd-doc    { fill: var(--bd-ink); opacity: var(--bd-doc-op); }
+.board .bd-edge   { fill: none; stroke: var(--bd-ink); stroke-width: 1; opacity: var(--bd-line-op); }
+.board .bd-line   { stroke: var(--bd-ink); stroke-width: 2; opacity: var(--bd-line-op); }
+.board .bd-redact { fill: var(--bd-ink); opacity: var(--bd-redact-op); }
+.board .bd-string { fill: none; stroke: var(--accent); stroke-width: 1; opacity: .26; }
+.board .bd-pin    { fill: var(--accent); opacity: .45; }
+:root[data-dark] .board .bd-string { stroke: var(--accent-deep); opacity: .3; }
+:root[data-dark] .board .bd-pin    { fill: var(--accent-deep); opacity: .5; }
+
+@media (max-width: 60rem) {
+  .board { opacity: .5; }
+}
+
+/* The topbar glyphs are stroke-drawn, so a solid mark like LinkedIn needs
+   the opposite treatment or it renders as an outline of itself. */
+.icon-btn--fill svg { fill: currentColor; stroke: none; }
+
+/* Below the width where the nav collapses, the two contact glyphs are
+   redundant: the same links sit in the contact section and the footer,
+   and the row needs the space for the primary action. */
+@media (max-width: 30rem) {
+  .topbar__end .icon-btn:not(#theme-toggle) { display: none; }
+}
+
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   PORTRAIT
+   The exported avatar is monochrome line art, so its two colours are
+   bound to tokens rather than baked in. Light keeps the drawing as it
+   was made — dark ink on paper. Dark inverts the pair, so the portrait
+   reads as a light drawing on the near-black ground instead of a white
+   card punched into it.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root { --av-ink: #14181d; --av-paper: #ffffff; }
+:root[data-dark] { --av-ink: #e8e9ec; --av-paper: #14181d; }
+
+.portrait {
+  width: clamp(7rem, 12vw, 9.5rem);
+  margin-bottom: 1.4rem;
+  position: relative;
+}
+.portrait .avatar { width: 100%; height: auto; display: block; }
+
+/* A drawn ring behind the figure, so the portrait sits on something and
+   does not float loose in the column. */
+.portrait::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 8%;
+  width: 82%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--accent-soft);
+  z-index: -1;
+}
+
+@media (max-width: 68rem) { .portrait { margin-inline: auto; } }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOTION LANGUAGE
+   Three additions that were missing, all built from the scale above.
+
+   The rule everything here follows: motion carries meaning or it does
+   not ship. A section transition tells you a section began. A cursor
+   response tells you the field is live. Nothing moves to prove the
+   site can move — which is why there is no glitch, shake or flash
+   anywhere in this block.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Section transition ────────────────────────────────────────────
+   The register rule measures itself out from the identifier when its
+   section arrives. It is the one moment that says "a new section
+   started", so it is the one thing given a long duration. */
+@media (prefers-reduced-motion: no-preference) {
+  .register__rule::after { transform-origin: left center; transform: scaleX(0); }
+  .register.is-in .register__rule::after {
+    transform: scaleX(1);
+    transition: transform var(--t-4) var(--ease-out);
   }
 
-  body {
-    background: white;
-    color: black;
+  .register__idx { opacity: 0; }
+  .register.is-in .register__idx {
+    opacity: 1;
+    transition: opacity var(--t-3) var(--ease-out) 260ms;
   }
 }
+
+/* ── Cursor response ───────────────────────────────────────────────
+   The hero graph drifts fractionally against the pointer. The amount is
+   deliberately below the threshold of "an effect": it should register as
+   the field being alive, not as the page reacting to you. Driven by a
+   custom property so the work happens on the compositor. */
+/* Applied to the graph wrapper, not to .hero__visual: GSAP owns that
+   element's transform for the scroll parallax, and a CSS transform on the
+   same node is simply overwritten. Two systems, two elements. */
+.graphwrap {
+  transform: translate3d(calc(var(--px, 0) * 10px), calc(var(--py, 0) * 8px), 0);
+  transition: transform 900ms var(--ease-soft);
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .graphwrap { transform: none; transition: none; }
+}
+
+/* ── Arrival ───────────────────────────────────────────────────────
+   Case cards and project cards lift very slightly toward the cursor,
+   using the standard duration so the whole page shares one feel. */
+.case.card, .project.card {
+  transition:
+    border-color var(--t-2) var(--ease-inout),
+    box-shadow   var(--t-2) var(--ease-inout),
+    transform    var(--t-2) var(--ease-out);
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .project.card:hover { transform: translateY(-3px); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CASE FIELDS
+   The section carries one grid, which made four different investigations
+   sit on identical ground. Each case now has its own field, and each one
+   echoes the form of that case's diagram — so the background is a quiet
+   restatement of the argument rather than texture picked at random.
+
+   Drawn on ::before against the existing ids, so no markup changes. The
+   card runs overflow: visible, so every field is masked to fade well
+   inside its own box rather than relying on clipping. All of them read
+   --graph-ring / --graph-tick, so they follow the theme with no second
+   definition and no dark-mode override.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.case.card { position: relative; isolation: isolate; }
+.case__layout { position: relative; z-index: 1; }
+
+.case.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* 001 — convergence. Rings closing on a point off the left edge, which
+   is where the many-to-few fan in the diagram above is heading. */
+#money-mule::before {
+  background: repeating-radial-gradient(
+    circle at 8% 50%,
+    transparent 0 26px,
+    var(--graph-ring) 26px 27px
+  );
+  -webkit-mask-image: radial-gradient(62% 88% at 6% 50%, #000, transparent 72%);
+  mask-image: radial-gradient(62% 88% at 6% 50%, #000, transparent 72%);
+}
+
+/* 002 — address space. A dense, even matrix: no hierarchy, no centre,
+   every cell equal until something answers. */
+#internet-scale-scanning::before {
+  background-image: radial-gradient(var(--graph-tick) .5px, transparent .9px);
+  background-size: 13px 13px;
+  -webkit-mask-image: linear-gradient(90deg, #000 8%, transparent 82%);
+  mask-image: linear-gradient(90deg, #000 8%, transparent 82%);
+}
+
+/* 003 — permutation. Diagonal rays fanning from one origin, the shape a
+   single domain makes when it is expanded into candidates. */
+#phishing-detection::before {
+  background: repeating-conic-gradient(
+    from -32deg at 4% 8%,
+    var(--graph-ring) 0deg 0.22deg,
+    transparent 0.22deg 4.4deg
+  );
+  -webkit-mask-image: radial-gradient(78% 92% at 4% 8%, #000, transparent 74%);
+  mask-image: radial-gradient(78% 92% at 4% 8%, #000, transparent 74%);
+}
+
+/* 004 — lanes. Orthogonal tracks with a repeating step, the way a case
+   moves between fixed states rather than flowing continuously. */
+#cybercrime-case-management::before {
+  background:
+    repeating-linear-gradient(90deg, var(--graph-ring) 0 1px, transparent 1px 96px),
+    repeating-linear-gradient(180deg, var(--graph-ring) 0 1px, transparent 1px 34px);
+  -webkit-mask-image: radial-gradient(70% 80% at 96% 92%, #000, transparent 74%);
+  mask-image: radial-gradient(70% 80% at 96% 92%, #000, transparent 74%);
+}
+
+/* The section grid was doing this job for all four at once; with fields
+   of their own the shared one only competes. */
+#case-studies > .bg-grid { opacity: .35; }
+
+/* Portrait in About. It belongs beside the bio, not on the landing: the
+   first screen should lead with the claim and the graph, and a face is
+   what you want once someone has decided to read about the person. */
+.about__portrait {
+  float: left;
+  margin: .2rem 1.75rem .8rem 0;
+}
+
+.about__portrait .portrait { margin-bottom: 0; }
+
+/* Below the two-column break the float stops helping, so it becomes a
+   plain block above the prose. */
+@media (max-width: 700px) {
+  .about__portrait { float: none; margin: 0 0 1.25rem; }
+}
+
+/* Spine packets are chevrons, oriented along their path by rotate="auto".
+   A circle carries no heading, so the direction of travel was invisible;
+   a chevron states it. The candidate dots upstream stay circles — those
+   have not been established as going anywhere yet. */
+.dg__arrowhead { fill: var(--accent); stroke: none; }
+
+/* Experience cards adopt the case-study rail: metadata on the left, the
+   record on the right. Same reading pattern across both sections, so a
+   reviewer learns the layout once. */
+.job__layout {
+  display: grid;
+  grid-template-columns: 13.5rem minmax(0, 1fr);
+  gap: 0;
+}
+
+.job__rail {
+  padding: 1.75rem 1.4rem;
+  align-self: start;
+  position: sticky;
+  top: calc(var(--topbar-h) + 1.25rem);
+}
+
+.job__main {
+  padding: 1.75rem 1.9rem;
+  min-width: 0;
+  border-left: 1px solid var(--border);
+}
+
+/* The card supplies the frame; the halves supply their own padding. */
+.job { padding: 0; }
+
+.job__rail .logo-chip { margin-top: .15rem; }
+
+@media (max-width: 960px) {
+  .job__layout { grid-template-columns: 1fr; }
+  .job__rail {
+    position: static;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .9rem 1.25rem;
+  }
+  .job__main { border-left: 0; padding: 1.5rem 1.25rem; }
+}
+
+@media (max-width: 600px) {
+  .job__rail { grid-template-columns: 1fr; padding: 1.25rem; }
+}
+
+/* Three more section figures, masked toward the corner each one is
+   anchored on, so they sit in the margin the content leaves free rather
+   than behind the reading column. Same weights as the constellation, so
+   the whole set reads as one family. */
+.bg-figure--orbit {
+  -webkit-mask-image: radial-gradient(60% 74% at 14% 48%, #000, transparent 74%);
+  mask-image: radial-gradient(60% 74% at 14% 48%, #000, transparent 74%);
+  opacity: .45;
+}
+.bg-figure--branch {
+  -webkit-mask-image: radial-gradient(66% 78% at 22% 50%, #000, transparent 76%);
+  mask-image: radial-gradient(66% 78% at 22% 50%, #000, transparent 76%);
+  opacity: .4;
+}
+.bg-figure--signal {
+  -webkit-mask-image: radial-gradient(64% 76% at 88% 76%, #000, transparent 74%);
+  mask-image: radial-gradient(64% 76% at 88% 76%, #000, transparent 74%);
+  opacity: .45;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   AGENT VIEW
+   A switch that shows the page the way a language model receives it:
+   the machine-readable profile this site already ships, rather than the
+   designed surface. It is not a gimmick — the content genuinely exists
+   in both forms, and showing the second one is the quickest proof that
+   the site is structured rather than only styled.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.agentsw {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .3rem .55rem .3rem .4rem;
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background: var(--surface);
+  cursor: pointer;
+  font-family: var(--font-code);
+  font-size: .62rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: color var(--ease), border-color var(--ease);
+}
+.agentsw:hover { color: var(--text); border-color: var(--border-strong); }
+
+.agentsw__track {
+  width: 1.6rem;
+  height: .85rem;
+  border-radius: 1rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  position: relative;
+  flex: 0 0 auto;
+  transition: background var(--ease), border-color var(--ease);
+}
+.agentsw__knob {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  background: var(--text-dim);
+  transform: translateY(-50%);
+  transition: transform var(--t-2) var(--ease-out), background var(--ease);
+}
+.agentsw[aria-checked="true"] { color: var(--accent); border-color: var(--accent); }
+.agentsw[aria-checked="true"] .agentsw__track { background: var(--accent-soft); border-color: var(--accent); }
+.agentsw[aria-checked="true"] .agentsw__knob { transform: translateY(-50%) translateX(.72rem); background: var(--accent); }
+
+@media (max-width: 62rem) { .agentsw__label { display: none; } }
+@media (max-width: 40rem) { .agentsw { display: none; } }
+
+/* ── The view itself ─────────────────────────────────────────────── */
+
+.agentview {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  background: var(--bg);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.agentview.is-open { display: block; }
+
+.agentview__bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .9rem clamp(1rem, 4vw, 2.5rem);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-code);
+  font-size: .66rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.agentview__bar b { color: var(--accent); font-weight: 500; }
+
+.agentview__close {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  border-radius: var(--radius);
+  padding: .3rem .7rem;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+.agentview__close:hover { color: var(--text); border-color: var(--border-strong); }
+
+.agentview__doc {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  font-family: var(--font-code);
+  font-size: .78rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  white-space: pre-wrap;
+  word-break: break-word;
+  tab-size: 2;
+}
+
+/* Markdown structure, marked without parsing it: headings and rules are
+   the only things lifted, so what you read stays the raw file. */
+.agentview__doc b  { color: var(--text); font-weight: 500; }
+.agentview__doc i  { color: var(--accent); font-style: normal; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   DARK WORLD — EDITORIAL ART DIRECTION
+   Stage 1: colour system and flat marks.
+
+   Swiss/Bauhaus rather than "dark mode": near-black ground, one red
+   used as a printed editorial mark, one yellow used as a highlighter
+   stroke. Flat by rule — no glow, no gradient on an accent, hard
+   corners — because a glow is a screen effect and this language is
+   print. Everything is scoped to :root[data-dark]; light keeps its own
+   identity untouched.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root[data-dark] {
+  --bg:            #090909;
+  --surface:       #111111;
+  --surface-2:     #1A1A1A;
+  --text:          #F5F5F5;
+  --text-muted:    #A5A5A5;
+  --text-dim:      #7A7A7A;
+  --border:        #232323;
+  --border-strong: #3A3A3A;
+
+  --accent:        #FF3333;
+  --accent-hover:  #FF5C5C;
+  --accent-soft:   rgba(255, 51, 51, .12);
+  --accent-deep:   #FF3333;
+
+  /* White on #FF3333 measures 3.64 — large text only. Near-black on the
+     same red is 5.47 and passes, so any text sitting on a red block is
+     set in the ground colour rather than in white. */
+  --accent-on:     #090909;
+
+  --mark:          #FFCC00;
+  --mark-soft:     rgba(255, 204, 0, .18);
+  --mark-on:       #090909;
+
+  --shadow:    none;
+  --shadow-sm: none;
+  --grain: .04;
+}
+
+/* Flat by rule. Every accent surface loses its gradient and every mark
+   loses its bloom — a printed red block does not glow. */
+:root[data-dark] {
+  --grad-accent: none;
+  --grad-glow:   none;
+  --grad-sheen:  none;
+}
+:root[data-dark] .btn--primary {
+  background: var(--accent);
+  color: var(--accent-on);
+  border-color: var(--accent);
+}
+:root[data-dark] .btn--primary:hover { background: var(--accent-hover); }
+
+:root[data-dark] .register__idx::after,
+:root[data-dark] .dossier__state::before,
+:root[data-dark] .marg__index { box-shadow: none; }
+
+:root[data-dark] .dg__halo { display: none; }
+
+/* Hard corners. Rounded cards read as product UI; this language is a
+   printed page, so the radius drops to a hairline everywhere but the
+   controls that need to stay legible as controls. */
+:root[data-dark] {
+  --radius: 0px;
+  --radius-lg: 0px;
+}
+:root[data-dark] .icon-btn,
+:root[data-dark] .btn,
+:root[data-dark] .agentsw,
+:root[data-dark] .modeswitch { border-radius: 0; }
+:root[data-dark] .toolstrip__item,
+:root[data-dark] .capstrip__item { border-radius: 0; }
+
+/* Cards become plates cut out of the ground: one hairline, no lift. */
+:root[data-dark] .card {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: none;
+}
+:root[data-dark] .card:hover { border-color: var(--border-strong); box-shadow: none; }
+
+/* The atmosphere keeps its scanlines but drops the coloured pools: the
+   ground is flat black now, and a tinted wash would fight the red. */
+:root[data-dark] body > .atmos {
+  background-image:
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, .012) 0 1px, transparent 1px 3px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   DARK WORLD — EDITORIAL ART DIRECTION
+   Stage 2: extreme typographic scale, red marks, yellow marker.
+
+   The hierarchy is the point. A headline at roughly ten times the body
+   is not decoration — it is what makes a page read as editorial rather
+   than as an interface. Red behaves like a printed register mark, flat
+   and structural. Yellow behaves like a physical highlighter: it lands
+   on one or two facts per screen and nothing else, so it keeps meaning
+   what it means.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Scale ─────────────────────────────────────────────────────────
+   Body stays at its readable size; the display sizes climb. The ratio
+   is achieved by raising the headline, never by shrinking the prose
+   below comfort. */
+:root[data-dark] {
+  --step-4: clamp(2.4rem, 5.5vw, 4rem);
+  --step-5: clamp(3rem, 8vw, 6rem);
+}
+
+:root[data-dark] .hero__title {
+  font-size: clamp(3.2rem, 10.5vw, 9.5rem);
+  line-height: .86;
+  letter-spacing: -.045em;
+  font-weight: 700;
+}
+
+:root[data-dark] .section__title {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  line-height: .92;
+  letter-spacing: -.04em;
+  font-weight: 700;
+}
+
+:root[data-dark] .case__title {
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+  line-height: .96;
+  letter-spacing: -.035em;
+  font-weight: 700;
+}
+
+/* Metadata goes the other way: small, wide-tracked, monospace. The gap
+   between the two is what creates the tension. */
+:root[data-dark] .case__ref,
+:root[data-dark] .register,
+:root[data-dark] .rail__k,
+:root[data-dark] .head__meta {
+  font-family: var(--font-code);
+  font-size: .62rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+/* ── Red marks ─────────────────────────────────────────────────────
+   Flat, structural, and always attached to something: a rule beside a
+   heading, a block behind a reference. Never floating ornament. */
+:root[data-dark] .section__title {
+  position: relative;
+  padding-left: 1.1rem;
+}
+:root[data-dark] .section__title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .12em;
+  bottom: .18em;
+  width: 5px;
+  background: var(--accent);
+}
+
+/* Case reference sits in a solid red block, set in the ground colour —
+   white on this red fails contrast, near-black passes. */
+:root[data-dark] .case__ref {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--accent-on);
+  padding: .3rem .6rem;
+  font-weight: 500;
+}
+
+/* The register index becomes a red plate rather than a tinted label. */
+:root[data-dark] .register__idx {
+  background: var(--accent);
+  color: var(--accent-on);
+  padding: .2rem .45rem;
+}
+:root[data-dark] .register__idx b { color: var(--accent-on); }
+
+/* ── Yellow marker ─────────────────────────────────────────────────
+   A highlighter stroke, not a UI chip: it sits behind the text, stops
+   short of the full line box, and runs slightly past the glyphs at each
+   end the way a real marker overshoots. */
+:root[data-dark] .callout__n {
+  position: relative;
+  display: inline-block;
+  color: var(--text);
+  padding-inline: .12em;
+}
+:root[data-dark] .callout__n::before {
+  content: "";
+  position: absolute;
+  left: -.14em;
+  right: -.2em;
+  top: 32%;
+  bottom: 12%;
+  background: var(--mark);
+  opacity: .92;
+  z-index: -1;
+  transform: rotate(-.5deg);
+}
+:root[data-dark] .callout__n { color: var(--mark-on); }
+
+/* One highlighted phrase per case, on the strong claim inside the
+   result line — any more and the marker stops meaning anything. */
+:root[data-dark] .callout__t b,
+:root[data-dark] .callout__t strong {
+  background: var(--mark-soft);
+  color: var(--text);
+  padding: .06em .22em;
+  font-weight: 600;
+}
+
+/* ── Asymmetric hero ───────────────────────────────────────────────
+   The headline was boxed into a 1.2fr column, so a fourteen-word title
+   at display size wrapped to six lines and filled 173% of the viewport.
+   Giving it the full measure is what makes the size usable: fewer, much
+   longer lines. The graph moves behind it and off the right edge, so the
+   composition is weighted left and cropped rather than balanced. */
+:root[data-dark] .hero__grid {
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+:root[data-dark] .hero__copy { position: relative; z-index: 2; }
+
+:root[data-dark] .hero__title {
+  font-size: clamp(2.8rem, 7.4vw, 6.6rem);
+  max-width: 16ch;
+}
+
+/* Supporting text stays deliberately small and set well left of the
+   headline's measure — the gap between the two is the composition. */
+:root[data-dark] .hero__lede { max-width: 34rem; font-size: .95rem; }
+:root[data-dark] .hero__disciplines { max-width: 40rem; }
+
+/* The graph sits behind the type, cropped by the viewport edge. */
+:root[data-dark] .hero__visual {
+  position: absolute;
+  top: 6%;
+  right: -8%;
+  width: min(46%, 34rem);
+  z-index: 0;
+  opacity: .55;
+  pointer-events: none;
+}
+:root[data-dark] .hero__inner { position: relative; }
+
+@media (max-width: 68rem) {
+  :root[data-dark] .hero__visual {
+    position: static;
+    width: 100%;
+    opacity: 1;
+    margin-inline: auto;
+    max-width: 20rem;
+  }
+  :root[data-dark] .hero__title { max-width: none; }
+}
+
+/* ── Corrections ───────────────────────────────────────────────────
+   The marker fill is gone from the headline figures: white on #FFCC00
+   measures about 1.4:1, so a white-on-yellow number would be unreadable.
+   The numbers are set in plain white instead, which is 18:1 and lets the
+   figure carry itself at that size. Yellow stays in the system as a rule
+   and an underline, where it marks without sitting behind type. */
+:root[data-dark] .callout__n {
+  color: var(--text);
+  background: none;
+  padding-inline: 0;
+}
+:root[data-dark] .callout__n::before { display: none; }
+
+:root[data-dark] .callout__t b,
+:root[data-dark] .callout__t strong {
+  background: none;
+  color: var(--text);
+  padding: 0;
+  box-shadow: inset 0 -.34em 0 var(--mark-soft);
+}
+
+/* Hero comes down to a readable size. The brief asks for a display
+   headline at 30–50% of the field, but this headline is a fourteen-word
+   sentence: at true display scale it stops being readable and starts
+   being wallpaper. Sentence first, scale second. */
+:root[data-dark] .hero__title {
+  font-size: clamp(2.2rem, 4.6vw, 3.9rem);
+  line-height: 1.02;
+  letter-spacing: -.03em;
+  max-width: 22ch;
+}
+
+/* ── Display headline ──────────────────────────────────────────────
+   The brief's structure: one enormous word, then a small precise
+   statement. That is what lets the ratio reach display scale without
+   the sentence becoming wallpaper — the word carries the impact, the
+   sentence carries the meaning.
+
+   It is aria-hidden and the <h1> is untouched, so the document outline
+   and every machine reader still see the full sentence as the heading.
+   Dark only; light keeps the sentence as its headline. */
+.hero__display { display: none; }
+
+:root[data-dark] .hero__display {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 15.5vw, 13rem);
+  font-weight: 700;
+  line-height: .82;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: .1em 0 .45rem;
+  user-select: none;
+}
+
+/* With the word carrying the impact, the sentence becomes the small
+   statement it was always meant to be. */
+:root[data-dark] .hero__title {
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -.01em;
+  color: var(--text-muted);
+  max-width: 44ch;
+  margin-bottom: 1.1rem;
+}
+
+/* ── Yellow marker, restored ───────────────────────────────────────
+   Kept as a real highlighter stroke: the fill is the electric yellow
+   and the text on it is set near-black, which measures 13.17:1. White
+   on this yellow is about 1.4:1, which is why the text flips rather
+   than the marker being dropped. */
+:root[data-dark] .callout__n {
+  position: relative;
+  display: inline-block;
+  color: var(--mark-on);
+  padding-inline: .14em;
+  z-index: 0;
+}
+:root[data-dark] .callout__n::before {
+  display: block;
+  content: "";
+  position: absolute;
+  left: -.1em;
+  right: -.16em;
+  top: 14%;
+  bottom: 6%;
+  background: var(--mark);
+  transform: rotate(-.6deg);
+  z-index: -1;
+}
+
+/* ── Yellow marker: white text ─────────────────────────────────────
+   White text, yellow highlight — but the stroke sits under the lower
+   third of the glyphs rather than filling the whole box. A full yellow
+   fill behind white type measures ~1.4:1 and the number would vanish;
+   dropped to an underlaid stroke, the text keeps the dark ground behind
+   its counters at 18:1 while the yellow still reads as a marker. */
+:root[data-dark] .callout__n {
+  color: var(--text);
+}
+:root[data-dark] .callout__n::before {
+  top: auto;
+  height: .3em;
+  bottom: .1em;
+  left: -.08em;
+  right: -.14em;
+  background: var(--mark);
+  transform: rotate(-.7deg);
+}
+
+/* Full marker block, white text — as directed. The stroke covers the
+   whole figure rather than sitting under it. */
+:root[data-dark] .callout__n::before {
+  top: 12%;
+  bottom: 8%;
+  height: auto;
+  left: -.1em;
+  right: -.16em;
+  transform: rotate(-.6deg);
+}
+
+/* ── Highlighter, drawn ────────────────────────────────────────────
+   A rectangle does not read as a marker. This is an SVG stroke with
+   chisel-angled ends, edges that wander, and a second overlapping pass
+   at higher opacity — the darker band you get where a highlighter
+   doubles back over itself. Stretched with preserveAspectRatio="none"
+   so it fits any figure without redrawing.
+
+   Not clipped to the glyphs: a real marker overshoots, so it runs a
+   little past both ends and sits slightly off level. */
+:root[data-dark] .callout__n::before {
+  content: "";
+  position: absolute;
+  left: -.22em;
+  right: -.3em;
+  top: 6%;
+  bottom: 2%;
+  height: auto;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 44' preserveAspectRatio='none'%3E%3Cpath d='M4.5 12.5 C28 9.2 62 11.4 96 9.8 C130 8.3 164 11.1 195.5 9.4 L197 33.8 C166 36.4 132 33.1 98 35.2 C64 37.2 30 34.4 6.2 36.9 Z' fill='%23FFCC00' opacity='.92'/%3E%3Cpath d='M14 16.4 C52 14.1 92 16.9 132 15.2 C154 14.3 170 15.8 182 15.1 L183 29.6 C168 30.6 150 29.2 130 30.1 C92 31.7 50 29.6 15.5 31.4 Z' fill='%23FFCC00' opacity='.55'/%3E%3Cpath d='M186 13.2 C192 12.6 196 12.9 199 12.4 L199.4 20.6 C196 21 192 20.8 187 21.4 Z' fill='%23FFCC00' opacity='.7'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+  transform: rotate(-.9deg);
+  z-index: -1;
+}
+
+/* ── Brand mark ────────────────────────────────────────────────────
+   Regression from the flat-marks pass: the mark paints its plate from
+   --grad-accent and its glyph from --accent-on. Setting the gradient to
+   none removed the plate, and --accent-on is near-black, so the rabbit
+   was drawn in #090909 on a #090909 ground — invisible.
+
+   In the dark world it takes the solid red plate with a white mark, so
+   it matches the favicon and cannot depend on a gradient token again. */
+:root[data-dark] .brand__mark {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-radius: 4px;
+}
+:root[data-dark] .brand__mark .rabbit { color: #FFFFFF; }

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 &mdash; Hariharan M</title>
+  <meta name="description" content="That page could not be found.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/favicon-hm.svg" type="image/svg+xml">
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') root.dataset.theme = t;
+      } catch (e) {}
+      window.__resolveDark = function () {
+        var explicit = root.dataset.theme;
+        var dark = explicit
+          ? explicit === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.toggleAttribute('data-dark', dark);
+      };
+      window.__resolveDark();
+    })();
+  </script>
+
+  <link rel="preload" href="/assets/fonts/geist-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    /* The 404 is one screen, so it gets its own composition rather than
+       the section rhythm the main page uses. */
+    .lost {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 3rem 1.5rem;
+    }
+
+    .lost__inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      justify-items: center;
+      text-align: center;
+      max-width: 34rem;
+    }
+
+    /* The drawing is black line art with luminance carried in the alpha,
+       so light needs no treatment and dark inverts it to pale ink. */
+    .lost__face {
+      width: clamp(11rem, 30vw, 17rem);
+      height: auto;
+      margin-bottom: 2rem;
+      opacity: .92;
+    }
+    :root[data-dark] .lost__face { filter: invert(1); opacity: .88; }
+
+    .lost__code {
+      font-family: var(--font-code);
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .9rem;
+    }
+
+    .lost__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 4.6vw, 2.6rem);
+      font-weight: 500;
+      letter-spacing: -.03em;
+      line-height: 1.12;
+      margin-bottom: .8rem;
+    }
+
+    .lost__lede {
+      color: var(--text-muted);
+      font-size: var(--step-0);
+      line-height: 1.65;
+      margin-bottom: 2rem;
+      text-wrap: pretty;
+    }
+
+    .lost__actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; }
+
+    /* ── Background: connections and scribbles, both themes ──────────
+       Light draws it as notebook ink — loose, pencil-weight, the sort of
+       thing you scrawl while working something out. Dark hardens the same
+       structure into an investigation trace. Same geometry, two registers. */
+    .lost__art {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      -webkit-mask-image: radial-gradient(80% 70% at 50% 45%, transparent 22%, #000 62%);
+      mask-image: radial-gradient(80% 70% at 50% 45%, transparent 22%, #000 62%);
+    }
+    .lost__art svg { width: 100%; height: 100%; }
+
+    .lost__art .ln     { fill: none; stroke: var(--text); opacity: .13; stroke-width: 1; stroke-linecap: round; }
+    .lost__art .ln-a   { stroke: var(--accent); opacity: .3; }
+    .lost__art .nd     { fill: var(--text); opacity: .16; }
+    .lost__art .nd-a   { fill: var(--accent); opacity: .5; }
+    .lost__art .scribe { fill: none; stroke: var(--accent); opacity: .3; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+
+    :root[data-dark] .lost__art .ln   { opacity: .1; }
+    :root[data-dark] .lost__art .ln-a { opacity: .34; }
+    :root[data-dark] .lost__art .scribe { opacity: .36; }
+
+    /* Dashed links draw themselves once, slowly, so the page feels like it
+       is still looking for the thing you asked for. */
+    @media (prefers-reduced-motion: no-preference) {
+      .lost__art .ln-a { stroke-dasharray: 5 6; animation: seek 24s linear infinite; }
+      .lost__art .nd-a { animation: blip 3.4s ease-in-out infinite; }
+    }
+    @keyframes seek { to { stroke-dashoffset: -220; } }
+    @keyframes blip { 0%, 100% { opacity: .25; } 50% { opacity: .65; } }
+
+    .lost__meta {
+      position: absolute;
+      left: 1.5rem;
+      bottom: 1.25rem;
+      z-index: 2;
+      font-family: var(--font-code);
+      font-size: .62rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    @media (max-width: 40rem) { .lost__meta { display: none; } }
+  </style>
+</head>
+<body>
+  <main class="lost">
+    <div class="lost__art" aria-hidden="true">
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+        <!-- structure: nodes that almost connect -->
+        <g class="ln">
+          <path d="M120 150 L260 96 M260 96 L392 168 M392 168 L250 268 M250 268 L120 150"/>
+          <path d="M948 118 L1080 190 M1080 190 L1012 320 M1012 320 L880 260 M880 260 L948 118"/>
+          <path d="M170 596 L300 660 M300 660 L232 742 M948 606 L1064 680"/>
+          <path d="M392 168 L520 220 M880 260 L742 300"/>
+        </g>
+        <g class="ln ln-a">
+          <path d="M520 220 C600 250 640 300 620 360"/>
+          <path d="M742 300 C680 330 650 350 634 372"/>
+          <path d="M300 660 C420 620 500 560 556 496"/>
+          <path d="M1064 680 C940 640 830 566 762 500"/>
+        </g>
+        <g class="nd">
+          <circle cx="120" cy="150" r="3.4"/><circle cx="260" cy="96" r="2.8"/>
+          <circle cx="392" cy="168" r="3.6"/><circle cx="250" cy="268" r="2.6"/>
+          <circle cx="948" cy="118" r="3"/><circle cx="1080" cy="190" r="2.6"/>
+          <circle cx="1012" cy="320" r="3.4"/><circle cx="880" cy="260" r="2.8"/>
+          <circle cx="170" cy="596" r="2.6"/><circle cx="300" cy="660" r="3.4"/>
+          <circle cx="232" cy="742" r="2.4"/><circle cx="948" cy="606" r="2.6"/>
+          <circle cx="1064" cy="680" r="3.2"/>
+        </g>
+        <g class="nd nd-a">
+          <circle cx="520" cy="220" r="4"/><circle cx="742" cy="300" r="4"/>
+        </g>
+
+        <!-- scribbles: the marks you make when a trail goes cold -->
+        <g class="scribe">
+          <!-- crossed-out box, upper left -->
+          <path d="M96 356 h96 v58 h-96 z"/>
+          <path d="M100 360 L188 410 M188 360 L100 410"/>
+          <!-- loose loop scribble, lower right -->
+          <path d="M986 452 c-26 -18 -52 -6 -50 16 c2 22 42 26 54 6 c12 -20 -18 -40 -44 -30 c-26 10 -30 44 -6 56 c24 12 58 -4 66 -26"/>
+          <!-- a question mark, small, lower left -->
+          <path d="M298 452 c0 -16 14 -26 28 -22 c14 4 18 20 8 30 c-8 8 -16 12 -16 24"/>
+          <circle cx="318" cy="500" r="2.2" fill="currentColor" stroke="none"/>
+          <!-- arrow that gives up halfway, right of centre -->
+          <path d="M812 552 c50 26 96 30 128 18 M940 570 l-14 -8 M940 570 l-4 -15"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="lost__inner">
+      <img class="lost__face" src="/assets/404-face.png" alt="" width="822" height="900">
+      <p class="lost__code">Error 404 &middot; no route</p>
+      <h1 class="lost__title">This one leads nowhere.</h1>
+      <p class="lost__lede">
+        The address does not match anything on the site. It may have moved, or it may
+        never have existed &mdash; both look identical from here.
+      </p>
+      <div class="lost__actions">
+        <a class="btn btn--primary" href="/">Back to the start</a>
+        <a class="btn btn--outline" href="/#case-studies">See the case studies</a>
+      </div>
+    </div>
+
+    <p class="lost__meta" aria-hidden="true">trace &middot; no matching record</p>
+  </main>
+</body>
+</html>

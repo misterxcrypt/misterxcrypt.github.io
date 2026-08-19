@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="HM">
+  <title>HM</title>
+  <!--
+    No prefers-color-scheme here on purpose. An SVG favicon reads the OS
+    scheme, not the site's theme, and Safari applies it inconsistently —
+    so a dark plate could land on dark browser chrome and disappear, which
+    is exactly what happened. A saturated plate needs no media query: it
+    holds against white chrome and dark chrome equally, and the mark stays
+    white in both.
+  -->
+  <rect x="0" y="0" width="64" height="64" rx="12" fill="#FF3333"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter">
+    <!-- H -->
+    <path d="M12 19 V45"/>
+    <path d="M12 32 H26"/>
+    <path d="M26 19 V45"/>
+    <!-- M -->
+    <path d="M34 45 V20 L42 33 L50 20 V45"/>
+  </g>
+</svg>

@@ -1,0 +1,51 @@
+# Hariharan M
+
+> Cyber Threat Intelligence Researcher. Finds what an organisation has exposed, what is
+> impersonating it, and who is profiting, then builds the systems that keep
+> finding it. Attack surface management, digital risk protection, brand abuse,
+> dark web and OSINT research for banks, enterprises and government across
+> India and Southeast Asia.
+
+This file exists so language models and agents can read this profile without
+parsing the HTML. Facts here are drawn from the portfolio and CV. Where a claim
+is not independently verifiable it is labelled.
+
+## Identity
+- Name: Hariharan M
+- Role: Cyber Threat Intelligence Researcher
+- Email: hariharan.mathankumar@gmail.com
+- Site: https://misterxcrypt.github.io/
+- GitHub: https://github.com/misterxcrypt
+- LinkedIn: https://www.linkedin.com/in/hariharanmathan/
+- Medium: https://medium.com/@misterxcrypt
+
+## Machine-readable documents
+- [Full profile](https://misterxcrypt.github.io/llms-full.txt): every fact on the site, flat text
+- [Résumé, structured](https://misterxcrypt.github.io/resume.md): experience, skills, education as Markdown
+- [Skill definition](https://misterxcrypt.github.io/skill.md): agent-invocable capability description
+- [Agent instructions](https://misterxcrypt.github.io/agents.md): how an agent should represent this person
+- [Résumé, human](https://misterxcrypt.github.io/resume.html): two-page rendered CV
+
+## Experience
+- Cyber Threat Intelligence Researcher, Redhunt Labs, May 2025 to July 2026, remote
+- Cyber Threat Intelligence Analyst, Saptang Labs, January 2023 to May 2025, IIT MRP India
+
+## Headline outcomes
+- 156,413 UPI IDs mapped to 598 fraud websites (F2Mon dataset, computable from source workbook)
+- 4,055 abused government URLs across 3 SEO-poisoning campaigns; 38,728 scam advertisements discovered
+- 102 money-mule sites clustered from a single landing-template fingerprint (~100 host/IP nodes)
+- 80+ actionable intelligence reports across 20+ forums, marketplaces and Telegram channels
+- Direct threat actor engagement under OPSEC procedure to map financial fraud infrastructure
+- 2,000+ SEO-poisoned .gov.in pages and 10,000+ fraudulent bank customer-care numbers detected
+- WhatsApp-based cybercrime complaint platform, estimated 75% reduction in manual handling
+
+## Core capability
+Cyber Threat Intelligence, OSINT, HUMINT, Digital Risk Protection, Dark Web
+Intelligence, External Attack Surface Management, Brand Protection, Phishing
+Detection Engineering, Money Mule and Financial Crime Investigation, MITRE
+ATT&CK mapping, Crypto On-Chain Analysis, Infrastructure Attribution.
+
+## Stack
+Python, FastAPI, Flask, React/TypeScript, AWS, Terraform, ZMap, zgrab2,
+Elasticsearch, MongoDB, Celery, Selenium, Docker, Shodan, Censys, VirusTotal,
+URLScan.io, SecurityTrails, FOFA, Maltego, Certificate Transparency logs.

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://misterxcrypt.github.io/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://misterxcrypt.github.io/resume.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://misterxcrypt.github.io/cryptic-grove</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url><loc>https://misterxcrypt.github.io/llms.txt</loc><priority>0.5</priority></url>
+  <url><loc>https://misterxcrypt.github.io/llms-full.txt</loc><priority>0.5</priority></url>
+  <url><loc>https://misterxcrypt.github.io/resume.md</loc><priority>0.5</priority></url>
+  <url><loc>https://misterxcrypt.github.io/skill.md</loc><priority>0.5</priority></url>
+  <url><loc>https://misterxcrypt.github.io/agents.md</loc><priority>0.5</priority></url>
+</urlset>
